@@ -17,10 +17,10 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
     // Simulate resume download
     const element = document.createElement('a');
     const file = new Blob([
-      `CURRICULUM VITAE - ALEX RIVERS\nSenior AI & Full-Stack Architect\nEmail: ${PORTFOLIO_DATA.personal.email}\nPhone: ${PORTFOLIO_DATA.personal.phone}\nLocation: ${PORTFOLIO_DATA.personal.location}\n\nBIO:\n${PORTFOLIO_DATA.personal.bio}\n\nEDUCATION:\n- M.S. CS (Stanford University) CGPA: 3.96\n- B.S. CS (UC Berkeley) CGPA: 3.94\n\nEXPERIENCE:\n- Apex AI Systems (Lead AI Architect)\n- Vanguard Cyber Tech (Senior Software Engineer)`
+      `CURRICULUM VITAE - GOPIPRAKAN\nAI & Data Science Student | AI Developer | Full Stack Developer\nEmail: ${PORTFOLIO_DATA.personal.email}\nPhone: ${PORTFOLIO_DATA.personal.phone}\nLocation: ${PORTFOLIO_DATA.personal.location}\n\nBIO:\n${PORTFOLIO_DATA.personal.bio}`
     ], { type: 'text/plain' });
     element.href = URL.createObjectURL(file);
-    element.download = 'Alex_Rivers_Resume_2026.txt';
+    element.download = 'Gopiprakan_Resume_2026.txt';
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
@@ -45,7 +45,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                 <h3 className="text-xl font-display font-bold text-gradient-cyan">
                   CURRICULUM VITAE
                 </h3>
-                <span className="text-xs font-mono text-slate-400">ALEX RIVERS // VERIFIED EXECUTIVE CV</span>
+                <span className="text-xs font-mono text-slate-400">GOPIPRAKAN // VERIFIED DEVELOPER CV</span>
               </div>
             </div>
 
