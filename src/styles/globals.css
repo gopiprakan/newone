@@ -85,19 +85,6 @@
   box-shadow: 0 0 10px #00f0ff;
 }
 
-/* Hide cursor on desktop when custom cursor active */
-@media (min-width: 1024px) {
-  body.custom-cursor-enabled {
-    cursor: none;
-  }
-  body.custom-cursor-enabled a,
-  body.custom-cursor-enabled button,
-  body.custom-cursor-enabled input,
-  body.custom-cursor-enabled textarea {
-    cursor: none;
-  }
-}
-
 /* Animation keyframes */
 @keyframes gridMove {
   0% { transform: translateY(0); }
