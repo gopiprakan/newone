@@ -74,7 +74,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
               <Cpu className="w-7 h-7 animate-pulse" />
             </div>
             <span className="font-display font-bold text-2xl tracking-widest text-gradient-cyan">
-              ALEX RIVERS // ARCHITECT
+              GOPIPRAKAN // AI & DATA SCIENCE
             </span>
           </motion.div>
 

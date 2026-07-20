@@ -84,7 +84,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Cpu className="w-6 h-6 animate-pulse" />
           </div>
           <span className="font-display font-bold text-lg md:text-xl tracking-wider text-gradient-cyan">
-            ALEX.RIVERS
+            GOPIPRAKAN
           </span>
         </button>
 

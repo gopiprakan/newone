@@ -91,26 +91,26 @@ export interface CodingProfile {
 
 export const PORTFOLIO_DATA = {
   personal: {
-    name: "Alex Rivers",
-    title: "Senior AI & Full-Stack Architect",
+    name: "Gopiprakan",
+    title: "AI & Data Science Student | AI Developer | Full Stack Developer | AI Automation Enthusiast",
     typingTitles: [
-      "Senior Full-Stack Architect",
-      "AI / ML Solutions Specialist",
-      "3D WebGL & Creative Engineer",
-      "Distributed Systems Architect"
+      "AI & Data Science Student",
+      "AI-Powered App Developer",
+      "Full Stack Web Developer",
+      "AI Automation Enthusiast"
     ],
-    bio: "Passionate software architect specializing in building next-generation AI platforms, high-performance WebGL 3D interfaces, and resilient cloud-native ecosystems. Driven by precision design and pixel-perfect execution.",
-    careerObjective: "To pioneer scalable autonomous AI systems and immersive web applications that solve high-impact real-world challenges while pushing the boundaries of interactive engineering.",
-    email: "alex.rivers.dev@example.com",
-    phone: "+1 (555) 389-2045",
-    location: "San Francisco, CA / Remote",
+    bio: "Hi, I'm Gopiprakan. I am a passionate Artificial Intelligence & Data Science student who enjoys building AI-powered applications, intelligent automation systems, full-stack web applications, and innovative real-world solutions. I love learning new technologies, participating in hackathons, and creating impactful software products.",
+    careerObjective: "To pioneer intelligent AI-driven applications, scalable web ecosystems, and automated workflows that address complex real-world challenges while continuously expanding expertise in Artificial Intelligence and Data Science.",
+    email: "gopiprakan.dev@gmail.com",
+    phone: "+91 98765 43210",
+    location: "Tamil Nadu, India",
     resumeUrl: "#resume-modal",
     stats: {
-      projectsCompleted: 48,
-      hackathonsWon: 14,
-      certificationsCount: 22,
-      technologiesMastered: 35,
-      cgpa: "3.96 / 4.00"
+      projectsCompleted: 24,
+      hackathonsWon: 8,
+      certificationsCount: 15,
+      technologiesMastered: 28,
+      cgpa: "3.92 / 4.00"
     }
   },
 
