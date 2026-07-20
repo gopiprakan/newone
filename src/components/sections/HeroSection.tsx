@@ -64,7 +64,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResumeModal }) =
             {/* Status Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono shadow-neon-cyan">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-              <span>AVAILABLE FOR SENIOR ARCHITECT & CONSULTING ROLES</span>
+              <span>AVAILABLE FOR AI & FULL-STACK ROLES / HACKATHONS</span>
             </div>
 
             {/* Name */}

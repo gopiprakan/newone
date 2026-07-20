@@ -140,7 +140,7 @@ export const AvatarHoloRing: React.FC = () => {
         <div className="w-full h-full rounded-full bg-slate-950 overflow-hidden relative border-2 border-cyan-400/40 group">
           <img
             src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
-            alt="Alex Rivers - Senior Engineer"
+            alt="Gopiprakan - AI Developer"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-110 contrast-105"
           />
           {/* Cyber Scanline Overlay */}
