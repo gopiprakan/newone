@@ -31,11 +31,11 @@ export const Footer: React.FC = () => {
                 <Cpu className="w-6 h-6 animate-pulse" />
               </div>
               <span className="font-display font-bold text-xl text-gradient-cyan tracking-wider">
-                ALEX RIVERS
+                GOPIPRAKAN
               </span>
             </div>
             <p className="text-sm text-slate-400 max-w-md leading-relaxed">
-              Pioneering high-performance AI architectures, 3D WebGL user interfaces, and cloud-native real-time systems. Pixel precision meets scalable engineering.
+              AI & Data Science Student building intelligent AI-powered applications, automation systems, full-stack web platforms, and innovative real-world software solutions.
             </p>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
               <Activity className="w-3.5 h-3.5 animate-pulse" />
@@ -101,7 +101,7 @@ export const Footer: React.FC = () => {
 
         {/* Bottom copyright & Back to top button */}
         <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
-          <p>© {new Date().getFullYear()} Alex Rivers. All rights reserved. Designed for excellence.</p>
+          <p>© {new Date().getFullYear()} Gopiprakan. All rights reserved. Designed for excellence.</p>
 
           <button
             onClick={scrollToTop}
