@@ -14,10 +14,10 @@ export const AboutSection: React.FC = () => {
             <span>EXECUTIVE PROFILE</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-slate-100">
-            ABOUT <span className="text-gradient-cyan">ALEX RIVERS</span>
+            ABOUT <span className="text-gradient-cyan">GOPIPRAKAN</span>
           </h2>
           <p className="text-sm font-mono text-slate-400">
-            Passionate software architect engineering autonomous AI systems and 3D web applications.
+            AI & Data Science Student engineering intelligent AI solutions, full-stack web applications, and automation systems.
           </p>
         </div>
 
@@ -35,7 +35,7 @@ export const AboutSection: React.FC = () => {
               <div className="w-full h-full rounded-[22px] bg-slate-950 overflow-hidden relative">
                 <img
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80"
-                  alt="Alex Rivers Professional"
+                  alt="Gopiprakan Professional"
                   className="w-full h-full object-cover filter brightness-105 contrast-105 transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
@@ -44,7 +44,7 @@ export const AboutSection: React.FC = () => {
                 <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-slate-900/90 backdrop-blur-md border border-cyan-500/30 flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <GraduationCap className="w-5 h-5 text-cyan-400" />
-                    <span className="text-xs font-mono text-slate-300">Stanford & Berkeley Alumni</span>
+                    <span className="text-xs font-mono text-slate-300">AI & Data Science Student</span>
                   </div>
                   <span className="text-xs font-mono font-bold text-gradient-cyan">
                     CGPA {PORTFOLIO_DATA.personal.stats.cgpa}
@@ -67,13 +67,13 @@ export const AboutSection: React.FC = () => {
           >
             <div className="space-y-4">
               <h3 className="text-2xl font-display font-bold text-slate-100">
-                Architecting high-frequency systems with pixel-perfect design elegance.
+                Building AI-powered applications & intelligent automation systems.
               </h3>
               <p className="text-slate-300 text-sm leading-relaxed">
-                With over 6+ years of specialized experience across Stanford AI Vision Lab and high-growth Silicon Valley startups, I bridge the gap between complex AI model inference and fluid 60 FPS WebGL user interfaces.
+                I am a passionate Artificial Intelligence & Data Science student based in Tamil Nadu, India. I specialize in building AI-driven web applications, machine learning workflows, full-stack solutions, and automated tools that solve real-world problems.
               </p>
               <p className="text-slate-300 text-sm leading-relaxed">
-                My work focuses on building fault-tolerant microservices, optimizing low-level 3D graphics shaders, and deploying autonomous agentic workflows that process millions of events daily.
+                I thrive on exploring cutting-edge AI technologies, competing in competitive hackathons, and developing production-ready software products with intuitive user experiences.
               </p>
             </div>
 

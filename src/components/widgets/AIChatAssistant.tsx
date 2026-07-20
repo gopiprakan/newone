@@ -17,7 +17,7 @@ export const AIChatAssistant: React.FC = () => {
     {
       id: '1',
       sender: 'ai',
-      text: "Hello! I am RIVERS-AI, Alex's autonomous portfolio assistant. Ask me about Alex's AI architecture experience, 3D WebGL projects, or career highlights!",
+      text: "Hello! I am GOPI-AI, Gopiprakan's autonomous portfolio assistant. Ask me about Gopiprakan's AI projects, Data Science background, or full-stack web apps!",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
@@ -48,19 +48,19 @@ export const AIChatAssistant: React.FC = () => {
 
     // AI logic response simulation
     setTimeout(() => {
-      let aiReply = "Alex is a Senior AI & Full-Stack Architect specialized in PyTorch, React, Three.js, and Cloud Distributed Systems.";
+      let aiReply = "Gopiprakan is an AI & Data Science Student and AI Developer specialized in building intelligent applications, full-stack web platforms, and automated workflows.";
 
       const q = textToSend.toLowerCase();
       if (q.includes('skill') || q.includes('tech') || q.includes('stack')) {
-        aiReply = `Alex's core mastery spans TypeScript, Python (PyTorch, FastAPI), React 18+, Three.js/R3F, WebGL, Next.js, and AWS Cloud Native infrastructure.`;
+        aiReply = `Gopiprakan's skills span Python, PyTorch, Machine Learning, Data Science, React 18+, TypeScript, Node.js, Three.js, and AI Automation frameworks.`;
       } else if (q.includes('project') || q.includes('neuromatrix') || q.includes('hyperspace')) {
-        aiReply = `Alex's flagship projects include NeuroMatrix AI (Autonomous agent matrix), HyperSpace 3D (PBR configurator), and Quantum Mesh Cloud Portal.`;
+        aiReply = `Gopiprakan has built AI-powered multi-agent engines, 3D web applications, real-time analytics platforms, and intelligent automation systems.`;
       } else if (q.includes('contact') || q.includes('hire') || q.includes('email')) {
-        aiReply = `You can reach Alex directly at alex.rivers.dev@example.com or via the Contact section below for contract, consulting, or full-time roles.`;
+        aiReply = `You can reach Gopiprakan directly at gopiprakan.dev@gmail.com or via the Contact section below.`;
       } else if (q.includes('education') || q.includes('degree') || q.includes('cgpa')) {
-        aiReply = `Alex holds a Master of Science in CS (Artificial Intelligence) from Stanford University (CGPA 3.96) and a BS in CS from UC Berkeley (CGPA 3.94).`;
+        aiReply = `Gopiprakan is pursuing a Bachelor of Technology / Science in Artificial Intelligence & Data Science in Tamil Nadu, India.`;
       } else if (q.includes('achievement') || q.includes('hackathon') || q.includes('award')) {
-        aiReply = `Highlights: 1st Place Grand Winner at Global AI Hackathon 2025, ETHGlobal Best Developer Tooling Award, and Google Developer Challenge Gold Medalist.`;
+        aiReply = `Highlights: Winner at regional & national AI hackathons, open-source contributor, and certified AI automation developer.`;
       }
 
       const aiMsg: Message = {
@@ -108,7 +108,7 @@ export const AIChatAssistant: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-display font-bold text-xs text-gradient-cyan tracking-wider">
-                    RIVERS-AI ASSISTANT
+                    GOPI-AI ASSISTANT
                   </h4>
                   <span className="text-[10px] font-mono text-emerald-400">● ONLINE // VECTOR RAG ENABLED</span>
                 </div>
@@ -160,9 +160,9 @@ export const AIChatAssistant: React.FC = () => {
             {/* Quick Prompts */}
             <div className="p-2 border-t border-slate-800 bg-slate-950/60 flex gap-1.5 overflow-x-auto">
               {[
-                'What are Alex’s core skills?',
-                'Tell me about NeuroMatrix AI',
-                'How can I contact Alex?'
+                'What are Gopiprakan’s core skills?',
+                'Tell me about AI & Data Science projects',
+                'How can I contact Gopiprakan?'
               ].map((qp, idx) => (
                 <button
                   key={idx}
