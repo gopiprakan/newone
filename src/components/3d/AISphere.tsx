@@ -156,8 +156,8 @@ export const AISphere: React.FC<AISphereProps> = ({ interactive = true }) => {
   }, [interactive]);
 
   return (
-    <div ref={containerRef} class="w-full h-full min-h-[260px] flex items-center justify-center relative select-none">
-      <div class="absolute inset-0 bg-cyan-500/10 rounded-full filter blur-3xl -z-10 pointer-events-none animate-pulse-glow" />
+    <div ref={containerRef} className="w-full h-full min-h-[260px] flex items-center justify-center relative select-none">
+      <div className="absolute inset-0 bg-cyan-500/10 rounded-full filter blur-3xl -z-10 pointer-events-none animate-pulse-glow" />
     </div>
   );
 };

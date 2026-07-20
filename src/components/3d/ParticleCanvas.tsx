@@ -145,7 +145,7 @@ export const ParticleCanvas: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      class="fixed inset-0 w-full h-full pointer-events-none -z-20 transition-opacity duration-1000"
+      className="fixed inset-0 w-full h-full pointer-events-none -z-20 transition-opacity duration-1000"
     />
   );
 };
