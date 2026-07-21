@@ -148,15 +148,17 @@ export const PORTFOLIO_DATA = {
       skills: [
         { name: 'Artificial Intelligence & Agents', level: 90, icon: 'Brain', description: 'Autonomous software engineer agents, AI workflows' },
         { name: 'Natural Language Processing (NLP)', level: 88, icon: 'Bot', description: 'Text processing, chatbot intent classification' },
+        { name: 'Generative AI & LLMs', level: 92, icon: 'Sparkles', description: 'Gemini, Prompt Engineering, LLM Agent tuning (Google Certified)' },
         { name: 'Data Science & Analytics', level: 89, icon: 'Search', description: 'Kaggle explorations, data extraction, predictive logic' }
       ]
     },
     {
       category: 'Databases & Cloud',
       skills: [
+        { name: 'Google Cloud Platform', level: 88, icon: 'Cloud', description: 'Google Skills Boost certified, Cloud AI, Vertex AI' },
         { name: 'MySQL & PostgreSQL', level: 88, icon: 'Database', description: 'Relational database schemas, indexing, queries' },
         { name: 'MongoDB', level: 90, icon: 'HardDrive', description: 'NoSQL collections, Mongoose data modeling' },
-        { name: 'AWS & Vercel Hosting', level: 85, icon: 'Cloud', description: 'Cloud hosting, S3 storage, deployment setups' }
+        { name: 'AWS & Vercel Hosting', level: 85, icon: 'Box', description: 'Cloud hosting, S3 storage, deployment setups' }
       ]
     },
     {
@@ -313,34 +315,44 @@ export const PORTFOLIO_DATA = {
 
   certificates: [
     {
-      id: 'cert-ml-internship',
-      title: 'Machine Learning Internship Certificate',
-      issuer: 'AI & Data Science Industry Partner',
-      issueDate: '2024',
-      credentialId: 'ML-INTERN-2024',
-      skillsLearned: ['Machine Learning Models', 'Data Analytics', 'Model Evaluation', 'Python Scikit-Learn'],
-      image: 'https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&w=800&q=80',
-      verifyUrl: '/resume.pdf'
-    },
-    {
-      id: 'cert-servicenow-internship',
-      title: 'ServiceNow Virtual Internship Certificate',
-      issuer: 'ServiceNow Academic Program',
-      issueDate: '2024',
-      credentialId: 'SNOW-INT-2024',
-      skillsLearned: ['IT Service Management', 'Workflow Automation', 'Cloud Platform Basics', 'Scripting'],
+      id: 'cert-google-llm',
+      title: 'Introduction to Large Language Models (LLM)',
+      issuer: 'Google Cloud Skills Boost',
+      issueDate: 'Aug 2025',
+      credentialId: 'GOOG-LLM-17330357',
+      skillsLearned: ['Large Language Models', 'Prompt Tuning', 'Generative AI Apps', 'Gemini GEAR Program'],
       image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
-      verifyUrl: '/resume.pdf'
+      verifyUrl: 'https://www.skills.google/public_profiles/4dd21e0d-872d-4f20-9113-84fee8fd7f54'
     },
     {
-      id: 'cert-google-ai',
-      title: 'Google AI Learning Programs Certificate',
-      issuer: 'Google Developers & AI Programs',
-      issueDate: '2024',
-      credentialId: 'GOOG-AI-2024',
-      skillsLearned: ['Generative AI Fundamentals', 'Prompt Engineering', 'TensorFlow Basics', 'Cloud AI Services'],
+      id: 'cert-google-genai',
+      title: 'Introduction to Generative AI',
+      issuer: 'Google Cloud Skills Boost',
+      issueDate: 'Aug 2025',
+      credentialId: 'GOOG-GENAI-17330109',
+      skillsLearned: ['Generative AI Fundamentals', 'Google AI Tools', 'Model Training Differences', 'Gen AI Applications'],
       image: 'https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=800&q=80',
-      verifyUrl: '/resume.pdf'
+      verifyUrl: 'https://www.skills.google/public_profiles/4dd21e0d-872d-4f20-9113-84fee8fd7f54'
+    },
+    {
+      id: 'cert-google-resp-ai',
+      title: 'Introduction to Responsible AI',
+      issuer: 'Google Cloud Skills Boost',
+      issueDate: 'Aug 2025',
+      credentialId: 'GOOG-RESPAI-17330476',
+      skillsLearned: ['Responsible AI Principles', 'Google 3 AI Principles', 'Ethics in AI', 'Safety Guidelines'],
+      image: 'https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&w=800&q=80',
+      verifyUrl: 'https://www.skills.google/public_profiles/4dd21e0d-872d-4f20-9113-84fee8fd7f54'
+    },
+    {
+      id: 'cert-google-boost-bites',
+      title: 'AI Boost Bites: Presentation Scripts with Gemini',
+      issuer: 'Google Cloud Skills Boost',
+      issueDate: 'Nov 2025',
+      credentialId: 'GOOG-BOOST-20395581',
+      skillsLearned: ['Gemini AI Tools', 'Presentation Automation', 'AI Productivity', 'Script Generation'],
+      image: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=800&q=80',
+      verifyUrl: 'https://www.skills.google/public_profiles/4dd21e0d-872d-4f20-9113-84fee8fd7f54'
     }
   ] as Certificate[],
 
@@ -393,6 +405,20 @@ export const PORTFOLIO_DATA = {
   ] as EducationItem[],
 
   codingProfiles: [
+    {
+      name: 'Google Skills Boost',
+      platform: 'google-skill-boost',
+      username: 'gopiprakan',
+      profileUrl: 'https://www.skills.google/public_profiles/4dd21e0d-872d-4f20-9113-84fee8fd7f54',
+      avatar: '/profile.jpg',
+      followers: 4,
+      problemsSolved: 4,
+      rating: 1890,
+      globalRank: 'Google Skill Badged',
+      badges: ['Generative AI', 'Large Language Models', 'Responsible AI', 'AI Boost Bites'],
+      color: '#4285f4',
+      heatmap: [8, 12, 16, 19, 22, 26, 30, 34, 25, 21, 18, 27, 33, 38, 32, 29, 24, 20, 18, 23, 31, 37, 41, 44, 33, 28, 23, 30, 38, 42]
+    },
     {
       name: 'GitHub',
       platform: 'github',

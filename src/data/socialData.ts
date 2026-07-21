@@ -23,6 +23,28 @@ export interface SocialPlatform {
 
 export const SOCIAL_PLATFORMS_DATA: SocialPlatform[] = [
   {
+    id: 'cloudskillsboost',
+    name: 'Google Cloud Skills Boost',
+    username: 'Gopiprakan S',
+    followers: '4 Badges',
+    followerCount: 4,
+    iconName: 'Cloud',
+    color: '#4285f4',
+    gradient: 'from-blue-500 to-blue-700',
+    url: 'https://www.skills.google/public_profiles/4dd21e0d-872d-4f20-9113-84fee8fd7f54',
+    recentActivity: 'Earned AI Boost Bites: Presentation Scripts with Gemini (Nov 2025)',
+    latestPost: 'Completed Google Cloud Skills Boost courses on Large Language Models (LLM), Generative AI, and Responsible AI.',
+    stats: [
+      { label: 'Badges Earned', value: '4 Verified' },
+      { label: 'Platform', value: 'Google Skills' },
+      { label: 'Member Since', value: '2025' }
+    ],
+    recentReposOrItems: [
+      { name: 'Introduction to Large Language Models', starsOrViews: '★ Google', desc: 'LLMs & prompt tuning microlearning' },
+      { name: 'Introduction to Generative AI', starsOrViews: '★ Google', desc: 'Gen AI & Google AI tools overview' }
+    ]
+  },
+  {
     id: 'github',
     name: 'GitHub',
     username: '@gopiprakan',
