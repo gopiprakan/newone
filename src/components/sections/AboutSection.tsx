@@ -40,7 +40,7 @@ export const AboutSection: React.FC = React.memo(() => {
             <div className="relative mx-auto w-72 sm:w-80 h-96 rounded-3xl p-1 bg-gradient-to-br from-cyan-500 via-purple-600 to-pink-500 shadow-neon-cyan group">
               <div className="w-full h-full rounded-[22px] bg-slate-950 overflow-hidden relative">
                 <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80"
+                  src="/profile.jpg"
                   alt="Gopiprakan Professional"
                   loading="lazy"
                   decoding="async"

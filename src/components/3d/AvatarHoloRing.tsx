@@ -194,7 +194,7 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
       <div className="absolute z-10 w-56 h-56 md:w-72 md:h-72 rounded-full p-1 bg-gradient-to-tr from-cyan-500 via-purple-600 to-pink-500 shadow-neon-cyan animate-pulse-glow flex items-center justify-center">
         <div className="w-full h-full rounded-full bg-slate-950 overflow-hidden relative border-2 border-cyan-400/40 group">
           <img
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
+            src="/profile.jpg"
             alt="Gopiprakan - AI Developer"
             loading="lazy"
             decoding="async"
