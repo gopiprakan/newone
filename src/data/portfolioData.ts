@@ -111,7 +111,7 @@ export const PORTFOLIO_DATA = {
       hackathonsWon: 8,
       certificationsCount: 15,
       technologiesMastered: 28,
-      cgpa: "3.92 / 4.00"
+      cgpa: "7.71 / 10.0"
     }
   },
 
@@ -412,7 +412,7 @@ export const PORTFOLIO_DATA = {
       institution: 'Stanford University',
       degree: 'Master of Science in Computer Science (Artificial Intelligence Specialization)',
       duration: '2021 – 2023',
-      cgpa: '3.96 / 4.00',
+      cgpa: '7.71 / 10.0',
       location: 'Stanford, CA',
       logo: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=150&q=80',
       highlights: [
@@ -426,7 +426,7 @@ export const PORTFOLIO_DATA = {
       institution: 'University of California, Berkeley',
       degree: 'Bachelor of Science in Computer Science & Applied Mathematics',
       duration: '2017 – 2021',
-      cgpa: '3.94 / 4.00',
+      cgpa: '7.71 / 10.0',
       location: 'Berkeley, CA',
       logo: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=150&q=80',
       highlights: [
