@@ -96,16 +96,17 @@ export const PORTFOLIO_DATA = {
     typingTitles: [
       "AI & Data Science Student",
       "Founder @ ZARO Web",
-      "Freelance Full-Stack Developer",
+      "Google Developer (g.dev/gopiprakan)",
       "SIH Hackathon Shortlisted Finalist"
     ],
-    bio: "Passionate AI & Data Science student at V.S.B Engineering College, Karur and Founder & Freelance Web Developer at ZARO. Experienced in designing responsive, scalable web applications, autonomous AI agents, and custom digital solutions for startups and businesses.",
+    bio: "Passionate AI & Data Science student at V.S.B Engineering College, Karur and Founder & Freelance Web Developer at ZARO. Verified Google Developer (g.dev/gopiprakan) specializing in building modern, responsive web applications, autonomous AI agents, and custom digital solutions.",
     careerObjective: "Technology becomes meaningful when it solves real-world problems and creates value for people.",
     profileImage: "/profile.jpg",
     email: "gopiprakan2006@gmail.com",
     phone: "+91 9043379569",
     location: "Tamil Nadu, India",
     resumeUrl: "/resume.pdf",
+    googleDevUrl: "https://g.dev/gopiprakan",
     stats: {
       projectsCompleted: 33,
       hackathonsWon: 3,
@@ -155,7 +156,7 @@ export const PORTFOLIO_DATA = {
     {
       category: 'Databases & Cloud',
       skills: [
-        { name: 'Google Cloud Platform', level: 88, icon: 'Cloud', description: 'Google Skills Boost certified, Cloud AI, Vertex AI' },
+        { name: 'Google Developer & GCP', level: 92, icon: 'Cloud', description: 'Verified Google Developer (g.dev/gopiprakan), Cloud AI, Vertex AI' },
         { name: 'MySQL & PostgreSQL', level: 88, icon: 'Database', description: 'Relational database schemas, indexing, queries' },
         { name: 'MongoDB', level: 90, icon: 'HardDrive', description: 'NoSQL collections, Mongoose data modeling' },
         { name: 'AWS & Vercel Hosting', level: 85, icon: 'Box', description: 'Cloud hosting, S3 storage, deployment setups' }
@@ -315,6 +316,16 @@ export const PORTFOLIO_DATA = {
 
   certificates: [
     {
+      id: 'cert-google-dev-profile',
+      title: 'Google Developer Profile Verification',
+      issuer: 'Google Developers (g.dev)',
+      issueDate: 'Verified 2026',
+      credentialId: 'GDEV-GOPIPRAKAN',
+      skillsLearned: ['Google Developer Program', 'Hands-on AI Training', 'Google Developer Tools', 'Cloud Badging'],
+      image: 'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80',
+      verifyUrl: 'https://g.dev/gopiprakan'
+    },
+    {
       id: 'cert-google-llm',
       title: 'Introduction to Large Language Models (LLM)',
       issuer: 'Google Cloud Skills Boost',
@@ -406,6 +417,20 @@ export const PORTFOLIO_DATA = {
 
   codingProfiles: [
     {
+      name: 'Google Developer',
+      platform: 'google-developer',
+      username: 'gopiprakan',
+      profileUrl: 'https://g.dev/gopiprakan',
+      avatar: '/profile.jpg',
+      followers: 15,
+      problemsSolved: 10,
+      rating: 1950,
+      globalRank: 'Verified Developer',
+      badges: ['Google Developer Program', 'g.dev Verified', 'Google AI Badged'],
+      color: '#4285f4',
+      heatmap: [12, 16, 20, 24, 28, 30, 35, 40, 32, 28, 25, 30, 36, 42, 38, 34, 30, 26, 22, 28, 35, 40, 45, 48, 36, 30, 26, 32, 40, 45]
+    },
+    {
       name: 'Google Skills Boost',
       platform: 'google-skill-boost',
       username: 'gopiprakan',
@@ -416,7 +441,7 @@ export const PORTFOLIO_DATA = {
       rating: 1890,
       globalRank: 'Google Skill Badged',
       badges: ['Generative AI', 'Large Language Models', 'Responsible AI', 'AI Boost Bites'],
-      color: '#4285f4',
+      color: '#34a853',
       heatmap: [8, 12, 16, 19, 22, 26, 30, 34, 25, 21, 18, 27, 33, 38, 32, 29, 24, 20, 18, 23, 31, 37, 41, 44, 33, 28, 23, 30, 38, 42]
     },
     {

@@ -23,14 +23,36 @@ export interface SocialPlatform {
 
 export const SOCIAL_PLATFORMS_DATA: SocialPlatform[] = [
   {
+    id: 'googledeveloper',
+    name: 'Google Developer Profile',
+    username: 'gopiprakan',
+    followers: 'Verified',
+    followerCount: 50,
+    iconName: 'Globe',
+    color: '#4285f4',
+    gradient: 'from-blue-500 via-red-500 to-amber-500',
+    url: 'https://g.dev/gopiprakan',
+    recentActivity: 'Verified Google Developer Profile (g.dev/gopiprakan)',
+    latestPost: 'Official Google Developer Program member building AI solutions, web applications, and earning Google Cloud credentials.',
+    stats: [
+      { label: 'Profile', value: 'g.dev/gopiprakan' },
+      { label: 'Program', value: 'Google Developers' },
+      { label: 'Status', value: 'Verified Member' }
+    ],
+    recentReposOrItems: [
+      { name: 'g.dev/gopiprakan', starsOrViews: '★ Verified', desc: 'Google Developer official profile link' },
+      { name: 'Google Cloud Skills', starsOrViews: '★ 4 Badges', desc: 'Gen AI & LLM course completions' }
+    ]
+  },
+  {
     id: 'cloudskillsboost',
     name: 'Google Cloud Skills Boost',
     username: 'Gopiprakan S',
     followers: '4 Badges',
     followerCount: 4,
     iconName: 'Cloud',
-    color: '#4285f4',
-    gradient: 'from-blue-500 to-blue-700',
+    color: '#34a853',
+    gradient: 'from-emerald-500 to-teal-700',
     url: 'https://www.skills.google/public_profiles/4dd21e0d-872d-4f20-9113-84fee8fd7f54',
     recentActivity: 'Earned AI Boost Bites: Presentation Scripts with Gemini (Nov 2025)',
     latestPost: 'Completed Google Cloud Skills Boost courses on Large Language Models (LLM), Generative AI, and Responsible AI.',
