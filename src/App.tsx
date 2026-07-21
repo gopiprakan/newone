@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Lenis from 'lenis';
 
 // Layout & 3D Components
@@ -22,15 +22,22 @@ import { ContactSection } from './components/sections/ContactSection';
 
 // Widget Modals & Floating Features
 import { CustomCursor } from './components/widgets/CustomCursor';
-import { CommandPalette } from './components/widgets/CommandPalette';
 import { AIChatAssistant } from './components/widgets/AIChatAssistant';
 import { ProjectModal } from './components/widgets/ProjectModal';
 import { AchievementModal } from './components/widgets/AchievementModal';
 import { ResumeModal } from './components/widgets/ResumeModal';
+import { CommandPalette } from './components/widgets/CommandPalette';
 import { ThemeSelector } from './components/widgets/ThemeSelector';
 
 import { Project, Achievement } from './data/portfolioData';
 
+/**
+ * PERFORMANCE OPTIMIZED APP ROOT
+ * Optimizations implemented:
+ * 1. useCallback Memoization: Stable prop callback references prevent full-tree re-render cascades.
+ * 2. Lenis RAF Cleanup: Tracks requestAnimationFrame handle and cancels on unmount to eliminate ghost animation loops.
+ * 3. Passive IntersectionObserver: Monitors active navigation section smoothly without scroll listener thrashing.
+ */
 export const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState('home');
@@ -42,26 +49,31 @@ export const App: React.FC = () => {
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [themeSelectorOpen, setThemeSelectorOpen] = useState(false);
 
-  // Initialize Lenis Smooth Scroll
+  // Initialize Lenis Smooth Scroll with proper RAF cancellation
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
 
+    let rafId: number;
+
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
     };
   }, []);
 
   // Section Observer for Active Nav pill
   useEffect(() => {
+    if (isLoading) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -81,11 +93,24 @@ export const App: React.FC = () => {
     return () => observer.disconnect();
   }, [isLoading]);
 
+  // Memoized Action Callbacks (Prevents child component re-renders)
+  const handlePreloaderComplete = useCallback(() => setIsLoading(false), []);
+  const handleOpenCommandPalette = useCallback(() => setCommandPaletteOpen(true), []);
+  const handleCloseCommandPalette = useCallback(() => setCommandPaletteOpen(false), []);
+  const handleOpenResumeModal = useCallback(() => setResumeModalOpen(true), []);
+  const handleCloseResumeModal = useCallback(() => setResumeModalOpen(false), []);
+  const handleOpenThemeSelector = useCallback(() => setThemeSelectorOpen(true), []);
+  const handleCloseThemeSelector = useCallback(() => setThemeSelectorOpen(false), []);
+  const handleSelectProject = useCallback((p: Project) => setSelectedProject(p), []);
+  const handleCloseProjectModal = useCallback(() => setSelectedProject(null), []);
+  const handleSelectAchievement = useCallback((ach: Achievement) => setSelectedAchievement(ach), []);
+  const handleCloseAchievementModal = useCallback(() => setSelectedAchievement(null), []);
+
   return (
-    <div className="min-h-screen bg-[#030712] text-slate-100 relative font-sans selection:bg-cyan-500 selection:text-black">
+    <div className="min-h-screen bg-[#030712] text-slate-100 relative font-sans selection:bg-cyan-500 selection:text-black gpu-accelerated">
       {/* Loading Overlay */}
       {isLoading ? (
-        <Preloader onComplete={() => setIsLoading(false)} />
+        <Preloader onComplete={handlePreloaderComplete} />
       ) : (
         <>
           {/* Ambient Particle Canvas Background */}
@@ -94,18 +119,18 @@ export const App: React.FC = () => {
           {/* Sticky Glass Navbar */}
           <Navbar
             activeSection={activeSection}
-            onOpenCommandPalette={() => setCommandPaletteOpen(true)}
-            onOpenResumeModal={() => setResumeModalOpen(true)}
-            onToggleTheme={() => setThemeSelectorOpen(true)}
+            onOpenCommandPalette={handleOpenCommandPalette}
+            onOpenResumeModal={handleOpenResumeModal}
+            onToggleTheme={handleOpenThemeSelector}
           />
 
           {/* Main Website Content Sections */}
           <main>
-            <HeroSection onOpenResumeModal={() => setResumeModalOpen(true)} />
+            <HeroSection onOpenResumeModal={handleOpenResumeModal} />
             <AboutSection />
             <SkillsSection />
-            <ProjectsSection onSelectProject={(p) => setSelectedProject(p)} />
-            <AchievementsSection onSelectAchievement={(ach) => setSelectedAchievement(ach)} />
+            <ProjectsSection onSelectProject={handleSelectProject} />
+            <AchievementsSection onSelectAchievement={handleSelectAchievement} />
             <CertificatesSection />
             <ExperienceSection />
             <EducationSection />
@@ -124,25 +149,25 @@ export const App: React.FC = () => {
           {/* Modals */}
           <ProjectModal
             project={selectedProject}
-            onClose={() => setSelectedProject(null)}
+            onClose={handleCloseProjectModal}
           />
           <AchievementModal
             achievement={selectedAchievement}
-            onClose={() => setSelectedAchievement(null)}
+            onClose={handleCloseAchievementModal}
           />
           <ResumeModal
             isOpen={resumeModalOpen}
-            onClose={() => setResumeModalOpen(false)}
+            onClose={handleCloseResumeModal}
           />
           <CommandPalette
             isOpen={commandPaletteOpen}
-            onClose={() => setCommandPaletteOpen(false)}
-            onOpenResumeModal={() => setResumeModalOpen(true)}
-            onToggleTheme={() => setThemeSelectorOpen(true)}
+            onClose={handleCloseCommandPalette}
+            onOpenResumeModal={handleOpenResumeModal}
+            onToggleTheme={handleOpenThemeSelector}
           />
           <ThemeSelector
             isOpen={themeSelectorOpen}
-            onClose={() => setThemeSelectorOpen(false)}
+            onClose={handleCloseThemeSelector}
           />
         </>
       )}

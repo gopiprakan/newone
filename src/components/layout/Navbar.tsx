@@ -34,7 +34,14 @@ export const NAV_SECTIONS = [
   { id: 'contact', label: 'Contact' },
 ];
 
-export const Navbar: React.FC<NavbarProps> = ({
+/**
+ * PERFORMANCE OPTIMIZED NAVBAR
+ * Optimizations implemented:
+ * 1. React.memo: Prevents unnecessary header re-renders on active section or parent state changes.
+ * 2. Throttled Scroll Listener: RAF-throttled scroll observer with passive event listener.
+ * 3. Hardware Layer Promotion: Glass background promoted to GPU compositing layer.
+ */
+export const Navbar: React.FC<NavbarProps> = React.memo(({
   activeSection,
   onOpenCommandPalette,
   onOpenResumeModal,
@@ -45,10 +52,19 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 40);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -68,7 +84,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 gpu-accelerated ${
         isScrolled
           ? 'py-3 bg-[#030712]/85 backdrop-blur-xl border-b border-cyan-500/15 shadow-neon-cyan'
           : 'py-5 bg-transparent'
@@ -229,4 +245,6 @@ export const Navbar: React.FC<NavbarProps> = ({
       </AnimatePresence>
     </header>
   );
-};
+});
+
+Navbar.displayName = 'Navbar';
