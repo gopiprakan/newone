@@ -20,15 +20,12 @@ export const ResumeModal: React.FC<ResumeModalProps> = React.memo(({ isOpen, onC
 
   const handleDownload = () => {
     audioController.playClick();
-    const element = document.createElement('a');
-    const file = new Blob([
-      `CURRICULUM VITAE - GOPIPRAKAN\nAI & Data Science Student | AI Developer | Full Stack Developer\nEmail: ${PORTFOLIO_DATA.personal.email}\nPhone: ${PORTFOLIO_DATA.personal.phone}\nLocation: ${PORTFOLIO_DATA.personal.location}\n\nBIO:\n${PORTFOLIO_DATA.personal.bio}`
-    ], { type: 'text/plain' });
-    element.href = URL.createObjectURL(file);
-    element.download = 'Gopiprakan_Resume_2026.txt';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
+    const link = document.createElement('a');
+    link.href = '/resume.pdf';
+    link.download = 'Gopiprakan_S_Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (

@@ -55,19 +55,19 @@ export const AIChatAssistant: React.FC = React.memo(() => {
 
     // AI logic response simulation
     setTimeout(() => {
-      let aiReply = "Gopiprakan is an AI & Data Science Student and AI Developer specialized in building intelligent applications, full-stack web platforms, and automated workflows.";
+      let aiReply = "Gopiprakan S is a Full-Stack Web Developer and B.Tech AI & Data Science student at Sengunthar Engineering College specializing in React, Node.js, Express, Python, Java, and Firebase.";
 
       const q = textToSend.toLowerCase();
       if (q.includes('skill') || q.includes('tech') || q.includes('stack')) {
-        aiReply = `Gopiprakan's skills span Python, PyTorch, Machine Learning, Data Science, React 18+, TypeScript, Node.js, Three.js, and AI Automation frameworks.`;
-      } else if (q.includes('project') || q.includes('neuromatrix') || q.includes('hyperspace')) {
-        aiReply = `Gopiprakan has built AI-powered multi-agent engines, 3D web applications, real-time analytics platforms, and intelligent automation systems.`;
-      } else if (q.includes('contact') || q.includes('hire') || q.includes('email')) {
-        aiReply = `You can reach Gopiprakan directly at gopiprakan.dev@gmail.com or via the Contact section below.`;
-      } else if (q.includes('education') || q.includes('degree') || q.includes('cgpa')) {
-        aiReply = `Gopiprakan is pursuing a Bachelor of Technology / Science in Artificial Intelligence & Data Science in Tamil Nadu, India.`;
-      } else if (q.includes('achievement') || q.includes('hackathon') || q.includes('award')) {
-        aiReply = `Highlights: Winner at regional & national AI hackathons, open-source contributor, and certified AI automation developer.`;
+        aiReply = `Gopiprakan's core skills include Java, Python, JavaScript (ES6+), React.js, Node.js, Express.js, Firebase, MongoDB, Tailwind CSS, and NLP/AI development.`;
+      } else if (q.includes('project') || q.includes('chat') || q.includes('location') || q.includes('bot')) {
+        aiReply = `Gopiprakan's featured projects: 1) Real-Time Communication Chat App (Firebase/React), 2) AI Chatbot for College Website (Python/NLP), 3) Real-Time Location Tracking Web App (Infosys Springboard).`;
+      } else if (q.includes('contact') || q.includes('hire') || q.includes('email') || q.includes('phone')) {
+        aiReply = `You can contact Gopiprakan S directly via Email at gopiprakan2006@gmail.com or Phone at +91 9043379569.`;
+      } else if (q.includes('education') || q.includes('degree') || q.includes('cgpa') || q.includes('college')) {
+        aiReply = `Gopiprakan S is pursuing B.Tech in Artificial Intelligence & Data Science (2023–2027) at Sengunthar Engineering College with a CGPA of 7.71 / 10.0.`;
+      } else if (q.includes('achievement') || q.includes('hackathon') || q.includes('sih') || q.includes('award')) {
+        aiReply = `Achievements: 1) Smart India Hackathon (SIH 2024) Shortlisted Finalist, 2) National Innovator at Indian Innovation Event (Bharat Mandapam, New Delhi 2025), 3) Infosys Springboard Project Distinction.`;
       }
 
       const aiMsg: Message = {
