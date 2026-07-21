@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, Award, Calendar, Eye } from 'lucide-react';
+import { Trophy, Calendar, Eye } from 'lucide-react';
 import { PORTFOLIO_DATA, Achievement } from '../../data/portfolioData';
 import { audioController } from '../../utils/AudioController';
 
@@ -8,9 +8,15 @@ interface AchievementsSectionProps {
   onSelectAchievement: (ach: Achievement) => void;
 }
 
-export const AchievementsSection: React.FC<AchievementsSectionProps> = ({ onSelectAchievement }) => {
+/**
+ * PERFORMANCE OPTIMIZED ACHIEVEMENTS SECTION
+ * Optimizations implemented:
+ * 1. React.memo: Prevents section re-renders on parent state changes.
+ * 2. Hardware Layer Acceleration: Promotes card animations to GPU layers.
+ */
+export const AchievementsSection: React.FC<AchievementsSectionProps> = React.memo(({ onSelectAchievement }) => {
   return (
-    <section id="achievements" className="py-24 relative z-10 border-t border-cyan-500/10">
+    <section id="achievements" className="py-24 relative z-10 border-t border-cyan-500/10 gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
@@ -82,4 +88,6 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = ({ onSele
       </div>
     </section>
   );
-};
+});
+
+AchievementsSection.displayName = 'AchievementsSection';

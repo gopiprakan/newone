@@ -1,12 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, ExternalLink, Download, CheckCircle2 } from 'lucide-react';
+import { Award, ExternalLink } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../../data/portfolioData';
-import { audioController } from '../../utils/AudioController';
 
-export const CertificatesSection: React.FC = () => {
+/**
+ * PERFORMANCE OPTIMIZED CERTIFICATES SECTION
+ * Optimizations implemented:
+ * 1. React.memo: Avoids re-renders on parent state updates.
+ * 2. Image Loading Attributes: Lazy loading & async decoding.
+ */
+export const CertificatesSection: React.FC = React.memo(() => {
   return (
-    <section id="certificates" className="py-24 relative z-10 border-t border-cyan-500/10">
+    <section id="certificates" className="py-24 relative z-10 border-t border-cyan-500/10 gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
@@ -39,6 +44,10 @@ export const CertificatesSection: React.FC = () => {
                   <img
                     src={cert.image}
                     alt={cert.title}
+                    loading="lazy"
+                    decoding="async"
+                    width={400}
+                    height={200}
                     className="w-full h-full object-cover filter brightness-105 transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -95,4 +104,6 @@ export const CertificatesSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+CertificatesSection.displayName = 'CertificatesSection';

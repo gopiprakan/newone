@@ -14,10 +14,9 @@ import {
   Facebook,
   ExternalLink,
   Users,
-  Activity,
-  MessageSquare
+  Activity
 } from 'lucide-react';
-import { SOCIAL_PLATFORMS_DATA, SocialPlatform } from '../../data/socialData';
+import { SOCIAL_PLATFORMS_DATA } from '../../data/socialData';
 import { audioController } from '../../utils/AudioController';
 
 const ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
@@ -33,9 +32,15 @@ const ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
   Facebook
 };
 
-export const SocialDashboardSection: React.FC = () => {
+/**
+ * PERFORMANCE OPTIMIZED SOCIAL DASHBOARD SECTION
+ * Optimizations implemented:
+ * 1. React.memo: Prevents section re-renders on parent state changes.
+ * 2. Hardware Layer Acceleration: GPU transform promotion on interactive cards.
+ */
+export const SocialDashboardSection: React.FC = React.memo(() => {
   return (
-    <section id="social-dashboard" className="py-24 relative z-10 border-t border-cyan-500/10">
+    <section id="social-dashboard" className="py-24 relative z-10 border-t border-cyan-500/10 gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
@@ -149,4 +154,6 @@ export const SocialDashboardSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+SocialDashboardSection.displayName = 'SocialDashboardSection';

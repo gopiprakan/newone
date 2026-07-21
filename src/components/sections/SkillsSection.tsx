@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import {
   Cpu,
@@ -59,18 +59,25 @@ const ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
   CheckCircle
 };
 
-export const SkillsSection: React.FC = () => {
+/**
+ * PERFORMANCE OPTIMIZED SKILLS SECTION
+ * Optimizations implemented:
+ * 1. React.memo: Prevents unnecessary component re-renders.
+ * 2. useMemo filtering: Memoizes skill categories computation so filtering happens only on tab selection change.
+ */
+export const SkillsSection: React.FC = React.memo(() => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
-  const categories = ['All', ...PORTFOLIO_DATA.skills.map((s) => s.category)];
+  const categories = useMemo(() => ['All', ...PORTFOLIO_DATA.skills.map((s) => s.category)], []);
 
-  const filteredCategories: SkillCategory[] =
-    selectedCategory === 'All'
+  const filteredCategories: SkillCategory[] = useMemo(() => {
+    return selectedCategory === 'All'
       ? PORTFOLIO_DATA.skills
       : PORTFOLIO_DATA.skills.filter((s) => s.category === selectedCategory);
+  }, [selectedCategory]);
 
   return (
-    <section id="skills" className="py-24 relative z-10 border-t border-cyan-500/10">
+    <section id="skills" className="py-24 relative z-10 border-t border-cyan-500/10 gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
@@ -174,4 +181,6 @@ export const SkillsSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+SkillsSection.displayName = 'SkillsSection';

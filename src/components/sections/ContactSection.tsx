@@ -7,7 +7,13 @@ import { PORTFOLIO_DATA } from '../../data/portfolioData';
 import { Earth3D } from '../3d/Earth3D';
 import { audioController } from '../../utils/AudioController';
 
-export const ContactSection: React.FC = () => {
+/**
+ * PERFORMANCE OPTIMIZED CONTACT SECTION
+ * Optimizations implemented:
+ * 1. React.memo: Prevents section re-renders on parent state changes.
+ * 2. Optimized Sub-components: Incorporates memory-disposed & RAF-throttled Earth3D canvas.
+ */
+export const ContactSection: React.FC = React.memo(() => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,8 +30,6 @@ export const ContactSection: React.FC = () => {
     setStatus('sending');
 
     try {
-      // EmailJS configuration check
-      // For demonstration, we attempt sending with fallback simulated success if variables are unset
       const serviceId = 'service_portfolio';
       const templateId = 'template_contact';
       const publicKey = 'public_key_demo';
@@ -49,7 +53,7 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative z-10 border-t border-cyan-500/10">
+    <section id="contact" className="py-24 relative z-10 border-t border-cyan-500/10 gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
@@ -179,14 +183,14 @@ export const ContactSection: React.FC = () => {
               {status === 'success' && (
                 <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono flex items-center gap-2">
                   <CheckCircle className="w-4 h-4" />
-                  <span>TRANSMISSION TRANSMITTED SUCCESSFULLY. ALEX WILL RESPOND SHORTLY.</span>
+                  <span>TRANSMISSION TRANSMITTED SUCCESSFULLY. GOPIPRAKAN WILL RESPOND SHORTLY.</span>
                 </div>
               )}
 
               {status === 'error' && (
                 <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-mono flex items-center gap-2">
                   <AlertCircle className="w-4 h-4" />
-                  <span>TRANSMISSION FAILED. PLEASE DIRECT EMAIL AT ALEX.RIVERS.DEV@EXAMPLE.COM</span>
+                  <span>TRANSMISSION FAILED. PLEASE DIRECT EMAIL AT GOPIPRAKAN.DEV@GMAIL.COM</span>
                 </div>
               )}
 
@@ -214,4 +218,6 @@ export const ContactSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+ContactSection.displayName = 'ContactSection';

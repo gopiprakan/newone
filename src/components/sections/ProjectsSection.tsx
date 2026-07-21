@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { FolderGit2, ExternalLink, Github, Sparkles, Search, Layers, Eye } from 'lucide-react';
+import { FolderGit2, ExternalLink, Github, Sparkles, Search, Eye } from 'lucide-react';
 import { PORTFOLIO_DATA, Project } from '../../data/portfolioData';
 import { audioController } from '../../utils/AudioController';
 
@@ -8,23 +8,33 @@ interface ProjectsSectionProps {
   onSelectProject: (p: Project) => void;
 }
 
-export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProject }) => {
+/**
+ * PERFORMANCE OPTIMIZED PROJECTS SECTION
+ * Optimizations implemented:
+ * 1. React.memo: Prevents unnecessary component re-renders.
+ * 2. useMemo filtering: Memoizes search and category filtering logic to prevent CPU layout overhead during user input.
+ * 3. Image Optimization: Lazy loading, async decoding & explicit pixel dimensions for smooth image paints.
+ */
+export const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onSelectProject }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const categories = ['All', 'AI & ML', '3D Web & Canvas', 'Full-Stack', 'Web3 & Cloud'];
+  const categories = useMemo(() => ['All', 'AI & ML', '3D Web & Canvas', 'Full-Stack', 'Web3 & Cloud'], []);
 
-  const filteredProjects = PORTFOLIO_DATA.projects.filter((p) => {
-    const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory;
-    const matchesSearch =
-      p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.shortDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.techStack.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+  const filteredProjects = useMemo(() => {
+    return PORTFOLIO_DATA.projects.filter((p) => {
+      const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory;
+      const query = searchQuery.toLowerCase();
+      const matchesSearch =
+        p.title.toLowerCase().includes(query) ||
+        p.shortDescription.toLowerCase().includes(query) ||
+        p.techStack.some((t) => t.toLowerCase().includes(query));
+      return matchesCategory && matchesSearch;
+    });
+  }, [selectedCategory, searchQuery]);
 
   return (
-    <section id="projects" className="py-24 relative z-10 border-t border-cyan-500/10">
+    <section id="projects" className="py-24 relative z-10 border-t border-cyan-500/10 gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
@@ -95,6 +105,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
                 <img
                   src={proj.image}
                   alt={proj.title}
+                  loading="lazy"
+                  decoding="async"
+                  width={600}
+                  height={320}
                   className="w-full h-full object-cover filter brightness-105 contrast-105 transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0b1021] via-transparent to-transparent opacity-90" />
@@ -183,4 +197,6 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
       </div>
     </section>
   );
-};
+});
+
+ProjectsSection.displayName = 'ProjectsSection';

@@ -7,7 +7,13 @@ interface PreloaderProps {
   onComplete: () => void;
 }
 
-export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
+/**
+ * PERFORMANCE OPTIMIZED PRELOADER
+ * Optimizations implemented:
+ * 1. React.memo: Prevents re-renders during state mutations.
+ * 2. Timer Cleanup: Guarantees interval and timeout disposal.
+ */
+export const Preloader: React.FC<PreloaderProps> = React.memo(({ onComplete }) => {
   const [progress, setProgress] = useState(0);
   const [statusText, setStatusText] = useState('BOOTING CORE ENGINE...');
   const [isFinished, setIsFinished] = useState(false);
@@ -21,20 +27,22 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       'SYSTEM ONLINE.'
     ];
 
+    let finishTimeout1: number;
+    let finishTimeout2: number;
+
     const timer = setInterval(() => {
       setProgress((prev) => {
         const next = prev + Math.floor(Math.random() * 8) + 4;
         if (next >= 100) {
           clearInterval(timer);
           setStatusText('SYSTEM ONLINE.');
-          setTimeout(() => {
+          finishTimeout1 = window.setTimeout(() => {
             setIsFinished(true);
-            setTimeout(onComplete, 800);
+            finishTimeout2 = window.setTimeout(onComplete, 800);
           }, 400);
           return 100;
         }
 
-        // Update status text based on progress milestone
         if (next > 75) setStatusText(statuses[3]);
         else if (next > 50) setStatusText(statuses[2]);
         else if (next > 25) setStatusText(statuses[1]);
@@ -43,7 +51,11 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       });
     }, 80);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      if (finishTimeout1) clearTimeout(finishTimeout1);
+      if (finishTimeout2) clearTimeout(finishTimeout2);
+    };
   }, [onComplete]);
 
   return (
@@ -53,7 +65,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#030712] text-slate-100 overflow-hidden"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#030712] text-slate-100 overflow-hidden gpu-accelerated"
         >
           {/* Cyber Grid Ambient Background */}
           <div className="absolute inset-0 cyber-grid opacity-20 pointer-events-none" />
@@ -96,4 +108,6 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
       )}
     </AnimatePresence>
   );
-};
+});
+
+Preloader.displayName = 'Preloader';

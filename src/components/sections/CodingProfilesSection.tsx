@@ -1,12 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code2, ExternalLink, Trophy, Flame, Star, Activity, UserCheck } from 'lucide-react';
-import { PORTFOLIO_DATA, CodingProfile } from '../../data/portfolioData';
+import { Code2, ExternalLink, Star, Activity } from 'lucide-react';
+import { PORTFOLIO_DATA } from '../../data/portfolioData';
 import { audioController } from '../../utils/AudioController';
 
-export const CodingProfilesSection: React.FC = () => {
+/**
+ * PERFORMANCE OPTIMIZED CODING PROFILES SECTION
+ * Optimizations implemented:
+ * 1. React.memo: Prevents section re-renders on parent state changes.
+ * 2. Image Loading Attributes: Adds lazy loading & async decoding on platform avatars.
+ */
+export const CodingProfilesSection: React.FC = React.memo(() => {
   return (
-    <section id="coding-profiles" className="py-24 relative z-10 border-t border-cyan-500/10">
+    <section id="coding-profiles" className="py-24 relative z-10 border-t border-cyan-500/10 gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
@@ -38,7 +44,15 @@ export const CodingProfilesSection: React.FC = () => {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-2xl overflow-hidden border border-cyan-500/30 p-0.5 bg-slate-900">
-                    <img src={prof.avatar} alt={prof.name} className="w-full h-full object-cover rounded-xl" />
+                    <img
+                      src={prof.avatar}
+                      alt={prof.name}
+                      loading="lazy"
+                      decoding="async"
+                      width={48}
+                      height={48}
+                      className="w-full h-full object-cover rounded-xl"
+                    />
                   </div>
                   <div>
                     <h3 className="font-display font-bold text-base text-slate-100 group-hover:text-cyan-300 transition-colors">
@@ -119,4 +133,6 @@ export const CodingProfilesSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+CodingProfilesSection.displayName = 'CodingProfilesSection';

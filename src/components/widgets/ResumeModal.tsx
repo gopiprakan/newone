@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Download, Printer, FileText, CheckCircle, Award } from 'lucide-react';
+import { X, Download, FileText } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../../data/portfolioData';
 import { audioController } from '../../utils/AudioController';
 
@@ -9,12 +9,17 @@ interface ResumeModalProps {
   onClose: () => void;
 }
 
-export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => {
+/**
+ * PERFORMANCE OPTIMIZED RESUME MODAL
+ * Optimizations implemented:
+ * 1. React.memo: Prevents modal re-renders when closed or parent re-renders.
+ * 2. Hardware Layer Promotion: Promotes backdrop and surface to GPU compositing layer.
+ */
+export const ResumeModal: React.FC<ResumeModalProps> = React.memo(({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const handleDownload = () => {
     audioController.playClick();
-    // Simulate resume download
     const element = document.createElement('a');
     const file = new Blob([
       `CURRICULUM VITAE - GOPIPRAKAN\nAI & Data Science Student | AI Developer | Full Stack Developer\nEmail: ${PORTFOLIO_DATA.personal.email}\nPhone: ${PORTFOLIO_DATA.personal.phone}\nLocation: ${PORTFOLIO_DATA.personal.location}\n\nBIO:\n${PORTFOLIO_DATA.personal.bio}`
@@ -28,12 +33,12 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-xl overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-xl overflow-y-auto gpu-accelerated">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative w-full max-w-4xl bg-[#090e1d] border border-cyan-500/30 rounded-3xl shadow-2xl overflow-hidden text-slate-100 p-6 md:p-10 my-auto"
+          className="relative w-full max-w-4xl bg-[#090e1d] border border-cyan-500/30 rounded-3xl shadow-2xl overflow-hidden text-slate-100 p-6 md:p-10 my-auto gpu-accelerated"
         >
           {/* Top Bar Actions */}
           <div className="flex items-center justify-between border-b border-slate-800 pb-6 mb-6">
@@ -129,4 +134,6 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
       </div>
     </AnimatePresence>
   );
-};
+});
+
+ResumeModal.displayName = 'ResumeModal';

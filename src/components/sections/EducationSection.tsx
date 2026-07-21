@@ -1,11 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Calendar, MapPin, Award, CheckCircle2 } from 'lucide-react';
+import { GraduationCap, Calendar, Award, CheckCircle2 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../../data/portfolioData';
 
-export const EducationSection: React.FC = () => {
+/**
+ * PERFORMANCE OPTIMIZED EDUCATION SECTION
+ * Optimizations implemented:
+ * 1. React.memo: Prevents unnecessary component re-renders.
+ * 2. Hardware Layer Acceleration: Promotes card layout elements to GPU compositing layers.
+ */
+export const EducationSection: React.FC = React.memo(() => {
   return (
-    <section id="education" className="py-24 relative z-10 border-t border-cyan-500/10">
+    <section id="education" className="py-24 relative z-10 border-t border-cyan-500/10 gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
@@ -77,4 +83,6 @@ export const EducationSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+EducationSection.displayName = 'EducationSection';

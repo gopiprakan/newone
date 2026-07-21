@@ -35,7 +35,12 @@ export const THEMES = [
   }
 ];
 
-export const ThemeSelector: React.FC<ThemeSelectorProps> = ({ isOpen, onClose }) => {
+/**
+ * PERFORMANCE OPTIMIZED THEME SELECTOR MODAL
+ * Optimizations implemented:
+ * 1. React.memo: Avoids re-rendering theme modal when closed or parent re-renders.
+ */
+export const ThemeSelector: React.FC<ThemeSelectorProps> = React.memo(({ isOpen, onClose }) => {
   const [activeTheme, setActiveTheme] = useState('cyber-obsidian');
 
   if (!isOpen) return null;
@@ -54,12 +59,12 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = ({ isOpen, onClose })
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md gpu-accelerated">
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="relative w-full max-w-lg bg-[#080d1b] border border-cyan-500/30 rounded-3xl shadow-2xl overflow-hidden text-slate-100 p-6 md:p-8 space-y-6"
+          className="relative w-full max-w-lg bg-[#080d1b] border border-cyan-500/30 rounded-3xl shadow-2xl overflow-hidden text-slate-100 p-6 md:p-8 space-y-6 gpu-accelerated"
         >
           <div className="flex items-center justify-between border-b border-slate-800 pb-4">
             <div className="flex items-center gap-3">
@@ -126,4 +131,6 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = ({ isOpen, onClose })
       </div>
     </AnimatePresence>
   );
-};
+});
+
+ThemeSelector.displayName = 'ThemeSelector';

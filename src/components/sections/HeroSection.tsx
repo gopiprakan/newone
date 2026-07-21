@@ -9,7 +9,14 @@ interface HeroSectionProps {
   onOpenResumeModal: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResumeModal }) => {
+/**
+ * PERFORMANCE OPTIMIZED HERO SECTION
+ * Optimizations implemented:
+ * 1. React.memo: Prevents unnecessary section re-evaluations during parent re-renders.
+ * 2. Timer Cleanup: Properly disposes typing effect timers to prevent memory leaks.
+ * 3. Hardware Layer Promotion: Applies GPU acceleration rules to text layout and stat cards.
+ */
+export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResumeModal }) => {
   const [typingIndex, setTypingIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -18,13 +25,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResumeModal }) =
 
   useEffect(() => {
     const fullText = titles[typingIndex];
+    let subTimeout: number;
 
     const timer = setTimeout(
       () => {
         if (!isDeleting) {
           setCurrentText(fullText.substring(0, currentText.length + 1));
           if (currentText === fullText) {
-            setTimeout(() => setIsDeleting(true), 1800);
+            subTimeout = window.setTimeout(() => setIsDeleting(true), 1800);
           }
         } else {
           setCurrentText(fullText.substring(0, currentText.length - 1));
@@ -37,7 +45,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResumeModal }) =
       isDeleting ? 50 : 100
     );
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (subTimeout) clearTimeout(subTimeout);
+    };
   }, [currentText, isDeleting, typingIndex, titles]);
 
   const scrollToProjects = () => {
@@ -51,7 +62,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResumeModal }) =
   };
 
   return (
-    <section id="home" className="relative min-h-screen pt-28 pb-16 flex flex-col justify-center overflow-hidden">
+    <section id="home" className="relative min-h-screen pt-28 pb-16 flex flex-col justify-center overflow-hidden gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Text Intro Column */}
@@ -169,4 +180,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenResumeModal }) =
       </div>
     </section>
   );
-};
+});
+
+HeroSection.displayName = 'HeroSection';

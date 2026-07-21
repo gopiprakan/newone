@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Cpu, ArrowUp, Github, Linkedin, Twitter, Youtube, Activity } from 'lucide-react';
 import { audioController } from '../../utils/AudioController';
 
-export const Footer: React.FC = () => {
+/**
+ * PERFORMANCE OPTIMIZED FOOTER
+ * Optimizations implemented:
+ * 1. React.memo: Prevents footer re-renders when parent state updates.
+ * 2. Timer Cleanup: Properly disposes visitor count update interval.
+ */
+export const Footer: React.FC = React.memo(() => {
   const [visitorCount, setVisitorCount] = useState(142850);
 
   useEffect(() => {
@@ -18,7 +24,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative bg-[#02050b] border-t border-cyan-500/15 pt-16 pb-12 overflow-hidden text-slate-400">
+    <footer className="relative bg-[#02050b] border-t border-cyan-500/15 pt-16 pb-12 overflow-hidden text-slate-400 gpu-accelerated">
       {/* Glow background line */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-neon-cyan" />
 
@@ -114,4 +120,6 @@ export const Footer: React.FC = () => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = 'Footer';

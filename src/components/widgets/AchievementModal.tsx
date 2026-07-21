@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Award, Calendar, Trophy, ExternalLink } from 'lucide-react';
+import { X, Award, Calendar, Trophy } from 'lucide-react';
 import { Achievement } from '../../data/portfolioData';
 import { audioController } from '../../utils/AudioController';
 
@@ -9,17 +9,23 @@ interface AchievementModalProps {
   onClose: () => void;
 }
 
-export const AchievementModal: React.FC<AchievementModalProps> = ({ achievement, onClose }) => {
+/**
+ * PERFORMANCE OPTIMIZED ACHIEVEMENT MODAL
+ * Optimizations implemented:
+ * 1. React.memo: Prevents unnecessary modal re-renders.
+ * 2. Image Loading Attributes: Lazy loading & async decoding.
+ */
+export const AchievementModal: React.FC<AchievementModalProps> = React.memo(({ achievement, onClose }) => {
   if (!achievement) return null;
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-xl">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-xl gpu-accelerated">
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="relative w-full max-w-2xl bg-[#080d1b] border border-cyan-500/30 rounded-3xl shadow-2xl overflow-hidden text-slate-100 p-6 md:p-8 space-y-6"
+          className="relative w-full max-w-2xl bg-[#080d1b] border border-cyan-500/30 rounded-3xl shadow-2xl overflow-hidden text-slate-100 p-6 md:p-8 space-y-6 gpu-accelerated"
         >
           <button
             onClick={() => {
@@ -49,6 +55,10 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({ achievement,
             <img
               src={achievement.image}
               alt={achievement.title}
+              loading="lazy"
+              decoding="async"
+              width={600}
+              height={224}
               className="w-full h-full object-cover filter brightness-105"
             />
           </div>
@@ -80,4 +90,6 @@ export const AchievementModal: React.FC<AchievementModalProps> = ({ achievement,
       </div>
     </AnimatePresence>
   );
-};
+});
+
+AchievementModal.displayName = 'AchievementModal';

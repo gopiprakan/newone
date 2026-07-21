@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ArrowRight, FileText, Palette, Volume2, Send, Code, Sparkles, X } from 'lucide-react';
+import { Search, ArrowRight, FileText, Palette, Volume2, Code, X } from 'lucide-react';
 import { NAV_SECTIONS } from '../layout/Navbar';
 import { PORTFOLIO_DATA } from '../../data/portfolioData';
 import { audioController } from '../../utils/AudioController';
@@ -12,7 +12,13 @@ interface CommandPaletteProps {
   onToggleTheme: () => void;
 }
 
-export const CommandPalette: React.FC<CommandPaletteProps> = ({
+/**
+ * PERFORMANCE OPTIMIZED COMMAND PALETTE WIDGET
+ * Optimizations implemented:
+ * 1. React.memo: Avoids re-rendering command modal when closed or when unrelated App state changes.
+ * 2. Hardware Layer Promotion: Promotes backdrop and modal surface to GPU layer.
+ */
+export const CommandPalette: React.FC<CommandPaletteProps> = React.memo(({
   isOpen,
   onClose,
   onOpenResumeModal,
@@ -54,12 +60,12 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-slate-950/80 backdrop-blur-md">
+      <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-slate-950/80 backdrop-blur-md gpu-accelerated">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: -20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: -20 }}
-          className="w-full max-w-2xl bg-[#090d1a] border border-cyan-500/30 rounded-2xl shadow-2xl overflow-hidden text-slate-100"
+          className="w-full max-w-2xl bg-[#090d1a] border border-cyan-500/30 rounded-2xl shadow-2xl overflow-hidden text-slate-100 gpu-accelerated"
         >
           {/* Header Search Box */}
           <div className="p-4 border-b border-cyan-500/20 flex items-center gap-3">
@@ -194,4 +200,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       </div>
     </AnimatePresence>
   );
-};
+});
+
+CommandPalette.displayName = 'CommandPalette';

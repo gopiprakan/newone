@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ExternalLink, Github, Layers, Cpu, AlertTriangle, Lightbulb, Play, CheckCircle2, ChevronRight } from 'lucide-react';
+import { X, ExternalLink, Github, Layers, AlertTriangle, Lightbulb, CheckCircle2 } from 'lucide-react';
 import { Project } from '../../data/portfolioData';
 import { audioController } from '../../utils/AudioController';
 
@@ -9,7 +9,13 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
-export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
+/**
+ * PERFORMANCE OPTIMIZED PROJECT MODAL
+ * Optimizations implemented:
+ * 1. React.memo: Prevents re-rendering modal when unrelated App state changes.
+ * 2. Image Optimization: Lazy loading, async decoding & explicit dimensions on screenshot gallery.
+ */
+export const ProjectModal: React.FC<ProjectModalProps> = React.memo(({ project, onClose }) => {
   const [selectedImg, setSelectedImg] = useState<string | null>(null);
 
   if (!project) return null;
@@ -18,12 +24,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-slate-950/85 backdrop-blur-xl overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-slate-950/85 backdrop-blur-xl overflow-y-auto gpu-accelerated">
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="relative w-full max-w-5xl bg-[#080d1b] border border-cyan-500/30 rounded-3xl shadow-2xl overflow-hidden text-slate-100 my-auto"
+          className="relative w-full max-w-5xl bg-[#080d1b] border border-cyan-500/30 rounded-3xl shadow-2xl overflow-hidden text-slate-100 my-auto gpu-accelerated"
         >
           {/* Close Button */}
           <button
@@ -41,6 +47,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             <img
               src={currentHeroImg}
               alt={project.title}
+              loading="lazy"
+              decoding="async"
+              width={900}
+              height={400}
               className="w-full h-full object-cover filter brightness-105 contrast-105 transition-all duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#080d1b] via-[#080d1b]/40 to-transparent" />
@@ -55,7 +65,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                     currentHeroImg === s ? 'border-cyan-400 scale-105 shadow-neon-cyan' : 'border-slate-700 opacity-60'
                   }`}
                 >
-                  <img src={s} alt="screenshot" className="w-full h-full object-cover" />
+                  <img src={s} alt="screenshot" loading="lazy" decoding="async" width={64} height={48} className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
@@ -162,4 +172,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       </div>
     </AnimatePresence>
   );
-};
+});
+
+ProjectModal.displayName = 'ProjectModal';

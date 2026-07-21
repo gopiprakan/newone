@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bot, X, Send, Sparkles, User, Cpu } from 'lucide-react';
-import { PORTFOLIO_DATA } from '../../data/portfolioData';
+import { Bot, X, Send, Cpu } from 'lucide-react';
 import { audioController } from '../../utils/AudioController';
 
 interface Message {
@@ -11,7 +10,13 @@ interface Message {
   timestamp: string;
 }
 
-export const AIChatAssistant: React.FC = () => {
+/**
+ * PERFORMANCE OPTIMIZED AI CHAT ASSISTANT WIDGET
+ * Optimizations implemented:
+ * 1. React.memo: Avoids re-evaluating widget DOM tree when unrelated App state changes.
+ * 2. Hardware Layer Promotion: Applies GPU compositing rules on floating drawers.
+ */
+export const AIChatAssistant: React.FC = React.memo(() => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -26,8 +31,10 @@ export const AIChatAssistant: React.FC = () => {
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isTyping]);
+    if (isOpen) {
+      chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages, isTyping, isOpen]);
 
   const handleSend = (userQuery?: string) => {
     const textToSend = userQuery || input;
@@ -85,7 +92,7 @@ export const AIChatAssistant: React.FC = () => {
           audioController.playClick();
           setIsOpen(!isOpen);
         }}
-        className="fixed bottom-6 right-6 z-40 p-4 rounded-full bg-gradient-to-tr from-cyan-500 to-purple-600 text-slate-950 shadow-neon-cyan flex items-center justify-center group"
+        className="fixed bottom-6 right-6 z-40 p-4 rounded-full bg-gradient-to-tr from-cyan-500 to-purple-600 text-slate-950 shadow-neon-cyan flex items-center justify-center group gpu-accelerated"
       >
         <Bot className="w-6 h-6 text-slate-950 group-hover:rotate-12 transition-transform" />
         <span className="absolute -top-1 -right-1 w-3 h-3 bg-pink-500 rounded-full animate-ping" />
@@ -98,7 +105,7 @@ export const AIChatAssistant: React.FC = () => {
             initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 30 }}
-            className="fixed bottom-24 right-4 sm:right-8 z-40 w-80 sm:w-96 bg-[#090d1a] border border-cyan-500/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[480px]"
+            className="fixed bottom-24 right-4 sm:right-8 z-40 w-80 sm:w-96 bg-[#090d1a] border border-cyan-500/30 rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[480px] gpu-accelerated"
           >
             {/* Header */}
             <div className="p-3.5 bg-slate-900 border-b border-cyan-500/20 flex items-center justify-between">
@@ -181,7 +188,7 @@ export const AIChatAssistant: React.FC = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                placeholder="Ask RIVERS-AI anything..."
+                placeholder="Ask GOPI-AI anything..."
                 className="flex-1 bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-cyan-400"
               />
               <button
@@ -196,4 +203,6 @@ export const AIChatAssistant: React.FC = () => {
       </AnimatePresence>
     </>
   );
-};
+});
+
+AIChatAssistant.displayName = 'AIChatAssistant';
