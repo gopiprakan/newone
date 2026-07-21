@@ -13,7 +13,7 @@ interface ResumeModalProps {
  * PERFORMANCE OPTIMIZED RESUME MODAL
  * Optimizations implemented:
  * 1. React.memo: Prevents modal re-renders when closed or parent re-renders.
- * 2. Full Viewport Fit: Fits directly in center of screen without page scrolling needed.
+ * 2. Perfectly Centered Viewport: Centered in the middle of the screen with balanced top/bottom margins.
  * 3. Lock Body Scroll: Disables background document scrolling while viewing PDF.
  */
 export const ResumeModal: React.FC<ResumeModalProps> = React.memo(({ isOpen, onClose }) => {
@@ -49,12 +49,13 @@ export const ResumeModal: React.FC<ResumeModalProps> = React.memo(({ isOpen, onC
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-950/90 backdrop-blur-2xl gpu-accelerated">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-slate-950/90 backdrop-blur-2xl gpu-accelerated">
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.96, y: 10 }}
-          className="relative w-full max-w-5xl h-[92vh] sm:h-[94vh] flex flex-col bg-[#090e1d] border border-cyan-500/40 rounded-3xl shadow-2xl overflow-hidden text-slate-100 p-3 sm:p-5 md:p-6 my-auto gpu-accelerated"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.25, ease: 'easeOut' }}
+          className="relative w-full max-w-5xl h-[80vh] sm:h-[84vh] max-h-[780px] flex flex-col bg-[#090e1d] border border-cyan-500/40 rounded-3xl shadow-2xl overflow-hidden text-slate-100 p-4 sm:p-6 my-auto gpu-accelerated"
         >
           {/* Top Bar Actions */}
           <div className="flex-none flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3 mb-3">
