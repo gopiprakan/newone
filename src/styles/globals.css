@@ -9,24 +9,29 @@
   --color-accent-pink: #ec4899;
 }
 
-/* Custom Cyber Glassmorphism & Neon Utilities */
+/* Custom Cyber Glassmorphism & Neon Utilities - Optimized for 60+ FPS compositing */
 @layer utilities {
   .glass-panel {
     background: rgba(15, 23, 42, 0.55);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.08);
+    /* PERFORMANCE: Promote to independent compositor layer to avoid layout reflow during scroll */
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   .glass-panel-hover {
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    /* PERFORMANCE: Hint compositor for hardware accelerated transform transitions */
+    will-change: transform;
   }
   
   .glass-panel-hover:hover {
     background: rgba(30, 41, 59, 0.75);
     border-color: rgba(56, 189, 248, 0.4);
     box-shadow: 0 0 25px rgba(56, 189, 248, 0.25), inset 0 0 15px rgba(56, 189, 248, 0.1);
-    transform: translateY(-4px);
+    transform: translateY(-4px) translateZ(0);
   }
 
   .glass-card-neon {
@@ -34,6 +39,9 @@
     backdrop-filter: blur(20px);
     border: 1px solid rgba(56, 189, 248, 0.2);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    /* PERFORMANCE: GPU layer promotion to prevent repaint during parent container transforms */
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
   .text-gradient-cyan {
@@ -67,9 +75,16 @@
   .aurora-bg {
     background: radial-gradient(circle at 50% 20%, rgba(0, 240, 255, 0.08) 0%, rgba(139, 92, 246, 0.06) 35%, transparent 70%);
   }
+
+  /* PERFORMANCE UTILITY: GPU acceleration helper for animated elements */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
 }
 
-/* Custom Futuristic Scrollbar */
+/* Custom Futuristic Scrollbar - Optimized for composite rendering */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -85,10 +100,10 @@
   box-shadow: 0 0 10px #00f0ff;
 }
 
-/* Animation keyframes */
+/* Animation keyframes - Uses GPU transform matrix */
 @keyframes gridMove {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(50px); }
+  0% { transform: translateY(0) translateZ(0); }
+  100% { transform: translateY(50px) translateZ(0); }
 }
 
 .cyber-grid {

@@ -6,7 +6,15 @@ interface AISphereProps {
   interactive?: boolean;
 }
 
-export const AISphere: React.FC<AISphereProps> = ({ interactive = true }) => {
+/**
+ * PERFORMANCE OPTIMIZED 3D AI SPHERE
+ * Optimizations implemented:
+ * 1. IntersectionObserver RAF pause: Halts WebGL continuous render loop when element is outside viewport, conserving GPU resources.
+ * 2. Explicit WebGL Memory Cleanup: Disposes all geometries, materials, geometries attributes, and renderer on unmount to eliminate GPU VRAM leaks.
+ * 3. Throttled Mouse Tracking: Uses requestAnimationFrame throttling for smooth interactivity without event flood overhead.
+ * 4. React.memo: Prevents unnecessary component re-evaluations during parent state updates.
+ */
+export const AISphere: React.FC<AISphereProps> = React.memo(({ interactive = true }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -20,12 +28,12 @@ export const AISphere: React.FC<AISphereProps> = ({ interactive = true }) => {
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
     camera.position.z = 3.5;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // AI Core Sphere Geometry (Wireframe Icosahedron + Outer Point Cloud)
+    // AI Core Sphere Geometry (Wireframe Icosahedron)
     const innerGeo = new THREE.IcosahedronGeometry(1, 2);
     const innerMat = new THREE.MeshBasicMaterial({
       color: 0x00f0ff,
@@ -85,42 +93,68 @@ export const AISphere: React.FC<AISphereProps> = ({ interactive = true }) => {
     ringMesh.rotation.x = Math.PI / 3;
     scene.add(ringMesh);
 
-    // Mouse Interaction Tracking
+    // Throttled Mouse Interaction Tracking
     let mouseX = 0;
     let mouseY = 0;
     let targetX = 0;
     let targetY = 0;
+    let mouseRafId: number | null = null;
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!interactive) return;
-      const rect = container.getBoundingClientRect();
-      const x = e.clientX - rect.left - width / 2;
-      const y = e.clientY - rect.top - height / 2;
-      targetX = (x / width) * 0.8;
-      targetY = (y / height) * 0.8;
+      if (!interactive || mouseRafId !== null) return;
+      mouseRafId = requestAnimationFrame(() => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left - width / 2;
+        const y = e.clientY - rect.top - height / 2;
+        targetX = (x / width) * 0.8;
+        targetY = (y / height) * 0.8;
+        mouseRafId = null;
+      });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
-    // Resize Observer
+    // Throttled Resize Observer
+    let resizeTimeout: number | null = null;
     const handleResize = () => {
-      if (!container) return;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
+      if (resizeTimeout !== null) window.clearTimeout(resizeTimeout);
+      resizeTimeout = window.setTimeout(() => {
+        if (!container) return;
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      }, 150);
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
 
-    // Animation Loop
-    let animationFrameId: number;
-    let clock = new THREE.Clock();
+    // Animation Loop with Viewport Intersect Observer Control
+    let animationFrameId: number | null = null;
+    let isVisible = true;
+    const clock = new THREE.Clock();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !animationFrameId) {
+            animationFrameId = requestAnimationFrame(animate);
+          } else if (!isVisible && animationFrameId) {
+            cancelAnimationFrame(animationFrameId);
+            animationFrameId = null;
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
 
     const animate = () => {
+      if (!isVisible) return;
       const elapsedTime = clock.getElapsedTime();
 
-      // Smooth Mouse Inertia
+      // Smooth Mouse Inertia interpolation
       mouseX += (targetX - mouseX) * 0.05;
       mouseY += (targetY - mouseY) * 0.05;
 
@@ -141,13 +175,27 @@ export const AISphere: React.FC<AISphereProps> = ({ interactive = true }) => {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    animationFrameId = requestAnimationFrame(animate);
 
-    // Cleanup
+    // Complete Cleanup and GPU Resource Disposal
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) cancelAnimationFrame(animationFrameId);
+      if (mouseRafId) cancelAnimationFrame(mouseRafId);
+      if (resizeTimeout) window.clearTimeout(resizeTimeout);
+      observer.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
+
+      // Dispose Three.js Geometries & Materials to avoid VRAM leaks
+      innerGeo.dispose();
+      innerMat.dispose();
+      coreGeo.dispose();
+      coreMat.dispose();
+      particlesGeo.dispose();
+      particlesMat.dispose();
+      ringGeo.dispose();
+      ringMat.dispose();
+
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
@@ -156,8 +204,10 @@ export const AISphere: React.FC<AISphereProps> = ({ interactive = true }) => {
   }, [interactive]);
 
   return (
-    <div ref={containerRef} className="w-full h-full min-h-[260px] flex items-center justify-center relative select-none">
+    <div ref={containerRef} className="w-full h-full min-h-[260px] flex items-center justify-center relative select-none gpu-accelerated">
       <div className="absolute inset-0 bg-cyan-500/10 rounded-full filter blur-3xl -z-10 pointer-events-none animate-pulse-glow" />
     </div>
   );
-};
+});
+
+AISphere.displayName = 'AISphere';

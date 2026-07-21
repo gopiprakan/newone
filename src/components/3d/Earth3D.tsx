@@ -1,7 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-export const Earth3D: React.FC = () => {
+/**
+ * PERFORMANCE OPTIMIZED 3D EARTH GLOBE
+ * Optimizations implemented:
+ * 1. IntersectionObserver RAF control: Halts rendering when globe is scrolled out of viewport.
+ * 2. Complete WebGL Resource Disposal: Cleanly releases VRAM by disposing all geometries, materials & renderers on unmount.
+ * 3. Throttled Mouse & Resize Handlers: Prevents main-thread layout thrashing during user cursor movement or window resizing.
+ * 4. React.memo: Avoids re-evaluating component on parent re-renders.
+ */
+export const Earth3D: React.FC = React.memo(() => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -14,7 +22,7 @@ export const Earth3D: React.FC = () => {
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
     camera.position.z = 3.2;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
@@ -70,11 +78,10 @@ export const Earth3D: React.FC = () => {
     const dotsMesh = new THREE.Points(dotsGeo, dotsMat);
     globeGroup.add(dotsMesh);
 
-    // Pulsing San Francisco Location Marker Pin
+    // Pulsing San Francisco / India Location Marker Pin
     const pinGeo = new THREE.SphereGeometry(0.06, 16, 16);
     const pinMat = new THREE.MeshBasicMaterial({ color: 0xff007f });
     const pinMesh = new THREE.Mesh(pinGeo, pinMat);
-    // Lat: ~37.77, Lon: -122.41
     pinMesh.position.set(0.6, 0.7, 0.8);
     globeGroup.add(pinMesh);
 
@@ -90,31 +97,58 @@ export const Earth3D: React.FC = () => {
     let mouseY = 0;
     let targetX = 0;
     let targetY = 0;
+    let mouseRafId: number | null = null;
 
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const x = e.clientX - rect.left - width / 2;
-      const y = e.clientY - rect.top - height / 2;
-      targetX = (x / width) * 0.8;
-      targetY = (y / height) * 0.8;
+      if (mouseRafId !== null) return;
+      mouseRafId = requestAnimationFrame(() => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left - width / 2;
+        const y = e.clientY - rect.top - height / 2;
+        targetX = (x / width) * 0.8;
+        targetY = (y / height) * 0.8;
+        mouseRafId = null;
+      });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
+    let resizeTimeout: number | null = null;
     const handleResize = () => {
-      if (!container) return;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
+      if (resizeTimeout !== null) window.clearTimeout(resizeTimeout);
+      resizeTimeout = window.setTimeout(() => {
+        if (!container) return;
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      }, 150);
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
 
-    let animId: number;
-    let clock = new THREE.Clock();
+    let animId: number | null = null;
+    let isVisible = true;
+    const clock = new THREE.Clock();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !animId) {
+            animId = requestAnimationFrame(animate);
+          } else if (!isVisible && animId) {
+            cancelAnimationFrame(animId);
+            animId = null;
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
 
     const animate = () => {
+      if (!isVisible) return;
       const elapsedTime = clock.getElapsedTime();
 
       mouseX += (targetX - mouseX) * 0.05;
@@ -130,12 +164,28 @@ export const Earth3D: React.FC = () => {
       animId = requestAnimationFrame(animate);
     };
 
-    animate();
+    animId = requestAnimationFrame(animate);
 
     return () => {
-      cancelAnimationFrame(animId);
+      if (animId) cancelAnimationFrame(animId);
+      if (mouseRafId) cancelAnimationFrame(mouseRafId);
+      if (resizeTimeout) window.clearTimeout(resizeTimeout);
+      observer.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
+
+      // Memory Cleanup & Resource Disposal
+      earthGeo.dispose();
+      earthMat.dispose();
+      coreGeo.dispose();
+      coreMat.dispose();
+      dotsGeo.dispose();
+      dotsMat.dispose();
+      pinGeo.dispose();
+      pinMat.dispose();
+      locRingGeo.dispose();
+      locRingMat.dispose();
+
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
@@ -144,8 +194,10 @@ export const Earth3D: React.FC = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full h-72 md:h-80 flex items-center justify-center relative select-none">
+    <div ref={containerRef} className="w-full h-72 md:h-80 flex items-center justify-center relative select-none gpu-accelerated">
       <div className="absolute inset-0 bg-cyan-500/10 rounded-full filter blur-2xl -z-10 pointer-events-none animate-pulse-glow" />
     </div>
   );
-};
+});
+
+Earth3D.displayName = 'Earth3D';

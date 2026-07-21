@@ -1,7 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-export const AvatarHoloRing: React.FC = () => {
+/**
+ * PERFORMANCE OPTIMIZED AVATAR HOLO RING
+ * Optimizations implemented:
+ * 1. Viewport-Aware Rendering: Halts WebGL animation loop when element is off-screen using IntersectionObserver.
+ * 2. Complete WebGL VRAM Cleanup: Memory disposal of geometries, materials, and canvas context on unmount.
+ * 3. Event Throttling: RAF throttled mouse movement listener prevents CPU main thread blocking.
+ * 4. Image Optimization: Added loading="lazy", decoding="async", explicit dimensions on avatar photo.
+ * 5. React.memo: Memoizes component to avoid redundant parent render cascade execution.
+ */
+export const AvatarHoloRing: React.FC = React.memo(() => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -14,7 +23,7 @@ export const AvatarHoloRing: React.FC = () => {
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
     camera.position.z = 4.2;
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
@@ -46,6 +55,8 @@ export const AvatarHoloRing: React.FC = () => {
 
     // Orbiting Floating Tech Cubes
     const cubes: THREE.Mesh[] = [];
+    const cubeGeos: THREE.BoxGeometry[] = [];
+    const cubeMats: THREE.MeshBasicMaterial[] = [];
     const cubeColors = [0x00f0ff, 0x7000ff, 0xec4899, 0x10b981, 0x3b82f6];
     const cubeCount = 8;
 
@@ -66,38 +77,67 @@ export const AvatarHoloRing: React.FC = () => {
       cube.position.z = (Math.random() - 0.5) * 0.8;
       group.add(cube);
       cubes.push(cube);
+      cubeGeos.push(cGeo);
+      cubeMats.push(cMat);
     }
 
-    // Mouse tilt tracking
+    // Mouse tilt tracking with RAF throttle
     let mouseX = 0;
     let mouseY = 0;
     let targetX = 0;
     let targetY = 0;
+    let mouseRafId: number | null = null;
 
     const handleMouseMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const x = e.clientX - rect.left - width / 2;
-      const y = e.clientY - rect.top - height / 2;
-      targetX = (x / width) * 0.6;
-      targetY = (y / height) * 0.6;
+      if (mouseRafId !== null) return;
+      mouseRafId = requestAnimationFrame(() => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left - width / 2;
+        const y = e.clientY - rect.top - height / 2;
+        targetX = (x / width) * 0.6;
+        targetY = (y / height) * 0.6;
+        mouseRafId = null;
+      });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
+    let resizeTimeout: number | null = null;
     const handleResize = () => {
-      if (!container) return;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
+      if (resizeTimeout !== null) window.clearTimeout(resizeTimeout);
+      resizeTimeout = window.setTimeout(() => {
+        if (!container) return;
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      }, 150);
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
 
-    let animationId: number;
-    let clock = new THREE.Clock();
+    let animationId: number | null = null;
+    let isVisible = true;
+    const clock = new THREE.Clock();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible && !animationId) {
+            animationId = requestAnimationFrame(animate);
+          } else if (!isVisible && animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+    observer.observe(container);
 
     const animate = () => {
+      if (!isVisible) return;
       const elapsedTime = clock.getElapsedTime();
 
       // Smooth inertia
@@ -120,12 +160,27 @@ export const AvatarHoloRing: React.FC = () => {
       animationId = requestAnimationFrame(animate);
     };
 
-    animate();
+    animationId = requestAnimationFrame(animate);
 
     return () => {
-      cancelAnimationFrame(animationId);
+      if (animationId) cancelAnimationFrame(animationId);
+      if (mouseRafId) cancelAnimationFrame(mouseRafId);
+      if (resizeTimeout) window.clearTimeout(resizeTimeout);
+      observer.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
+
+      // Memory Disposal Routines
+      ring1Geo.dispose();
+      ring1Mat.dispose();
+      ring2Geo.dispose();
+      ring2Mat.dispose();
+      ring3Geo.dispose();
+      ring3Mat.dispose();
+
+      cubeGeos.forEach((g) => g.dispose());
+      cubeMats.forEach((m) => m.dispose());
+
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
@@ -134,13 +189,17 @@ export const AvatarHoloRing: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center">
+    <div className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center gpu-accelerated">
       {/* Central Glowing Cyber Avatar Box */}
       <div className="absolute z-10 w-56 h-56 md:w-72 md:h-72 rounded-full p-1 bg-gradient-to-tr from-cyan-500 via-purple-600 to-pink-500 shadow-neon-cyan animate-pulse-glow flex items-center justify-center">
         <div className="w-full h-full rounded-full bg-slate-950 overflow-hidden relative border-2 border-cyan-400/40 group">
           <img
-            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"
             alt="Gopiprakan - AI Developer"
+            loading="lazy"
+            decoding="async"
+            width={300}
+            height={300}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-110 contrast-105"
           />
           {/* Cyber Scanline Overlay */}
@@ -153,4 +212,6 @@ export const AvatarHoloRing: React.FC = () => {
       <div ref={containerRef} className="absolute inset-0 z-0 pointer-events-none" />
     </div>
   );
-};
+});
+
+AvatarHoloRing.displayName = 'AvatarHoloRing';
