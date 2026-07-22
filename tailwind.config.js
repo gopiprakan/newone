@@ -8,27 +8,43 @@ export default {
   theme: {
     extend: {
       colors: {
+        google: {
+          bg: '#202124',
+          surface: '#2d2e31',
+          border: '#3c4043',
+          blue: '#4285F4',
+          blueLight: '#8ab4f8',
+          red: '#EA4335',
+          redLight: '#f28b82',
+          yellow: '#FBBC04',
+          yellowLight: '#fdd663',
+          green: '#34A853',
+          greenLight: '#81c995',
+        },
         cyber: {
-          bg: '#05070f',
-          card: 'rgba(13, 18, 36, 0.6)',
-          border: 'rgba(56, 189, 248, 0.15)',
-          neonCyan: '#00f0ff',
-          neonPurple: '#7000ff',
-          neonPink: '#ff007f',
-          emerald: '#10b981',
-          gold: '#f59e0b',
+          bg: '#202124',
+          card: 'rgba(45, 46, 49, 0.85)',
+          border: 'rgba(255, 255, 255, 0.12)',
+          neonCyan: '#4285F4',
+          neonPurple: '#EA4335',
+          neonPink: '#FBBC04',
+          emerald: '#34A853',
+          gold: '#FBBC04',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['Fira Code', 'JetBrains Mono', 'monospace'],
-        display: ['Space Grotesk', 'sans-serif']
+        sans: ['Google Sans', 'Roboto', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        display: ['Google Sans', 'Roboto', 'sans-serif']
       },
       boxShadow: {
-        'neon-cyan': '0 0 20px rgba(0, 240, 255, 0.4), 0 0 40px rgba(0, 240, 255, 0.2)',
-        'neon-purple': '0 0 20px rgba(112, 0, 255, 0.4), 0 0 40px rgba(112, 0, 255, 0.2)',
-        'neon-pink': '0 0 20px rgba(255, 0, 127, 0.4), 0 0 40px rgba(255, 0, 127, 0.2)',
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
+        'google-blue': '0 4px 20px rgba(66, 133, 244, 0.35)',
+        'google-red': '0 4px 20px rgba(234, 67, 53, 0.35)',
+        'google-card': '0 4px 24px rgba(0, 0, 0, 0.4)',
+        'neon-cyan': '0 4px 20px rgba(66, 133, 244, 0.35)',
+        'neon-purple': '0 4px 20px rgba(234, 67, 53, 0.35)',
+        'neon-pink': '0 4px 20px rgba(251, 188, 4, 0.35)',
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.4)'
       },
       animation: {
         'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
@@ -37,12 +53,12 @@ export default {
       },
       keyframes: {
         pulseGlow: {
-          '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
-          '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+          '0%, 100%': { opacity: '0.5', transform: 'scale(1)' },
+          '50%': { opacity: '0.85', transform: 'scale(1.03)' },
         },
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-15px)' },
+          '50%': { transform: 'translateY(-12px)' },
         }
       }
     },

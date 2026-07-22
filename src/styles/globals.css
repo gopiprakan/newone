@@ -3,19 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #030712;
-  --color-accent-cyan: #00f0ff;
-  --color-accent-purple: #8b5cf6;
-  --color-accent-pink: #ec4899;
+  --bg-primary: #202124;
+  --color-google-blue: #4285F4;
+  --color-google-red: #EA4335;
+  --color-google-yellow: #FBBC04;
+  --color-google-green: #34A853;
+  --color-accent-cyan: #4285F4;
+  --color-accent-purple: #EA4335;
+  --color-accent-pink: #FBBC04;
 }
 
-/* Custom Cyber Glassmorphism & Neon Utilities - Optimized for 60+ FPS compositing */
+/* Custom Google Material & Antigravity Utilities - Optimized for 60+ FPS compositing */
 @layer utilities {
   .glass-panel {
-    background: rgba(15, 23, 42, 0.55);
+    background: rgba(45, 46, 49, 0.85);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     /* PERFORMANCE: Promote to independent compositor layer to avoid layout reflow during scroll */
     transform: translateZ(0);
     backface-visibility: hidden;
@@ -28,52 +32,53 @@
   }
   
   .glass-panel-hover:hover {
-    background: rgba(30, 41, 59, 0.75);
-    border-color: rgba(56, 189, 248, 0.4);
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.25), inset 0 0 15px rgba(56, 189, 248, 0.1);
+    background: rgba(60, 63, 68, 0.95);
+    border-color: rgba(66, 133, 244, 0.5);
+    box-shadow: 0 6px 25px rgba(66, 133, 244, 0.25), inset 0 0 15px rgba(66, 133, 244, 0.1);
     transform: translateY(-4px) translateZ(0);
   }
 
   .glass-card-neon {
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(30, 41, 59, 0.4) 100%);
+    background: linear-gradient(135deg, rgba(45, 46, 49, 0.9) 0%, rgba(32, 33, 36, 0.9) 100%);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(56, 189, 248, 0.2);
+    border: 1px solid rgba(66, 133, 244, 0.3);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
     /* PERFORMANCE: GPU layer promotion to prevent repaint during parent container transforms */
     transform: translateZ(0);
     backface-visibility: hidden;
   }
 
-  .text-gradient-cyan {
-    background: linear-gradient(135deg, #00f0ff 0%, #3b82f6 50%, #8b5cf6 100%);
+  /* Signature Google Antigravity 4-Color Gradient Text */
+  .text-gradient-cyan, .text-gradient-google {
+    background: linear-gradient(135deg, #4285F4 0%, #EA4335 33%, #FBBC04 66%, #34A853 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-gradient-purple {
-    background: linear-gradient(135deg, #a855f7 0%, #ec4899 50%, #f43f5e 100%);
+    background: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-gradient-gold {
-    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #ef4444 100%);
+    background: linear-gradient(135deg, #EA4335 0%, #FBBC04 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .neon-border-cyan {
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3), inset 0 0 15px rgba(0, 240, 255, 0.15);
-    border-color: rgba(0, 240, 255, 0.5);
+    box-shadow: 0 0 15px rgba(66, 133, 244, 0.3), inset 0 0 15px rgba(66, 133, 244, 0.15);
+    border-color: rgba(66, 133, 244, 0.5);
   }
 
   .neon-border-purple {
-    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3), inset 0 0 15px rgba(139, 92, 246, 0.15);
-    border-color: rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 15px rgba(234, 67, 53, 0.3), inset 0 0 15px rgba(234, 67, 53, 0.15);
+    border-color: rgba(234, 67, 53, 0.5);
   }
 
   .aurora-bg {
-    background: radial-gradient(circle at 50% 20%, rgba(0, 240, 255, 0.08) 0%, rgba(139, 92, 246, 0.06) 35%, transparent 70%);
+    background: radial-gradient(circle at 50% 20%, rgba(66, 133, 244, 0.12) 0%, rgba(52, 168, 83, 0.08) 35%, transparent 70%);
   }
 
   /* PERFORMANCE UTILITY: GPU acceleration helper for animated elements */
@@ -84,44 +89,31 @@
   }
 }
 
-/* Custom Futuristic Scrollbar - Optimized for composite rendering */
+/* Custom Google Minimalist Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #030712;
+  background: #202124;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00f0ff 0%, #8b5cf6 100%);
+  background: linear-gradient(180deg, #4285F4 0%, #34A853 100%);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00f0ff;
-  box-shadow: 0 0 10px #00f0ff;
-}
-
-/* Animation keyframes - Uses GPU transform matrix */
-@keyframes gridMove {
-  0% { transform: translateY(0) translateZ(0); }
-  100% { transform: translateY(50px) translateZ(0); }
-}
-
-.cyber-grid {
-  background-size: 50px 50px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background: #4285F4;
+  box-shadow: 0 0 10px #4285F4;
 }
 
 /* Theme variations */
-body.theme-cyberpunk {
-  --bg-primary: #090014;
-  --color-accent-cyan: #ff007f;
-  --color-accent-purple: #00f0ff;
+body.theme-cyberpunk, body.theme-google-light {
+  --bg-primary: #f8f9fa;
+  --color-accent-cyan: #1a73e8;
+  --color-accent-purple: #ea4335;
 }
 
-body.theme-emerald {
-  --bg-primary: #01140e;
-  --color-accent-cyan: #10b981;
-  --color-accent-purple: #06b6d4;
+body.theme-emerald, body.theme-google-slate {
+  --bg-primary: #171717;
+  --color-accent-cyan: #8ab4f8;
+  --color-accent-purple: #34a853;
 }

@@ -107,7 +107,7 @@ export const App: React.FC = () => {
   const handleCloseAchievementModal = useCallback(() => setSelectedAchievement(null), []);
 
   return (
-    <div className="min-h-screen bg-[#030712] text-slate-100 relative font-sans selection:bg-cyan-500 selection:text-black gpu-accelerated">
+    <div className="min-h-screen bg-[#202124] text-[#e8eaed] relative font-sans selection:bg-[#4285F4] selection:text-white gpu-accelerated">
       {/* Loading Overlay */}
       {isLoading ? (
         <Preloader onComplete={handlePreloaderComplete} />
