@@ -60,27 +60,27 @@ export const CommandPalette: React.FC<CommandPaletteProps> = React.memo(({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-slate-950/80 backdrop-blur-md gpu-accelerated">
+      <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/80 backdrop-blur-md gpu-accelerated">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: -20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: -20 }}
-          className="w-full max-w-2xl bg-[#090d1a] border border-cyan-500/30 rounded-2xl shadow-2xl overflow-hidden text-slate-100 gpu-accelerated"
+          className="w-full max-w-2xl bg-[#2d2e31] border border-[#3c4043] rounded-2xl shadow-2xl overflow-hidden text-[#e8eaed] gpu-accelerated"
         >
           {/* Header Search Box */}
-          <div className="p-4 border-b border-cyan-500/20 flex items-center gap-3">
-            <Search className="w-5 h-5 text-cyan-400" />
+          <div className="p-4 border-b border-[#3c4043] flex items-center gap-3">
+            <Search className="w-5 h-5 text-[#4285F4]" />
             <input
               type="text"
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Type a command, search project, or section..."
-              className="w-full bg-transparent text-sm focus:outline-none text-slate-100 placeholder:text-slate-500 font-sans"
+              className="w-full bg-transparent text-sm focus:outline-none text-[#e8eaed] placeholder:text-slate-500 font-sans"
             />
             <button
               onClick={onClose}
-              className="p-1 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-slate-200"
+              className="p-1 rounded-lg hover:bg-[#202124] text-slate-400 hover:text-slate-200"
             >
               <X className="w-4 h-4" />
             </button>
@@ -99,26 +99,26 @@ export const CommandPalette: React.FC<CommandPaletteProps> = React.memo(({
                     onClose();
                     onOpenResumeModal();
                   }}
-                  className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-cyan-500/10 hover:border-cyan-500/30 border border-transparent text-xs text-left group transition-all"
+                  className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#4285F4]/10 hover:border-[#4285F4]/30 border border-transparent text-xs text-left group transition-all"
                 >
                   <div className="flex items-center gap-3">
-                    <FileText className="w-4 h-4 text-cyan-400" />
+                    <FileText className="w-4 h-4 text-[#4285F4]" />
                     <span>View & Download Curriculum Vitae (Resume)</span>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-cyan-400 transition-opacity" />
+                  <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-[#4285F4] transition-opacity" />
                 </button>
 
                 <button
                   onClick={() => {
                     audioController.toggleSound();
                   }}
-                  className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-cyan-500/10 hover:border-cyan-500/30 border border-transparent text-xs text-left group transition-all"
+                  className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#4285F4]/10 hover:border-[#4285F4]/30 border border-transparent text-xs text-left group transition-all"
                 >
                   <div className="flex items-center gap-3">
-                    <Volume2 className="w-4 h-4 text-purple-400" />
+                    <Volume2 className="w-4 h-4 text-[#34A853]" />
                     <span>Toggle Synthesized Sound Effects Engine</span>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-purple-400 transition-opacity" />
+                  <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-[#34A853] transition-opacity" />
                 </button>
 
                 <button
@@ -126,13 +126,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = React.memo(({
                     onClose();
                     onToggleTheme();
                   }}
-                  className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-cyan-500/10 hover:border-cyan-500/30 border border-transparent text-xs text-left group transition-all"
+                  className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#4285F4]/10 hover:border-[#4285F4]/30 border border-transparent text-xs text-left group transition-all"
                 >
                   <div className="flex items-center gap-3">
-                    <Palette className="w-4 h-4 text-pink-400" />
-                    <span>Switch Cyber Aesthetic Theme Palette</span>
+                    <Palette className="w-4 h-4 text-[#FBBC04]" />
+                    <span>Switch Google Antigravity Theme Palette</span>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-pink-400 transition-opacity" />
+                  <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-[#FBBC04] transition-opacity" />
                 </button>
               </div>
             </div>
@@ -148,10 +148,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = React.memo(({
                     <button
                       key={sec.id}
                       onClick={() => handleJump(sec.id)}
-                      className="flex items-center justify-between p-2 rounded-xl bg-slate-900/60 hover:bg-cyan-500/15 border border-slate-800 hover:border-cyan-500/40 text-xs text-slate-300 hover:text-cyan-300 transition-all"
+                      className="flex items-center justify-between p-2 rounded-xl bg-[#202124] hover:bg-[#4285F4]/15 border border-[#3c4043] hover:border-[#4285F4]/40 text-xs text-slate-300 hover:text-[#8ab4f8] transition-all"
                     >
                       <span className="font-mono">// {sec.label}</span>
-                      <ArrowRight className="w-3 h-3 text-cyan-400" />
+                      <ArrowRight className="w-3 h-3 text-[#4285F4]" />
                     </button>
                   ))}
                 </div>
@@ -169,16 +169,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = React.memo(({
                     <button
                       key={proj.id}
                       onClick={() => handleJump('projects')}
-                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-slate-900/60 hover:bg-purple-500/15 border border-slate-800 hover:border-purple-500/40 text-xs text-left group transition-all"
+                      className="w-full flex items-center justify-between p-2.5 rounded-xl bg-[#202124] hover:bg-[#EA4335]/15 border border-[#3c4043] hover:border-[#EA4335]/40 text-xs text-left group transition-all"
                     >
                       <div className="flex items-center gap-3">
-                        <Code className="w-4 h-4 text-cyan-400" />
+                        <Code className="w-4 h-4 text-[#4285F4]" />
                         <div>
                           <p className="font-semibold text-slate-200">{proj.title}</p>
                           <p className="text-[11px] text-slate-400 line-clamp-1">{proj.shortDescription}</p>
                         </div>
                       </div>
-                      <span className="px-2 py-0.5 rounded bg-slate-800 text-[10px] text-purple-300 font-mono">
+                      <span className="px-2 py-0.5 rounded bg-[#2d2e31] text-[10px] text-[#f28b82] font-mono border border-[#3c4043]">
                         {proj.category}
                       </span>
                     </button>
@@ -189,11 +189,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = React.memo(({
           </div>
 
           {/* Footer Navigation Hints */}
-          <div className="p-3 bg-slate-950 border-t border-cyan-500/20 flex items-center justify-between text-[11px] font-mono text-slate-500">
+          <div className="p-3 bg-[#202124] border-t border-[#3c4043] flex items-center justify-between text-[11px] font-mono text-slate-500">
             <span>Navigation Shortcuts</span>
             <div className="flex items-center gap-3">
-              <span><kbd className="px-1.5 py-0.5 bg-slate-800 rounded">ESC</kbd> Close</span>
-              <span><kbd className="px-1.5 py-0.5 bg-slate-800 rounded">Ctrl+K</kbd> Toggle</span>
+              <span><kbd className="px-1.5 py-0.5 bg-[#2d2e31] rounded border border-[#3c4043]">ESC</kbd> Close</span>
+              <span><kbd className="px-1.5 py-0.5 bg-[#2d2e31] rounded border border-[#3c4043]">Ctrl+K</kbd> Toggle</span>
             </div>
           </div>
         </motion.div>
