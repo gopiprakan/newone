@@ -36,7 +36,7 @@ export const AISphere: React.FC<AISphereProps> = React.memo(({ interactive = tru
     // AI Core Sphere Geometry (Wireframe Icosahedron)
     const innerGeo = new THREE.IcosahedronGeometry(1, 2);
     const innerMat = new THREE.MeshBasicMaterial({
-      color: 0x00f0ff,
+      color: 0x4285f4,
       wireframe: true,
       transparent: true,
       opacity: 0.75,
@@ -47,7 +47,7 @@ export const AISphere: React.FC<AISphereProps> = React.memo(({ interactive = tru
     // Core Solid Inner Core with Pulsing Light
     const coreGeo = new THREE.SphereGeometry(0.5, 32, 32);
     const coreMat = new THREE.MeshBasicMaterial({
-      color: 0x7000ff,
+      color: 0xea4335,
       transparent: true,
       opacity: 0.6,
     });
@@ -73,7 +73,7 @@ export const AISphere: React.FC<AISphereProps> = React.memo(({ interactive = tru
 
     const particlesMat = new THREE.PointsMaterial({
       size: 0.035,
-      color: 0x00f0ff,
+      color: 0xfbbc04,
       transparent: true,
       opacity: 0.85,
       blending: THREE.AdditiveBlending,
@@ -84,7 +84,7 @@ export const AISphere: React.FC<AISphereProps> = React.memo(({ interactive = tru
     // Holographic Ring
     const ringGeo = new THREE.TorusGeometry(1.6, 0.015, 16, 100);
     const ringMat = new THREE.MeshBasicMaterial({
-      color: 0xff007f,
+      color: 0x34a853,
       wireframe: true,
       transparent: true,
       opacity: 0.5,
@@ -205,7 +205,7 @@ export const AISphere: React.FC<AISphereProps> = React.memo(({ interactive = tru
 
   return (
     <div ref={containerRef} className="w-full h-full min-h-[260px] flex items-center justify-center relative select-none gpu-accelerated">
-      <div className="absolute inset-0 bg-cyan-500/10 rounded-full filter blur-3xl -z-10 pointer-events-none animate-pulse-glow" />
+      <div className="absolute inset-0 bg-[#4285F4]/10 rounded-full filter blur-3xl -z-10 pointer-events-none animate-pulse-glow" />
     </div>
   );
 });

@@ -34,7 +34,7 @@ export const Earth3D: React.FC = React.memo(() => {
     // Outer Atmosphere Wireframe Sphere
     const earthGeo = new THREE.SphereGeometry(1.2, 36, 36);
     const earthMat = new THREE.MeshBasicMaterial({
-      color: 0x00f0ff,
+      color: 0x4285f4,
       wireframe: true,
       transparent: true,
       opacity: 0.45,
@@ -45,7 +45,7 @@ export const Earth3D: React.FC = React.memo(() => {
     // Inner Glowing Core Sphere
     const coreGeo = new THREE.SphereGeometry(1.15, 32, 32);
     const coreMat = new THREE.MeshBasicMaterial({
-      color: 0x0a192f,
+      color: 0x202124,
       transparent: true,
       opacity: 0.9,
     });
@@ -71,23 +71,23 @@ export const Earth3D: React.FC = React.memo(() => {
     dotsGeo.setAttribute('position', new THREE.BufferAttribute(dotPositions, 3));
     const dotsMat = new THREE.PointsMaterial({
       size: 0.03,
-      color: 0x7000ff,
+      color: 0x34a853,
       transparent: true,
       opacity: 0.8,
     });
     const dotsMesh = new THREE.Points(dotsGeo, dotsMat);
     globeGroup.add(dotsMesh);
 
-    // Pulsing San Francisco / India Location Marker Pin
+    // Pulsing Location Marker Pin
     const pinGeo = new THREE.SphereGeometry(0.06, 16, 16);
-    const pinMat = new THREE.MeshBasicMaterial({ color: 0xff007f });
+    const pinMat = new THREE.MeshBasicMaterial({ color: 0xea4335 });
     const pinMesh = new THREE.Mesh(pinGeo, pinMat);
     pinMesh.position.set(0.6, 0.7, 0.8);
     globeGroup.add(pinMesh);
 
     // Location Atmosphere Ring
     const locRingGeo = new THREE.RingGeometry(0.08, 0.12, 32);
-    const locRingMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, side: THREE.DoubleSide, transparent: true, opacity: 0.8 });
+    const locRingMat = new THREE.MeshBasicMaterial({ color: 0xfbbc04, side: THREE.DoubleSide, transparent: true, opacity: 0.8 });
     const locRing = new THREE.Mesh(locRingGeo, locRingMat);
     locRing.position.copy(pinMesh.position);
     locRing.lookAt(new THREE.Vector3(0, 0, 0));
@@ -195,7 +195,7 @@ export const Earth3D: React.FC = React.memo(() => {
 
   return (
     <div ref={containerRef} className="w-full h-72 md:h-80 flex items-center justify-center relative select-none gpu-accelerated">
-      <div className="absolute inset-0 bg-cyan-500/10 rounded-full filter blur-2xl -z-10 pointer-events-none animate-pulse-glow" />
+      <div className="absolute inset-0 bg-[#4285F4]/10 rounded-full filter blur-2xl -z-10 pointer-events-none animate-pulse-glow" />
     </div>
   );
 });
