@@ -65,11 +65,10 @@ export const Preloader: React.FC<PreloaderProps> = React.memo(({ onComplete }) =
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#030712] text-slate-100 overflow-hidden gpu-accelerated"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#202124] text-[#e8eaed] overflow-hidden gpu-accelerated"
         >
-          {/* Cyber Grid Ambient Background */}
-          <div className="absolute inset-0 cyber-grid opacity-20 pointer-events-none" />
-          <div className="absolute w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+          {/* Google Ambient Glow Background */}
+          <div className="absolute w-96 h-96 bg-[#4285F4]/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
 
           {/* 3D Sphere Container */}
           <div className="w-64 h-64 md:w-80 md:h-80 relative mb-4">
@@ -82,26 +81,26 @@ export const Preloader: React.FC<PreloaderProps> = React.memo(({ onComplete }) =
             animate={{ opacity: 1, y: 0 }}
             className="flex items-center gap-3 mb-6"
           >
-            <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 shadow-neon-cyan">
+            <div className="p-2.5 rounded-xl bg-[#4285F4]/10 border border-[#4285F4]/30 text-[#4285F4] shadow-google-blue">
               <Cpu className="w-7 h-7 animate-pulse" />
             </div>
-            <span className="font-display font-bold text-2xl tracking-widest text-gradient-cyan">
-              GOPIPRAKAN // AI & DATA SCIENCE
+            <span className="font-display font-bold text-2xl tracking-widest text-gradient-google">
+              GOPIPRAKAN // GOOGLE ANTIGRAVITY
             </span>
           </motion.div>
 
           {/* Progress Percentage & Status */}
           <div className="w-72 md:w-96 flex flex-col items-center gap-2">
-            <div className="w-full h-2 bg-slate-900 rounded-full overflow-hidden border border-cyan-500/20 p-0.5 shadow-inner">
+            <div className="w-full h-2 bg-[#2d2e31] rounded-full overflow-hidden border border-[#3c4043] p-0.5 shadow-inner">
               <motion.div
-                className="h-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-full shadow-neon-cyan"
+                className="h-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC04] to-[#34A853] rounded-full shadow-google-blue"
                 style={{ width: `${progress}%` }}
                 transition={{ ease: 'easeOut', duration: 0.2 }}
               />
             </div>
             <div className="w-full flex justify-between items-center text-xs font-mono tracking-wider text-slate-400 mt-1">
-              <span className="text-cyan-400 font-semibold">{statusText}</span>
-              <span className="text-gradient-purple font-bold text-sm">{progress}%</span>
+              <span className="text-[#8ab4f8] font-semibold">{statusText}</span>
+              <span className="text-[#EA4335] font-bold text-sm">{progress}%</span>
             </div>
           </div>
         </motion.div>

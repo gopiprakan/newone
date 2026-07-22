@@ -24,26 +24,26 @@ export const Footer: React.FC = React.memo(() => {
   };
 
   return (
-    <footer className="relative bg-[#02050b] border-t border-cyan-500/15 pt-16 pb-12 overflow-hidden text-slate-400 gpu-accelerated">
+    <footer className="relative bg-[#202124] border-t border-[#3c4043] pt-16 pb-12 overflow-hidden text-slate-400 gpu-accelerated">
       {/* Glow background line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-neon-cyan" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-[#4285F4] to-transparent shadow-google-blue" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand Col */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400">
+              <div className="p-2.5 rounded-xl bg-[#4285F4]/10 border border-[#4285F4]/30 text-[#4285F4]">
                 <Cpu className="w-6 h-6 animate-pulse" />
               </div>
-              <span className="font-display font-bold text-xl text-gradient-cyan tracking-wider">
+              <span className="font-display font-bold text-xl text-gradient-google tracking-wider">
                 GOPIPRAKAN
               </span>
             </div>
             <p className="text-sm text-slate-400 max-w-md leading-relaxed">
-              AI & Data Science Student building intelligent AI-powered applications, automation systems, full-stack web platforms, and innovative real-world software solutions.
+              Google Antigravity Developer & AI Data Science Student building intelligent applications, web automation systems, and full-stack software solutions.
             </p>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#34A853]/10 border border-[#34A853]/30 text-[#34A853] text-xs font-mono">
               <Activity className="w-3.5 h-3.5 animate-pulse" />
               <span>SYSTEM STATUS: 100% OPERATIONAL</span>
             </div>
@@ -51,7 +51,7 @@ export const Footer: React.FC = React.memo(() => {
 
           {/* Quick Links */}
           <div className="space-y-3">
-            <h4 className="font-display font-semibold text-slate-200 text-sm tracking-wider uppercase text-cyan-400">
+            <h4 className="font-display font-semibold text-slate-200 text-sm tracking-wider uppercase text-[#4285F4]">
               Quick Navigation
             </h4>
             <ul className="space-y-2 text-xs">
@@ -59,7 +59,7 @@ export const Footer: React.FC = React.memo(() => {
                 <li key={link}>
                   <a
                     href={`#${link}`}
-                    className="hover:text-cyan-400 transition-colors uppercase tracking-wider font-mono"
+                    className="hover:text-[#4285F4] transition-colors uppercase tracking-wider font-mono"
                   >
                     // {link}
                   </a>
@@ -70,7 +70,7 @@ export const Footer: React.FC = React.memo(() => {
 
           {/* Social Connections & Live Visitor Counter */}
           <div className="space-y-4">
-            <h4 className="font-display font-semibold text-slate-200 text-sm tracking-wider uppercase text-cyan-400">
+            <h4 className="font-display font-semibold text-slate-200 text-sm tracking-wider uppercase text-[#4285F4]">
               Connect & Telemetry
             </h4>
             <div className="flex items-center gap-3">
@@ -87,7 +87,7 @@ export const Footer: React.FC = React.memo(() => {
                     href={soc.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/40 hover:scale-110 transition-all duration-300"
+                    className="p-2.5 rounded-xl bg-[#2d2e31] border border-[#3c4043] text-slate-400 hover:text-[#4285F4] hover:border-[#4285F4]/40 hover:scale-110 transition-all duration-300"
                   >
                     <IconComp className="w-4 h-4" />
                   </a>
@@ -96,9 +96,9 @@ export const Footer: React.FC = React.memo(() => {
             </div>
 
             {/* Live Visitor Counter Badge */}
-            <div className="p-3 rounded-xl bg-slate-900/90 border border-cyan-500/20 flex items-center justify-between">
+            <div className="p-3 rounded-xl bg-[#2d2e31]/90 border border-[#3c4043] flex items-center justify-between">
               <span className="text-xs font-mono text-slate-400">GLOBAL VISITORS</span>
-              <span className="text-sm font-mono font-bold text-gradient-cyan">
+              <span className="text-sm font-mono font-bold text-gradient-google">
                 {visitorCount.toLocaleString()}
               </span>
             </div>
@@ -106,12 +106,12 @@ export const Footer: React.FC = React.memo(() => {
         </div>
 
         {/* Bottom copyright & Back to top button */}
-        <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
-          <p>© {new Date().getFullYear()} Gopiprakan. All rights reserved. Designed for excellence.</p>
+        <div className="pt-8 border-t border-[#3c4043] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+          <p>© {new Date().getFullYear()} Gopiprakan. Google Antigravity Theme.</p>
 
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20 hover:border-cyan-400 transition-all duration-300 shadow-neon-cyan"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#2d2e31] border border-[#3c4043] text-[#4285F4] hover:bg-[#4285F4] hover:text-white transition-all duration-300 shadow-google-blue"
           >
             <span>BACK TO TOP</span>
             <ArrowUp className="w-3.5 h-3.5" />
