@@ -38,7 +38,7 @@ export const ParticleCanvas: React.FC = React.memo(() => {
     const particles: Particle[] = [];
     // Calculate optimal particle count based on screen area to guarantee 60+ FPS on all devices
     const particleCount = Math.min(Math.floor((width * height) / 12000), 120);
-    const colors = ['#00f0ff', '#7000ff', '#3b82f6', '#ec4899'];
+    const colors = ['#4285F4', '#EA4335', '#FBBC04', '#34A853'];
 
     for (let i = 0; i < particleCount; i++) {
       const color = colors[Math.floor(Math.random() * colors.length)];
@@ -109,9 +109,9 @@ export const ParticleCanvas: React.FC = React.memo(() => {
 
       // Draw ambient background dark radial gradient
       const grad = ctx.createRadialGradient(width / 2, height / 3, 100, width / 2, height / 2, width);
-      grad.addColorStop(0, 'rgba(15, 23, 42, 0.4)');
-      grad.addColorStop(0.5, 'rgba(3, 7, 18, 0.8)');
-      grad.addColorStop(1, '#030712');
+      grad.addColorStop(0, 'rgba(45, 46, 49, 0.5)');
+      grad.addColorStop(0.5, 'rgba(32, 33, 36, 0.9)');
+      grad.addColorStop(1, '#202124');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, width, height);
 

@@ -32,23 +32,23 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
     const group = new THREE.Group();
     scene.add(group);
 
-    // Ring 1 (Outer Cyan Cyber Ring)
+    // Ring 1 (Outer Google Blue Ring)
     const ring1Geo = new THREE.TorusGeometry(1.8, 0.018, 16, 100);
-    const ring1Mat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, transparent: true, opacity: 0.7, wireframe: true });
+    const ring1Mat = new THREE.MeshBasicMaterial({ color: 0x4285f4, transparent: true, opacity: 0.7, wireframe: true });
     const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
     ring1.rotation.x = Math.PI / 2.5;
     group.add(ring1);
 
-    // Ring 2 (Middle Neon Purple Ring)
+    // Ring 2 (Middle Google Red Ring)
     const ring2Geo = new THREE.TorusGeometry(1.5, 0.012, 16, 100);
-    const ring2Mat = new THREE.MeshBasicMaterial({ color: 0x7000ff, transparent: true, opacity: 0.6, wireframe: true });
+    const ring2Mat = new THREE.MeshBasicMaterial({ color: 0xea4335, transparent: true, opacity: 0.6, wireframe: true });
     const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
     ring2.rotation.y = Math.PI / 3;
     group.add(ring2);
 
-    // Ring 3 (Inner Pink Glowing Accents)
+    // Ring 3 (Inner Google Green Ring)
     const ring3Geo = new THREE.TorusGeometry(1.2, 0.008, 16, 100);
-    const ring3Mat = new THREE.MeshBasicMaterial({ color: 0xff007f, transparent: true, opacity: 0.5 });
+    const ring3Mat = new THREE.MeshBasicMaterial({ color: 0x34a853, transparent: true, opacity: 0.5 });
     const ring3 = new THREE.Mesh(ring3Geo, ring3Mat);
     ring3.rotation.x = -Math.PI / 4;
     group.add(ring3);
@@ -57,7 +57,7 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
     const cubes: THREE.Mesh[] = [];
     const cubeGeos: THREE.BoxGeometry[] = [];
     const cubeMats: THREE.MeshBasicMaterial[] = [];
-    const cubeColors = [0x00f0ff, 0x7000ff, 0xec4899, 0x10b981, 0x3b82f6];
+    const cubeColors = [0x4285f4, 0xea4335, 0xfbbc04, 0x34a853];
     const cubeCount = 8;
 
     for (let i = 0; i < cubeCount; i++) {
@@ -190,9 +190,9 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
 
   return (
     <div className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center gpu-accelerated">
-      {/* Central Glowing Cyber Avatar Box */}
-      <div className="absolute z-10 w-56 h-56 md:w-72 md:h-72 rounded-full p-1 bg-gradient-to-tr from-cyan-500 via-purple-600 to-pink-500 shadow-neon-cyan animate-pulse-glow flex items-center justify-center">
-        <div className="w-full h-full rounded-full bg-slate-950 overflow-hidden relative border-2 border-cyan-400/40 group">
+      {/* Central Glowing Google Avatar Box */}
+      <div className="absolute z-10 w-56 h-56 md:w-72 md:h-72 rounded-full p-1 bg-gradient-to-tr from-[#4285F4] via-[#EA4335] via-[#FBBC04] to-[#34A853] shadow-google-blue animate-pulse-glow flex items-center justify-center">
+        <div className="w-full h-full rounded-full bg-[#202124] overflow-hidden relative border-2 border-[#4285F4]/40 group">
           <img
             src="/profile.jpg"
             alt="Gopiprakan - AI Developer"
@@ -202,9 +202,8 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
             height={300}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-110 contrast-105"
           />
-          {/* Cyber Scanline Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent pointer-events-none animate-pulse" />
-          <div className="absolute inset-0 bg-cyan-950/20 mix-blend-overlay" />
+          {/* Subtle Google Ambient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#4285F4]/10 to-transparent pointer-events-none" />
         </div>
       </div>
 
