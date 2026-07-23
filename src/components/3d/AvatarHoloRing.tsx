@@ -1,23 +1,27 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { User } from 'lucide-react';
 
 /**
  * PERFORMANCE OPTIMIZED AVATAR HOLO RING
  * Optimizations implemented:
- * 1. Viewport-Aware Rendering: Halts WebGL animation loop when element is off-screen using IntersectionObserver.
- * 2. Complete WebGL VRAM Cleanup: Memory disposal of geometries, materials, and canvas context on unmount.
- * 3. Event Throttling: RAF throttled mouse movement listener prevents CPU main thread blocking.
- * 4. Image Optimization: Added loading="lazy", decoding="async", explicit dimensions on avatar photo.
- * 5. React.memo: Memoizes component to avoid redundant parent render cascade execution.
+ * 1. Synchronized 3D Tilt Parallax: Avatar image card tilts in perfect 3D perspective unison with Three.js holo rings.
+ * 2. Viewport-Aware Rendering: Halts WebGL animation loop when element is off-screen using IntersectionObserver.
+ * 3. Complete WebGL VRAM Cleanup: Memory disposal of geometries, materials, and canvas context on unmount.
+ * 4. Resilient Fallback: Safe onError handler with stylized icon backup state.
+ * 5. Event Throttling: RAF throttled mouse movement listener prevents CPU main thread blocking.
+ * 6. React.memo: Memoizes component to avoid redundant parent render cascade execution.
  */
 export const AvatarHoloRing: React.FC = React.memo(() => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [imageError, setImageError] = useState(false);
+  const [avatarTransform, setAvatarTransform] = useState('perspective(1000px) rotateX(0deg) rotateY(0deg)');
 
   useEffect(() => {
     if (!containerRef.current) return;
     const container = containerRef.current;
-    const width = container.clientWidth || 400;
-    const height = container.clientHeight || 400;
+    let width = container.clientWidth || 400;
+    let height = container.clientHeight || 400;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
@@ -92,10 +96,18 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
       if (mouseRafId !== null) return;
       mouseRafId = requestAnimationFrame(() => {
         const rect = container.getBoundingClientRect();
-        const x = e.clientX - rect.left - width / 2;
-        const y = e.clientY - rect.top - height / 2;
-        targetX = (x / width) * 0.6;
-        targetY = (y / height) * 0.6;
+        if (e.clientY < rect.top - 300 || e.clientY > rect.bottom + 300) {
+          targetX = 0;
+          targetY = 0;
+          mouseRafId = null;
+          return;
+        }
+        const currentWidth = container.clientWidth || 400;
+        const currentHeight = container.clientHeight || 400;
+        const x = e.clientX - rect.left - currentWidth / 2;
+        const y = e.clientY - rect.top - currentHeight / 2;
+        targetX = (x / currentWidth) * 0.6;
+        targetY = (y / currentHeight) * 0.6;
         mouseRafId = null;
       });
     };
@@ -107,11 +119,11 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
       if (resizeTimeout !== null) window.clearTimeout(resizeTimeout);
       resizeTimeout = window.setTimeout(() => {
         if (!container) return;
-        const w = container.clientWidth;
-        const h = container.clientHeight;
-        camera.aspect = w / h;
+        width = container.clientWidth || 400;
+        height = container.clientHeight || 400;
+        camera.aspect = width / height;
         camera.updateProjectionMatrix();
-        renderer.setSize(w, h);
+        renderer.setSize(width, height);
       }, 150);
     };
     window.addEventListener('resize', handleResize, { passive: true });
@@ -156,6 +168,11 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
         cube.rotation.y += 0.015 * (idx + 1);
       });
 
+      // Update 3D card tilt transform for DOM Avatar container
+      const rotY = (mouseX * 16).toFixed(2);
+      const rotX = (-mouseY * 16).toFixed(2);
+      setAvatarTransform(`perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg)`);
+
       renderer.render(scene, camera);
       animationId = requestAnimationFrame(animate);
     };
@@ -190,20 +207,38 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
 
   return (
     <div className="relative w-full h-[400px] md:h-[500px] flex items-center justify-center gpu-accelerated">
-      {/* Central Glowing Google Avatar Box */}
-      <div className="absolute z-10 w-56 h-56 md:w-72 md:h-72 rounded-full p-1 bg-gradient-to-tr from-[#4285F4] via-[#EA4335] via-[#FBBC04] to-[#34A853] shadow-google-blue animate-pulse-glow flex items-center justify-center">
-        <div className="w-full h-full rounded-full bg-[#202124] overflow-hidden relative border-2 border-[#4285F4]/40 group">
-          <img
-            src="/profile.jpg"
-            alt="Gopiprakan - AI Developer"
-            loading="lazy"
-            decoding="async"
-            width={300}
-            height={300}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-110 contrast-105"
-          />
+      {/* Central Glowing Google Avatar Box with 3D Tilt Parallax */}
+      <div
+        style={{
+          transform: avatarTransform,
+          transition: 'transform 0.1s ease-out',
+          willChange: 'transform'
+        }}
+        className="absolute z-10 w-56 h-56 md:w-72 md:h-72 rounded-full p-1 bg-gradient-to-tr from-[#4285F4] via-[#EA4335] via-[#FBBC04] to-[#34A853] shadow-google-blue animate-pulse-glow flex items-center justify-center group cursor-pointer"
+      >
+        <div className="w-full h-full rounded-full bg-[#202124] overflow-hidden relative border-2 border-[#4285F4]/40 flex items-center justify-center">
+          {!imageError ? (
+            <img
+              src="/profile.jpg"
+              alt="Gopiprakan - AI Developer"
+              loading="eager"
+              decoding="async"
+              width={300}
+              height={300}
+              onError={() => setImageError(true)}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-110 contrast-105"
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center text-slate-400 gap-2 p-4 text-center">
+              <User className="w-16 h-16 text-[#4285F4] animate-pulse" />
+              <span className="text-xs font-mono text-[#8ab4f8]">Gopiprakan</span>
+            </div>
+          )}
           {/* Subtle Google Ambient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#4285F4]/10 to-transparent pointer-events-none" />
+
+          {/* Interactive Hover Reflection */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/15 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
         </div>
       </div>
 
