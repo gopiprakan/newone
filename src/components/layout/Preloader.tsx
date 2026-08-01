@@ -85,7 +85,7 @@ export const Preloader: React.FC<PreloaderProps> = React.memo(({ onComplete }) =
               <Cpu className="w-7 h-7 animate-pulse" />
             </div>
             <span className="font-display font-bold text-2xl tracking-widest text-gradient-google">
-              GOPIPRAKAN // GOOGLE ANTIGRAVITY
+              GOPIPRAKAN // PORTFOLIO
             </span>
           </motion.div>
 
