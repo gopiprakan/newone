@@ -41,7 +41,7 @@ export const Footer: React.FC = React.memo(() => {
               </span>
             </div>
             <p className="text-sm text-slate-400 max-w-md leading-relaxed">
-              Google Antigravity Developer & AI Data Science Student building intelligent applications, web automation systems, and full-stack software solutions.
+              AI & Data Science Student building intelligent applications, web automation systems, and full-stack software solutions.
             </p>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#34A853]/10 border border-[#34A853]/30 text-[#34A853] text-xs font-mono">
               <Activity className="w-3.5 h-3.5 animate-pulse" />

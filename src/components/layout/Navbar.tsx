@@ -165,7 +165,7 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
               audioController.playClick();
               onToggleTheme();
             }}
-            title="Switch Google Antigravity Theme"
+            title="Switch Theme"
             className="p-2.5 rounded-xl bg-[#2d2e31] border border-[#3c4043] text-slate-300 hover:text-[#EA4335] hover:border-[#EA4335]/40 transition-all duration-300"
           >
             <Palette className="w-4 h-4 text-[#EA4335]" />
