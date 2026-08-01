@@ -107,7 +107,7 @@ export const Footer: React.FC = React.memo(() => {
 
         {/* Bottom copyright & Back to top button */}
         <div className="pt-8 border-t border-[#3c4043] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
-          <p>© {new Date().getFullYear()} Gopiprakan. Google Antigravity Theme.</p>
+          <p>© {new Date().getFullYear()} Gopiprakan. All rights reserved.</p>
 
           <button
             onClick={scrollToTop}

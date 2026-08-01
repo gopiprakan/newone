@@ -11,24 +11,24 @@ interface ThemeSelectorProps {
 export const THEMES = [
   {
     id: 'google-antigravity-dark',
-    name: 'Google Antigravity Dark',
-    description: 'Signature Google Dark background with Google 4-color brand accents.',
+    name: 'Dark Theme',
+    description: 'Signature dark background with 4-color brand accents.',
     primary: '#4285F4',
     secondary: '#EA4335',
     bg: '#202124'
   },
   {
     id: 'google-material-light',
-    name: 'Google Material Light',
-    description: 'Clean Google light theme background with Google Blue and Green highlights.',
+    name: 'Material Light',
+    description: 'Clean light theme background with Blue and Green highlights.',
     primary: '#1a73e8',
     secondary: '#34A853',
     bg: '#f8f9fa'
   },
   {
     id: 'google-deep-slate',
-    name: 'Google Workspace Slate',
-    description: 'Minimalist deep slate style with vibrant Google Yellow and Blue accents.',
+    name: 'Workspace Slate',
+    description: 'Minimalist deep slate style with vibrant Yellow and Blue accents.',
     primary: '#8ab4f8',
     secondary: '#FBBC04',
     bg: '#171717'
