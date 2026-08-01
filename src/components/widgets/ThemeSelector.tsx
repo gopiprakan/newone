@@ -72,7 +72,7 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = React.memo(({ isOpen,
                 <Palette className="w-5 h-5" />
               </div>
               <h3 className="text-xl font-display font-bold text-gradient-google">
-                GOOGLE ANTIGRAVITY THEMES
+                COLOR THEMES
               </h3>
             </div>
             <button

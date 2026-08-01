@@ -130,7 +130,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = React.memo(({
                 >
                   <div className="flex items-center gap-3">
                     <Palette className="w-4 h-4 text-[#FBBC04]" />
-                    <span>Switch Google Antigravity Theme Palette</span>
+                    <span>Switch Theme Palette</span>
                   </div>
                   <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-[#FBBC04] transition-opacity" />
                 </button>
