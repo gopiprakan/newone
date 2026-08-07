@@ -40,7 +40,7 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
     // -------------------------------------------------------------
     const ring1Geo = new THREE.TorusGeometry(1.85, 0.022, 16, 120);
     const ring1Mat = new THREE.MeshBasicMaterial({
-      color: 0x4285f4,
+      color: 0xff5f1f,
       transparent: true,
       opacity: 0.85,
       wireframe: false
@@ -52,7 +52,7 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
 
     const ring2Geo = new THREE.TorusGeometry(1.55, 0.018, 16, 120);
     const ring2Mat = new THREE.MeshBasicMaterial({
-      color: 0xea4335,
+      color: 0xff3d00,
       transparent: true,
       opacity: 0.75,
       wireframe: false
@@ -65,7 +65,7 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
     // Outer HUD Segmented Compass Ring
     const hudRingGeo = new THREE.RingGeometry(2.1, 2.13, 64);
     const hudRingMat = new THREE.MeshBasicMaterial({
-      color: 0x34a853,
+      color: 0xff8f00,
       side: THREE.DoubleSide,
       transparent: true,
       opacity: 0.45,
@@ -88,10 +88,10 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
     const yOffsets = new Float32Array(particleCount);
 
     const palette = [
-      new THREE.Color(0x4285f4), // Blue
-      new THREE.Color(0xea4335), // Red
-      new THREE.Color(0xfbbc04), // Yellow
-      new THREE.Color(0x34a853)  // Green
+      new THREE.Color(0xff5f1f), // Orange
+      new THREE.Color(0xff3d00), // Red-Orange
+      new THREE.Color(0xff8f00), // Amber
+      new THREE.Color(0xffa726)  // Light Orange
     ];
 
     for (let i = 0; i < particleCount; i++) {
@@ -136,7 +136,7 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
     const nodes: THREE.Mesh[] = [];
     const nodeGeos: THREE.BufferGeometry[] = [];
     const nodeMats: THREE.MeshBasicMaterial[] = [];
-    const nodeColors = [0x4285f4, 0xea4335, 0xfbbc04, 0x34a853];
+    const nodeColors = [0xff5f1f, 0xff3d00, 0xff8f00, 0xffa726];
 
     for (let i = 0; i < 6; i++) {
       const isIcosa = i % 2 === 0;
@@ -315,8 +315,8 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
   return (
     <div className="relative w-full h-[420px] md:h-[520px] flex items-center justify-center gpu-accelerated overflow-visible">
       {/* Background Quantum HUD Radar Sweeper Ripple Rings */}
-      <div className="absolute z-0 w-80 h-80 md:w-96 md:h-96 rounded-full border border-[#4285F4]/20 animate-ping opacity-25 pointer-events-none" />
-      <div className="absolute z-0 w-64 h-64 md:w-80 md:h-80 rounded-full border border-[#EA4335]/30 pointer-events-none animate-pulse" />
+      <div className="absolute z-0 w-80 h-80 md:w-96 md:h-96 rounded-full border border-[#FF5F1F]/20 animate-ping opacity-25 pointer-events-none" />
+      <div className="absolute z-0 w-64 h-64 md:w-80 md:h-80 rounded-full border border-[#FF3D00]/30 pointer-events-none animate-pulse" />
 
       {/* Central Glowing 3D Synchronized Avatar Box */}
       <div
@@ -325,12 +325,12 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
           transition: 'transform 0.1s ease-out',
           willChange: 'transform'
         }}
-        className="absolute z-10 w-56 h-56 md:w-72 md:h-72 rounded-full p-1.5 bg-gradient-to-tr from-[#4285F4] via-[#EA4335] via-[#FBBC04] to-[#34A853] shadow-google-blue flex items-center justify-center group cursor-pointer"
+        className="absolute z-10 w-56 h-56 md:w-72 md:h-72 rounded-full p-1.5 bg-gradient-to-tr from-[#FF5F1F] via-[#FF8F00] to-[#FF3D00] shadow-google-blue flex items-center justify-center group cursor-pointer"
       >
         {/* Animated Gradient Border Ring */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#4285F4] via-[#EA4335] via-[#FBBC04] to-[#34A853] blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-500 animate-pulse-glow" />
+        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#FF5F1F] via-[#FF8F00] to-[#FF3D00] blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-500 animate-pulse-glow" />
 
-        <div className="w-full h-full rounded-full bg-[#202124] overflow-hidden relative border-2 border-[#4285F4]/50 flex items-center justify-center z-10">
+        <div className="w-full h-full rounded-full bg-[#050505] overflow-hidden relative border-2 border-[#FF5F1F]/50 flex items-center justify-center z-10">
           {!imageError ? (
             <img
               src="/profile.jpg"
@@ -344,20 +344,20 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
             />
           ) : (
             <div className="flex flex-col items-center justify-center text-slate-400 gap-2 p-4 text-center">
-              <User className="w-16 h-16 text-[#4285F4] animate-pulse" />
-              <span className="text-xs font-mono text-[#8ab4f8]">Gopiprakan</span>
+              <User className="w-16 h-16 text-[#FF5F1F] animate-pulse" />
+              <span className="text-xs font-mono text-[#FFA726]">Gopiprakan</span>
             </div>
           )}
           
           {/* Ambient Lighting Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#4285F4]/10 to-[#202124]/40 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FF5F1F]/10 to-[#050505]/40 pointer-events-none" />
 
           {/* Interactive Holographic Shimmer Sweep */}
           <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
           {/* Online AI Developer Status Badge */}
-          <div className="absolute bottom-3 px-3 py-1 rounded-full bg-[#202124]/90 backdrop-blur-md border border-[#4285F4]/40 text-[11px] font-mono text-[#8ab4f8] flex items-center gap-1.5 shadow-lg group-hover:border-[#4285F4] transition-colors">
-            <Sparkles className="w-3 h-3 text-[#FBBC04] animate-spin" />
+          <div className="absolute bottom-3 px-3 py-1 rounded-full bg-[#050505]/90 backdrop-blur-md border border-[#FF5F1F]/40 text-[11px] font-mono text-[#FFA726] flex items-center gap-1.5 shadow-lg group-hover:border-[#FF5F1F] transition-colors">
+            <Sparkles className="w-3 h-3 text-[#FF8F00] animate-spin" />
             <span>AI DEV</span>
           </div>
         </div>

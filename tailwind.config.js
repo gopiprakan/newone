@@ -9,27 +9,27 @@ export default {
     extend: {
       colors: {
         google: {
-          bg: '#202124',
-          surface: '#2d2e31',
-          border: '#3c4043',
-          blue: '#4285F4',
-          blueLight: '#8ab4f8',
-          red: '#EA4335',
-          redLight: '#f28b82',
-          yellow: '#FBBC04',
-          yellowLight: '#fdd663',
-          green: '#34A853',
-          greenLight: '#81c995',
+          bg: '#050505',
+          surface: '#0d0d0d',
+          border: 'rgba(255, 95, 31, 0.15)',
+          blue: '#FF5F1F',
+          blueLight: '#FFA726',
+          red: '#FF3D00',
+          redLight: '#FF8A50',
+          yellow: '#FF8F00',
+          yellowLight: '#FFB300',
+          green: '#FF5F1F',
+          greenLight: '#FFA726',
         },
         cyber: {
-          bg: '#202124',
-          card: 'rgba(45, 46, 49, 0.85)',
-          border: 'rgba(255, 255, 255, 0.12)',
-          neonCyan: '#4285F4',
-          neonPurple: '#EA4335',
-          neonPink: '#FBBC04',
-          emerald: '#34A853',
-          gold: '#FBBC04',
+          bg: '#050505',
+          card: 'rgba(13, 13, 13, 0.85)',
+          border: 'rgba(255, 95, 31, 0.15)',
+          neonCyan: '#FF5F1F',
+          neonPurple: '#FF3D00',
+          neonPink: '#FF8F00',
+          emerald: '#FF5F1F',
+          gold: '#FF8F00',
         }
       },
       fontFamily: {
@@ -38,13 +38,13 @@ export default {
         display: ['Google Sans', 'Roboto', 'sans-serif']
       },
       boxShadow: {
-        'google-blue': '0 4px 20px rgba(66, 133, 244, 0.35)',
-        'google-red': '0 4px 20px rgba(234, 67, 53, 0.35)',
-        'google-card': '0 4px 24px rgba(0, 0, 0, 0.4)',
-        'neon-cyan': '0 4px 20px rgba(66, 133, 244, 0.35)',
-        'neon-purple': '0 4px 20px rgba(234, 67, 53, 0.35)',
-        'neon-pink': '0 4px 20px rgba(251, 188, 4, 0.35)',
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.4)'
+        'google-blue': '0 4px 25px rgba(255, 95, 31, 0.35)',
+        'google-red': '0 4px 25px rgba(255, 61, 0, 0.35)',
+        'google-card': '0 4px 24px rgba(0, 0, 0, 0.8)',
+        'neon-cyan': '0 4px 25px rgba(255, 95, 31, 0.35)',
+        'neon-purple': '0 4px 25px rgba(255, 61, 0, 0.35)',
+        'neon-pink': '0 4px 25px rgba(255, 143, 0, 0.35)',
+        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.7)'
       },
       animation: {
         'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
