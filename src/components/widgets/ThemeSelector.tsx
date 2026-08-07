@@ -12,26 +12,26 @@ export const THEMES = [
   {
     id: 'google-antigravity-dark',
     name: 'Dark Theme',
-    description: 'Signature dark background with 4-color brand accents.',
-    primary: '#4285F4',
-    secondary: '#EA4335',
-    bg: '#202124'
+    description: 'Signature dark background with orange-cyber accents.',
+    primary: '#FF5F1F',
+    secondary: '#FF8F00',
+    bg: '#050505'
   },
   {
     id: 'google-material-light',
     name: 'Material Light',
-    description: 'Clean light theme background with Blue and Green highlights.',
-    primary: '#1a73e8',
-    secondary: '#34A853',
+    description: 'Clean light theme background with orange highlights.',
+    primary: '#ff5f1f',
+    secondary: '#ffa726',
     bg: '#f8f9fa'
   },
   {
     id: 'google-deep-slate',
     name: 'Workspace Slate',
-    description: 'Minimalist deep slate style with vibrant Yellow and Blue accents.',
-    primary: '#8ab4f8',
-    secondary: '#FBBC04',
-    bg: '#171717'
+    description: 'Minimalist deep slate style with orange and amber accents.',
+    primary: '#ffa726',
+    secondary: '#ff8f00',
+    bg: '#121212'
   }
 ];
 
@@ -64,11 +64,11 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = React.memo(({ isOpen,
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="relative w-full max-w-lg bg-[#2d2e31] border border-[#3c4043] rounded-3xl shadow-2xl overflow-hidden text-[#e8eaed] p-6 md:p-8 space-y-6 gpu-accelerated"
+          className="relative w-full max-w-lg bg-[#121212] border border-[#262626] rounded-3xl shadow-2xl overflow-hidden text-[#e8eaed] p-6 md:p-8 space-y-6 gpu-accelerated"
         >
-          <div className="flex items-center justify-between border-b border-[#3c4043] pb-4">
+          <div className="flex items-center justify-between border-b border-[#262626] pb-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#4285F4]/10 border border-[#4285F4]/30 text-[#4285F4]">
+              <div className="p-2.5 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F]">
                 <Palette className="w-5 h-5" />
               </div>
               <h3 className="text-xl font-display font-bold text-gradient-google">
@@ -77,7 +77,7 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = React.memo(({ isOpen,
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl bg-[#202124] border border-[#3c4043] text-slate-400 hover:text-[#4285F4]"
+              className="p-2 rounded-xl bg-[#050505] border border-[#262626] text-slate-400 hover:text-[#FF5F1F]"
             >
               <X className="w-5 h-5" />
             </button>
@@ -92,8 +92,8 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = React.memo(({ isOpen,
                   onClick={() => handleSelectTheme(theme.id)}
                   className={`w-full p-4 rounded-2xl border text-left transition-all flex items-center justify-between group ${
                     isSelected
-                      ? 'bg-[#202124] border-[#4285F4] shadow-google-blue'
-                      : 'bg-[#202124]/50 border-[#3c4043] hover:border-[#4285F4]/40'
+                      ? 'bg-[#050505] border-[#FF5F1F] shadow-google-blue'
+                      : 'bg-[#050505]/50 border-[#262626] hover:border-[#FF5F1F]/40'
                   }`}
                 >
                   <div className="space-y-1">
@@ -110,7 +110,7 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = React.memo(({ isOpen,
                   </div>
 
                   {isSelected && (
-                    <div className="p-1.5 rounded-full bg-[#4285F4] text-white">
+                    <div className="p-1.5 rounded-full bg-[#FF5F1F] text-white">
                       <Check className="w-4 h-4" />
                     </div>
                   )}
@@ -122,7 +122,7 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = React.memo(({ isOpen,
           <div className="pt-2 flex justify-end">
             <button
               onClick={onClose}
-              className="px-5 py-2 rounded-xl bg-[#4285F4] hover:bg-[#3367d6] text-white text-xs font-bold font-mono transition-colors shadow-md"
+              className="px-5 py-2 rounded-xl bg-[#FF5F1F] hover:bg-[#E64A19] text-white text-xs font-bold font-mono transition-colors shadow-md"
             >
               APPLY & CLOSE
             </button>
