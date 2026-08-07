@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Code2, ExternalLink, Star, Activity } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../../data/portfolioData';
 import { audioController } from '../../utils/AudioController';
+import { BrandLogoMap } from '../utils/BrandLogos';
 
 /**
  * PERFORMANCE OPTIMIZED CODING PROFILES SECTION
@@ -43,16 +44,23 @@ export const CodingProfilesSection: React.FC = React.memo(() => {
               {/* Profile Header */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl overflow-hidden border border-[#262626] p-0.5 bg-[#050505]">
-                    <img
-                      src={prof.avatar}
-                      alt={prof.name}
-                      loading="lazy"
-                      decoding="async"
-                      width={48}
-                      height={48}
-                      className="w-full h-full object-cover rounded-xl"
-                    />
+                  <div className="w-12 h-12 rounded-2xl overflow-hidden border border-[#262626] p-2 bg-[#050505] flex items-center justify-center shrink-0">
+                    {(() => {
+                      const LogoComponent = BrandLogoMap[prof.platform];
+                      return LogoComponent ? (
+                        <LogoComponent className="w-8 h-8 object-contain" />
+                      ) : (
+                        <img
+                          src={prof.avatar}
+                          alt={prof.name}
+                          loading="lazy"
+                          decoding="async"
+                          width={48}
+                          height={48}
+                          className="w-full h-full object-cover rounded-xl"
+                        />
+                      );
+                    })()}
                   </div>
                   <div>
                     <h3 className="font-display font-bold text-base text-slate-100 group-hover:text-[#FFA726] transition-colors">

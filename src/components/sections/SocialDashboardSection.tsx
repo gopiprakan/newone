@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { SOCIAL_PLATFORMS_DATA } from '../../data/socialData';
 import { audioController } from '../../utils/AudioController';
+import { BrandLogoMap } from '../utils/BrandLogos';
 
 const ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
   Github,
@@ -81,10 +82,16 @@ export const SocialDashboardSection: React.FC = React.memo(() => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div
-                        className="p-3 rounded-2xl border border-[#262626] text-[#e8eaed] transition-transform group-hover:scale-110"
-                        style={{ backgroundColor: `${platform.color}15`, borderColor: `${platform.color}40` }}
+                        className="p-2.5 w-11 h-11 rounded-2xl border border-[#262626] text-[#e8eaed] transition-transform group-hover:scale-110 flex items-center justify-center bg-[#050505] shrink-0"
                       >
-                        <IconComponent className="w-5 h-5" />
+                        {(() => {
+                          const LogoComponent = BrandLogoMap[platform.id];
+                          return LogoComponent ? (
+                            <LogoComponent className="w-6 h-6 object-contain" />
+                          ) : (
+                            <IconComponent className="w-5 h-5" />
+                          );
+                        })()}
                       </div>
                       <div>
                         <h3 className="font-display font-bold text-base text-[#e8eaed] group-hover:text-[#FFA726] transition-colors">
