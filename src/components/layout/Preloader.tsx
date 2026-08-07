@@ -65,10 +65,10 @@ export const Preloader: React.FC<PreloaderProps> = React.memo(({ onComplete }) =
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#202124] text-[#e8eaed] overflow-hidden gpu-accelerated"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050505] text-[#e8eaed] overflow-hidden gpu-accelerated"
         >
           {/* Google Ambient Glow Background */}
-          <div className="absolute w-96 h-96 bg-[#4285F4]/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+          <div className="absolute w-96 h-96 bg-[#FF5F1F]/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
 
           {/* 3D Sphere Container */}
           <div className="w-64 h-64 md:w-80 md:h-80 relative mb-4">
@@ -81,7 +81,7 @@ export const Preloader: React.FC<PreloaderProps> = React.memo(({ onComplete }) =
             animate={{ opacity: 1, y: 0 }}
             className="flex items-center gap-3 mb-6"
           >
-            <div className="p-2.5 rounded-xl bg-[#4285F4]/10 border border-[#4285F4]/30 text-[#4285F4] shadow-google-blue">
+            <div className="p-2.5 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F] shadow-google-blue">
               <Cpu className="w-7 h-7 animate-pulse" />
             </div>
             <span className="font-display font-bold text-2xl tracking-widest text-gradient-google">
@@ -91,16 +91,16 @@ export const Preloader: React.FC<PreloaderProps> = React.memo(({ onComplete }) =
 
           {/* Progress Percentage & Status */}
           <div className="w-72 md:w-96 flex flex-col items-center gap-2">
-            <div className="w-full h-2 bg-[#2d2e31] rounded-full overflow-hidden border border-[#3c4043] p-0.5 shadow-inner">
+            <div className="w-full h-2 bg-[#121212] rounded-full overflow-hidden border border-[#262626] p-0.5 shadow-inner">
               <motion.div
-                className="h-full bg-gradient-to-r from-[#4285F4] via-[#EA4335] via-[#FBBC04] to-[#34A853] rounded-full shadow-google-blue"
+                className="h-full bg-gradient-to-r from-[#FF5F1F] via-[#FF3D00] via-[#FF8F00] to-[#FF5F1F] rounded-full shadow-google-blue"
                 style={{ width: `${progress}%` }}
                 transition={{ ease: 'easeOut', duration: 0.2 }}
               />
             </div>
             <div className="w-full flex justify-between items-center text-xs font-mono tracking-wider text-slate-400 mt-1">
-              <span className="text-[#8ab4f8] font-semibold">{statusText}</span>
-              <span className="text-[#EA4335] font-bold text-sm">{progress}%</span>
+              <span className="text-[#FFA726] font-semibold">{statusText}</span>
+              <span className="text-[#FF3D00] font-bold text-sm">{progress}%</span>
             </div>
           </div>
         </motion.div>

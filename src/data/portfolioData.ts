@@ -427,7 +427,7 @@ export const PORTFOLIO_DATA = {
       rating: 1950,
       globalRank: 'Verified Developer',
       badges: ['Google Developer Program', 'g.dev Verified', 'Google AI Badged'],
-      color: '#4285f4',
+      color: '#FF5F1F',
       heatmap: [12, 16, 20, 24, 28, 30, 35, 40, 32, 28, 25, 30, 36, 42, 38, 34, 30, 26, 22, 28, 35, 40, 45, 48, 36, 30, 26, 32, 40, 45]
     },
     {
@@ -441,7 +441,7 @@ export const PORTFOLIO_DATA = {
       rating: 1890,
       globalRank: 'Google Skill Badged',
       badges: ['Generative AI', 'Large Language Models', 'Responsible AI', 'AI Boost Bites'],
-      color: '#34a853',
+      color: '#FF5F1F',
       heatmap: [8, 12, 16, 19, 22, 26, 30, 34, 25, 21, 18, 27, 33, 38, 32, 29, 24, 20, 18, 23, 31, 37, 41, 44, 33, 28, 23, 30, 38, 42]
     },
     {

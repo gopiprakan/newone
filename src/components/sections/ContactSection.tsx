@@ -53,12 +53,12 @@ export const ContactSection: React.FC = React.memo(() => {
   };
 
   return (
-    <section id="contact" className="py-24 relative z-10 border-t border-[#3c4043] gpu-accelerated">
+    <section id="contact" className="py-24 relative z-10 border-t border-[#262626] gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#4285F4]/10 border border-[#4285F4]/30 text-[#8ab4f8] text-xs font-mono">
-            <Mail className="w-3.5 h-3.5 text-[#4285F4]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FFA726] text-xs font-mono">
+            <Mail className="w-3.5 h-3.5 text-[#FF5F1F]" />
             <span>GLOBAL COMMUNICATION</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#e8eaed]">
@@ -79,12 +79,12 @@ export const ContactSection: React.FC = React.memo(() => {
             transition={{ duration: 0.8 }}
             className="lg:col-span-5 space-y-6"
           >
-            <div className="glass-panel p-6 rounded-3xl border border-[#3c4043] space-y-6 relative overflow-hidden">
+            <div className="glass-panel p-6 rounded-3xl border border-[#262626] space-y-6 relative overflow-hidden">
               <Earth3D />
 
               <div className="space-y-4 font-mono text-xs">
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#202124] border border-[#3c4043]">
-                  <div className="p-2.5 rounded-xl bg-[#4285F4]/10 border border-[#4285F4]/30 text-[#4285F4]">
+                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#050505] border border-[#262626]">
+                  <div className="p-2.5 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F]">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
@@ -93,20 +93,20 @@ export const ContactSection: React.FC = React.memo(() => {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#202124] border border-[#3c4043]">
-                  <div className="p-2.5 rounded-xl bg-[#EA4335]/10 border border-[#EA4335]/30 text-[#EA4335]">
+                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#050505] border border-[#262626]">
+                  <div className="p-2.5 rounded-xl bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00]">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
                     <span className="text-slate-500 block text-[10px]">DIRECT TRANSMISSION EMAIL</span>
-                    <a href={`mailto:${PORTFOLIO_DATA.personal.email}`} className="text-[#8ab4f8] font-bold hover:underline">
+                    <a href={`mailto:${PORTFOLIO_DATA.personal.email}`} className="text-[#FFA726] font-bold hover:underline">
                       {PORTFOLIO_DATA.personal.email}
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#202124] border border-[#3c4043]">
-                  <div className="p-2.5 rounded-xl bg-[#34A853]/10 border border-[#34A853]/30 text-[#34A853]">
+                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#050505] border border-[#262626]">
+                  <div className="p-2.5 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F]">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
@@ -128,7 +128,7 @@ export const ContactSection: React.FC = React.memo(() => {
           >
             <form
               onSubmit={handleSubmit}
-              className="glass-panel p-6 sm:p-8 rounded-3xl border border-[#3c4043] space-y-5"
+              className="glass-panel p-6 sm:p-8 rounded-3xl border border-[#262626] space-y-5"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="space-y-1.5 font-mono text-xs">
@@ -139,7 +139,7 @@ export const ContactSection: React.FC = React.memo(() => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Gopiprakan S"
-                    className="w-full px-4 py-3 bg-[#202124] border border-[#3c4043] rounded-xl text-[#e8eaed] placeholder:text-slate-600 focus:outline-none focus:border-[#4285F4] transition-colors font-sans text-sm"
+                    className="w-full px-4 py-3 bg-[#050505] border border-[#262626] rounded-xl text-[#e8eaed] placeholder:text-slate-600 focus:outline-none focus:border-[#FF5F1F] transition-colors font-sans text-sm"
                   />
                 </div>
 
@@ -151,7 +151,7 @@ export const ContactSection: React.FC = React.memo(() => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="gopiprakan2006@gmail.com"
-                    className="w-full px-4 py-3 bg-[#202124] border border-[#3c4043] rounded-xl text-[#e8eaed] placeholder:text-slate-600 focus:outline-none focus:border-[#4285F4] transition-colors font-sans text-sm"
+                    className="w-full px-4 py-3 bg-[#050505] border border-[#262626] rounded-xl text-[#e8eaed] placeholder:text-slate-600 focus:outline-none focus:border-[#FF5F1F] transition-colors font-sans text-sm"
                   />
                 </div>
               </div>
@@ -163,7 +163,7 @@ export const ContactSection: React.FC = React.memo(() => {
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   placeholder="System Architecture Consulting / Project Collaboration"
-                  className="w-full px-4 py-3 bg-[#202124] border border-[#3c4043] rounded-xl text-[#e8eaed] placeholder:text-slate-600 focus:outline-none focus:border-[#4285F4] transition-colors font-sans text-sm"
+                  className="w-full px-4 py-3 bg-[#050505] border border-[#262626] rounded-xl text-[#e8eaed] placeholder:text-slate-600 focus:outline-none focus:border-[#FF5F1F] transition-colors font-sans text-sm"
                 />
               </div>
 
@@ -175,20 +175,20 @@ export const ContactSection: React.FC = React.memo(() => {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Provide brief details regarding scope, timeline, or requirements..."
-                  className="w-full px-4 py-3 bg-[#202124] border border-[#3c4043] rounded-xl text-[#e8eaed] placeholder:text-slate-600 focus:outline-none focus:border-[#4285F4] transition-colors font-sans text-sm resize-none"
+                  className="w-full px-4 py-3 bg-[#050505] border border-[#262626] rounded-xl text-[#e8eaed] placeholder:text-slate-600 focus:outline-none focus:border-[#FF5F1F] transition-colors font-sans text-sm resize-none"
                 />
               </div>
 
               {/* Status Notifications */}
               {status === 'success' && (
-                <div className="p-3.5 rounded-xl bg-[#34A853]/10 border border-[#34A853]/30 text-[#34A853] text-xs font-mono flex items-center gap-2">
+                <div className="p-3.5 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F] text-xs font-mono flex items-center gap-2">
                   <CheckCircle className="w-4 h-4" />
                   <span>TRANSMISSION TRANSMITTED SUCCESSFULLY. GOPIPRAKAN WILL RESPOND SHORTLY.</span>
                 </div>
               )}
 
               {status === 'error' && (
-                <div className="p-3.5 rounded-xl bg-[#EA4335]/10 border border-[#EA4335]/30 text-[#f28b82] text-xs font-mono flex items-center gap-2">
+                <div className="p-3.5 rounded-xl bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF8A50] text-xs font-mono flex items-center gap-2">
                   <AlertCircle className="w-4 h-4" />
                   <span>TRANSMISSION FAILED. PLEASE EMAIL DIRECTLY AT GOPIPRAKAN2006@GMAIL.COM</span>
                 </div>
@@ -198,11 +198,11 @@ export const ContactSection: React.FC = React.memo(() => {
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-[#4285F4] hover:bg-[#3367d6] text-white font-display font-bold text-sm shadow-google-blue hover:scale-[1.02] active:scale-95 transition-all duration-300 disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-[#FF5F1F] hover:bg-[#E64A19] text-white font-display font-bold text-sm shadow-google-blue hover:scale-[1.02] active:scale-95 transition-all duration-300 disabled:opacity-50"
               >
                 {status === 'sending' ? (
                   <span className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 animate-spin text-[#FBBC04]" />
+                    <Sparkles className="w-4 h-4 animate-spin text-[#FF8F00]" />
                     TRANSMITTING SIGNAL...
                   </span>
                 ) : (

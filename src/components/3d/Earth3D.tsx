@@ -195,7 +195,7 @@ export const Earth3D: React.FC = React.memo(() => {
 
   return (
     <div ref={containerRef} className="w-full h-72 md:h-80 flex items-center justify-center relative select-none gpu-accelerated">
-      <div className="absolute inset-0 bg-[#4285F4]/10 rounded-full filter blur-2xl -z-10 pointer-events-none animate-pulse-glow" />
+      <div className="absolute inset-0 bg-[#FF5F1F]/10 rounded-full filter blur-2xl -z-10 pointer-events-none animate-pulse-glow" />
     </div>
   );
 });

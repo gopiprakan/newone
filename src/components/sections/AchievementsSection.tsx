@@ -16,11 +16,11 @@ interface AchievementsSectionProps {
  */
 export const AchievementsSection: React.FC<AchievementsSectionProps> = React.memo(({ onSelectAchievement }) => {
   return (
-    <section id="achievements" className="py-24 relative z-10 border-t border-[#3c4043] gpu-accelerated">
+    <section id="achievements" className="py-24 relative z-10 border-t border-[#262626] gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FBBC04]/10 border border-[#FBBC04]/30 text-[#FBBC04] text-xs font-mono">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF8F00]/10 border border-[#FF8F00]/30 text-[#FF8F00] text-xs font-mono">
             <Trophy className="w-3.5 h-3.5" />
             <span>HONORS & HACKATHONS</span>
           </div>
@@ -42,24 +42,24 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = React.mem
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               whileHover={{ y: -6 }}
-              className="glass-panel glass-panel-hover p-6 rounded-3xl border border-[#3c4043] flex flex-col justify-between space-y-6 relative overflow-hidden group"
+              className="glass-panel glass-panel-hover p-6 rounded-3xl border border-[#262626] flex flex-col justify-between space-y-6 relative overflow-hidden group"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="p-3 rounded-2xl bg-[#FBBC04]/10 border border-[#FBBC04]/30 text-[#FBBC04]">
+                  <div className="p-3 rounded-2xl bg-[#FF8F00]/10 border border-[#FF8F00]/30 text-[#FF8F00]">
                     <Trophy className="w-6 h-6 animate-pulse" />
                   </div>
-                  <span className="text-[10px] font-mono text-[#8ab4f8] flex items-center gap-1">
-                    <Calendar className="w-3 h-3 text-[#4285F4]" />
+                  <span className="text-[10px] font-mono text-[#FFA726] flex items-center gap-1">
+                    <Calendar className="w-3 h-3 text-[#FF5F1F]" />
                     {ach.date}
                   </span>
                 </div>
 
                 <div>
-                  <span className="text-xs font-mono font-bold text-[#FBBC04] block mb-1">
+                  <span className="text-xs font-mono font-bold text-[#FF8F00] block mb-1">
                     {ach.rank}
                   </span>
-                  <h3 className="text-lg font-display font-bold text-slate-100 group-hover:text-[#FBBC04] transition-colors">
+                  <h3 className="text-lg font-display font-bold text-slate-100 group-hover:text-[#FF8F00] transition-colors">
                     {ach.title}
                   </h3>
                   <p className="text-xs font-mono text-slate-400 mt-1">
@@ -77,7 +77,7 @@ export const AchievementsSection: React.FC<AchievementsSectionProps> = React.mem
                   audioController.playClick();
                   onSelectAchievement(ach);
                 }}
-                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[#2d2e31] border border-[#FBBC04]/30 text-[#FBBC04] font-mono text-xs font-semibold hover:bg-[#FBBC04]/20 transition-all shadow-sm"
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[#121212] border border-[#FF8F00]/30 text-[#FF8F00] font-mono text-xs font-semibold hover:bg-[#FF8F00]/20 transition-all shadow-sm"
               >
                 <Eye className="w-4 h-4" />
                 <span>View Full Award & Certificate</span>

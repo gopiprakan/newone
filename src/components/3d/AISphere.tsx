@@ -205,7 +205,7 @@ export const AISphere: React.FC<AISphereProps> = React.memo(({ interactive = tru
 
   return (
     <div ref={containerRef} className="w-full h-full min-h-[260px] flex items-center justify-center relative select-none gpu-accelerated">
-      <div className="absolute inset-0 bg-[#4285F4]/10 rounded-full filter blur-3xl -z-10 pointer-events-none animate-pulse-glow" />
+      <div className="absolute inset-0 bg-[#FF5F1F]/10 rounded-full filter blur-3xl -z-10 pointer-events-none animate-pulse-glow" />
     </div>
   );
 });

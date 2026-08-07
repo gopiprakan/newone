@@ -29,7 +29,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = React.memo(({ project, 
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className="relative w-full max-w-5xl bg-[#2d2e31] border border-[#3c4043] rounded-3xl shadow-2xl overflow-hidden text-[#e8eaed] my-auto gpu-accelerated"
+          className="relative w-full max-w-5xl bg-[#121212] border border-[#262626] rounded-3xl shadow-2xl overflow-hidden text-[#e8eaed] my-auto gpu-accelerated"
         >
           {/* Close Button */}
           <button
@@ -37,13 +37,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = React.memo(({ project, 
               audioController.playClick();
               onClose();
             }}
-            className="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-[#202124] border border-[#3c4043] text-slate-300 hover:text-[#4285F4] hover:border-[#4285F4] transition-all"
+            className="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-[#050505] border border-[#262626] text-slate-300 hover:text-[#FF5F1F] hover:border-[#FF5F1F] transition-all"
           >
             <X className="w-5 h-5" />
           </button>
 
           {/* Project Screenshot Hero & Gallery */}
-          <div className="relative h-64 sm:h-80 md:h-96 w-full bg-[#202124] overflow-hidden group">
+          <div className="relative h-64 sm:h-80 md:h-96 w-full bg-[#050505] overflow-hidden group">
             <img
               src={currentHeroImg}
               alt={project.title}
@@ -53,7 +53,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = React.memo(({ project, 
               height={400}
               className="w-full h-full object-cover filter brightness-105 contrast-105 transition-all duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#2d2e31] via-[#2d2e31]/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-[#121212]/40 to-transparent" />
 
             {/* Thumbnail Gallery Overlay */}
             <div className="absolute bottom-4 left-6 right-6 flex items-center gap-3 overflow-x-auto pb-1">
@@ -62,7 +62,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = React.memo(({ project, 
                   key={idx}
                   onClick={() => setSelectedImg(s)}
                   className={`w-16 h-12 rounded-xl overflow-hidden border-2 shrink-0 transition-all ${
-                    currentHeroImg === s ? 'border-[#4285F4] scale-105 shadow-google-blue' : 'border-[#3c4043] opacity-60'
+                    currentHeroImg === s ? 'border-[#FF5F1F] scale-105 shadow-google-blue' : 'border-[#262626] opacity-60'
                   }`}
                 >
                   <img src={s} alt="screenshot" loading="lazy" decoding="async" width={64} height={48} className="w-full h-full object-cover" />
@@ -74,9 +74,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = React.memo(({ project, 
           {/* Body Content */}
           <div className="p-6 md:p-8 space-y-8 max-h-[60vh] overflow-y-auto font-sans">
             {/* Title & CTAs */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#3c4043] pb-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#262626] pb-6">
               <div>
-                <span className="inline-block px-3 py-1 rounded-full bg-[#4285F4]/10 border border-[#4285F4]/30 text-[#8ab4f8] text-xs font-mono mb-2">
+                <span className="inline-block px-3 py-1 rounded-full bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FFA726] text-xs font-mono mb-2">
                   {project.category}
                 </span>
                 <h2 className="text-2xl md:text-3xl font-display font-bold text-gradient-google">
@@ -88,7 +88,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = React.memo(({ project, 
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#202124] border border-[#3c4043] text-xs font-mono font-medium hover:border-[#4285F4] hover:text-[#8ab4f8] transition-all"
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#050505] border border-[#262626] text-xs font-mono font-medium hover:border-[#FF5F1F] hover:text-[#FFA726] transition-all"
                 >
                   <Github className="w-4 h-4" />
                   <span>GitHub Repository</span>
@@ -97,7 +97,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = React.memo(({ project, 
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-5 py-2 rounded-xl bg-[#4285F4] hover:bg-[#3367d6] text-white font-bold text-xs shadow-google-blue transition-all"
+                  className="flex items-center gap-2 px-5 py-2 rounded-xl bg-[#FF5F1F] hover:bg-[#E64A19] text-white font-bold text-xs shadow-google-blue transition-all"
                 >
                   <ExternalLink className="w-4 h-4" />
                   <span>Launch Live App</span>
@@ -107,16 +107,16 @@ export const ProjectModal: React.FC<ProjectModalProps> = React.memo(({ project, 
 
             {/* Problem & Solution Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-5 rounded-2xl bg-[#202124] border border-[#EA4335]/30 space-y-2">
-                <div className="flex items-center gap-2 text-[#EA4335] font-mono text-xs font-semibold">
+              <div className="p-5 rounded-2xl bg-[#050505] border border-[#FF3D00]/30 space-y-2">
+                <div className="flex items-center gap-2 text-[#FF3D00] font-mono text-xs font-semibold">
                   <AlertTriangle className="w-4 h-4" />
                   <span>PROBLEM STATEMENT</span>
                 </div>
                 <p className="text-xs text-slate-300 leading-relaxed">{project.problemStatement}</p>
               </div>
 
-              <div className="p-5 rounded-2xl bg-[#202124] border border-[#34A853]/30 space-y-2">
-                <div className="flex items-center gap-2 text-[#34A853] font-mono text-xs font-semibold">
+              <div className="p-5 rounded-2xl bg-[#050505] border border-[#FF5F1F]/30 space-y-2">
+                <div className="flex items-center gap-2 text-[#FF5F1F] font-mono text-xs font-semibold">
                   <Lightbulb className="w-4 h-4" />
                   <span>ENGINEERED SOLUTION</span>
                 </div>
@@ -126,13 +126,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = React.memo(({ project, 
 
             {/* Key Features & Tech Badges */}
             <div className="space-y-4">
-              <h4 className="text-sm font-mono uppercase tracking-wider text-[#4285F4]">
+              <h4 className="text-sm font-mono uppercase tracking-wider text-[#FF5F1F]">
                 // KEY ARCHITECTURAL FEATURES
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {project.features.map((f, i) => (
-                  <div key={i} className="flex items-start gap-2.5 p-3 rounded-xl bg-[#202124] border border-[#3c4043] text-xs text-slate-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#4285F4] shrink-0 mt-0.5" />
+                  <div key={i} className="flex items-start gap-2.5 p-3 rounded-xl bg-[#050505] border border-[#262626] text-xs text-slate-300">
+                    <CheckCircle2 className="w-4 h-4 text-[#FF5F1F] shrink-0 mt-0.5" />
                     <span>{f}</span>
                   </div>
                 ))}
@@ -141,14 +141,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = React.memo(({ project, 
 
             {/* Tech Stack Badges */}
             <div className="space-y-3">
-              <h4 className="text-sm font-mono uppercase tracking-wider text-[#FBBC04]">
+              <h4 className="text-sm font-mono uppercase tracking-wider text-[#FF8F00]">
                 // TECHNOLOGIES UTILIZED
               </h4>
               <div className="flex flex-wrap gap-2">
                 {project.techStack.map((t, idx) => (
                   <span
                     key={idx}
-                    className="px-3 py-1 rounded-xl bg-[#202124] border border-[#3c4043] text-xs font-mono text-[#8ab4f8]"
+                    className="px-3 py-1 rounded-xl bg-[#050505] border border-[#262626] text-xs font-mono text-[#FFA726]"
                   >
                     {t}
                   </span>
@@ -157,8 +157,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = React.memo(({ project, 
             </div>
 
             {/* Architecture & Challenges */}
-            <div className="p-5 rounded-2xl bg-[#202124] border border-[#3c4043] space-y-3">
-              <div className="flex items-center gap-2 text-[#4285F4] font-mono text-xs font-semibold">
+            <div className="p-5 rounded-2xl bg-[#050505] border border-[#262626] space-y-3">
+              <div className="flex items-center gap-2 text-[#FF5F1F] font-mono text-xs font-semibold">
                 <Layers className="w-4 h-4" />
                 <span>SYSTEM ARCHITECTURE & CHALLENGES</span>
               </div>

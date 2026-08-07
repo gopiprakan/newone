@@ -11,11 +11,11 @@ import { PORTFOLIO_DATA } from '../../data/portfolioData';
  */
 export const AboutSection: React.FC = React.memo(() => {
   return (
-    <section id="about" className="py-24 relative z-10 border-t border-[#3c4043] gpu-accelerated">
+    <section id="about" className="py-24 relative z-10 border-t border-[#262626] gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#4285F4]/10 border border-[#4285F4]/30 text-[#8ab4f8] text-xs font-mono">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FFA726] text-xs font-mono">
             <User className="w-3.5 h-3.5" />
             <span>EXECUTIVE PROFILE</span>
           </div>
@@ -37,8 +37,8 @@ export const AboutSection: React.FC = React.memo(() => {
             transition={{ duration: 0.8 }}
             className="lg:col-span-5 relative"
           >
-            <div className="relative mx-auto w-72 sm:w-80 h-96 rounded-3xl p-1 bg-gradient-to-br from-[#4285F4] via-[#EA4335] via-[#FBBC04] to-[#34A853] shadow-google-blue group">
-              <div className="w-full h-full rounded-[22px] bg-[#202124] overflow-hidden relative">
+            <div className="relative mx-auto w-72 sm:w-80 h-96 rounded-3xl p-1 bg-gradient-to-br from-[#FF5F1F] via-[#FF3D00] via-[#FF8F00] to-[#FF5F1F] shadow-google-blue group">
+              <div className="w-full h-full rounded-[22px] bg-[#050505] overflow-hidden relative">
                 <img
                   src="/profile.jpg"
                   alt="Gopiprakan Professional"
@@ -48,12 +48,12 @@ export const AboutSection: React.FC = React.memo(() => {
                   height={384}
                   className="w-full h-full object-cover filter brightness-105 contrast-105 transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#202124] via-transparent to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
 
                 {/* Floating CGPA Badge */}
-                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-[#2d2e31]/90 backdrop-blur-md border border-[#3c4043] flex items-center justify-between">
+                <div className="absolute bottom-4 left-4 right-4 p-3 rounded-xl bg-[#121212]/90 backdrop-blur-md border border-[#262626] flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <GraduationCap className="w-5 h-5 text-[#4285F4]" />
+                    <GraduationCap className="w-5 h-5 text-[#FF5F1F]" />
                     <span className="text-xs font-mono text-slate-300">AI & Data Science Student</span>
                   </div>
                   <span className="text-xs font-mono font-bold text-gradient-google">
@@ -63,7 +63,7 @@ export const AboutSection: React.FC = React.memo(() => {
               </div>
 
               {/* Decorative Frame Overlay */}
-              <div className="absolute -inset-4 border border-[#4285F4]/20 rounded-[36px] pointer-events-none -z-10 animate-spin-slow" />
+              <div className="absolute -inset-4 border border-[#FF5F1F]/20 rounded-[36px] pointer-events-none -z-10 animate-spin-slow" />
             </div>
           </motion.div>
 
@@ -88,8 +88,8 @@ export const AboutSection: React.FC = React.memo(() => {
             </div>
 
             {/* Career Objective Box */}
-            <div className="p-5 rounded-2xl bg-[#2d2e31] border border-[#3c4043] space-y-2">
-              <div className="flex items-center gap-2 text-[#EA4335] font-mono text-xs font-semibold">
+            <div className="p-5 rounded-2xl bg-[#121212] border border-[#262626] space-y-2">
+              <div className="flex items-center gap-2 text-[#FF3D00] font-mono text-xs font-semibold">
                 <Target className="w-4 h-4" />
                 <span>CAREER VISION & OBJECTIVE</span>
               </div>
@@ -106,8 +106,8 @@ export const AboutSection: React.FC = React.memo(() => {
                 'Optimized Full-Stack Microservices',
                 'Clean Modular TypeScript Architecture'
               ].map((pillar, i) => (
-                <div key={i} className="flex items-center gap-2.5 p-3 rounded-xl bg-[#2d2e31]/60 border border-[#3c4043] text-xs text-slate-300">
-                  <CheckCircle2 className="w-4 h-4 text-[#34A853] shrink-0" />
+                <div key={i} className="flex items-center gap-2.5 p-3 rounded-xl bg-[#121212]/60 border border-[#262626] text-xs text-slate-300">
+                  <CheckCircle2 className="w-4 h-4 text-[#FF5F1F] shrink-0" />
                   <span>{pillar}</span>
                 </div>
               ))}

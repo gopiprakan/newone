@@ -24,16 +24,16 @@ export const Footer: React.FC = React.memo(() => {
   };
 
   return (
-    <footer className="relative bg-[#202124] border-t border-[#3c4043] pt-16 pb-12 overflow-hidden text-slate-400 gpu-accelerated">
+    <footer className="relative bg-[#050505] border-t border-[#262626] pt-16 pb-12 overflow-hidden text-slate-400 gpu-accelerated">
       {/* Glow background line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-[#4285F4] to-transparent shadow-google-blue" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-[#FF5F1F] to-transparent shadow-google-blue" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand Col */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#4285F4]/10 border border-[#4285F4]/30 text-[#4285F4]">
+              <div className="p-2.5 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F]">
                 <Cpu className="w-6 h-6 animate-pulse" />
               </div>
               <span className="font-display font-bold text-xl text-gradient-google tracking-wider">
@@ -43,7 +43,7 @@ export const Footer: React.FC = React.memo(() => {
             <p className="text-sm text-slate-400 max-w-md leading-relaxed">
               AI & Data Science Student building intelligent applications, web automation systems, and full-stack software solutions.
             </p>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#34A853]/10 border border-[#34A853]/30 text-[#34A853] text-xs font-mono">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F] text-xs font-mono">
               <Activity className="w-3.5 h-3.5 animate-pulse" />
               <span>SYSTEM STATUS: 100% OPERATIONAL</span>
             </div>
@@ -51,7 +51,7 @@ export const Footer: React.FC = React.memo(() => {
 
           {/* Quick Links */}
           <div className="space-y-3">
-            <h4 className="font-display font-semibold text-slate-200 text-sm tracking-wider uppercase text-[#4285F4]">
+            <h4 className="font-display font-semibold text-slate-200 text-sm tracking-wider uppercase text-[#FF5F1F]">
               Quick Navigation
             </h4>
             <ul className="space-y-2 text-xs">
@@ -59,7 +59,7 @@ export const Footer: React.FC = React.memo(() => {
                 <li key={link}>
                   <a
                     href={`#${link}`}
-                    className="hover:text-[#4285F4] transition-colors uppercase tracking-wider font-mono"
+                    className="hover:text-[#FF5F1F] transition-colors uppercase tracking-wider font-mono"
                   >
                     // {link}
                   </a>
@@ -70,7 +70,7 @@ export const Footer: React.FC = React.memo(() => {
 
           {/* Social Connections & Live Visitor Counter */}
           <div className="space-y-4">
-            <h4 className="font-display font-semibold text-slate-200 text-sm tracking-wider uppercase text-[#4285F4]">
+            <h4 className="font-display font-semibold text-slate-200 text-sm tracking-wider uppercase text-[#FF5F1F]">
               Connect & Telemetry
             </h4>
             <div className="flex items-center gap-3">
@@ -87,7 +87,7 @@ export const Footer: React.FC = React.memo(() => {
                     href={soc.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-[#2d2e31] border border-[#3c4043] text-slate-400 hover:text-[#4285F4] hover:border-[#4285F4]/40 hover:scale-110 transition-all duration-300"
+                    className="p-2.5 rounded-xl bg-[#121212] border border-[#262626] text-slate-400 hover:text-[#FF5F1F] hover:border-[#FF5F1F]/40 hover:scale-110 transition-all duration-300"
                   >
                     <IconComp className="w-4 h-4" />
                   </a>
@@ -96,7 +96,7 @@ export const Footer: React.FC = React.memo(() => {
             </div>
 
             {/* Live Visitor Counter Badge */}
-            <div className="p-3 rounded-xl bg-[#2d2e31]/90 border border-[#3c4043] flex items-center justify-between">
+            <div className="p-3 rounded-xl bg-[#121212]/90 border border-[#262626] flex items-center justify-between">
               <span className="text-xs font-mono text-slate-400">GLOBAL VISITORS</span>
               <span className="text-sm font-mono font-bold text-gradient-google">
                 {visitorCount.toLocaleString()}
@@ -106,12 +106,12 @@ export const Footer: React.FC = React.memo(() => {
         </div>
 
         {/* Bottom copyright & Back to top button */}
-        <div className="pt-8 border-t border-[#3c4043] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
+        <div className="pt-8 border-t border-[#262626] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
           <p>© {new Date().getFullYear()} Gopiprakan. All rights reserved.</p>
 
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#2d2e31] border border-[#3c4043] text-[#4285F4] hover:bg-[#4285F4] hover:text-white transition-all duration-300 shadow-google-blue"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#121212] border border-[#262626] text-[#FF5F1F] hover:bg-[#FF5F1F] hover:text-white transition-all duration-300 shadow-google-blue"
           >
             <span>BACK TO TOP</span>
             <ArrowUp className="w-3.5 h-3.5" />

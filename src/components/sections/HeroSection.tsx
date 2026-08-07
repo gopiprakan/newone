@@ -73,8 +73,8 @@ export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResum
             className="lg:col-span-7 space-y-6 text-left"
           >
             {/* Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#4285F4]/10 border border-[#4285F4]/30 text-[#8ab4f8] text-xs font-mono shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#4285F4] animate-ping" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FFA726] text-xs font-mono shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#FF5F1F] animate-ping" />
               <span>AVAILABLE FOR AI & FULL-STACK ROLES / HACKATHONS</span>
             </div>
 
@@ -84,10 +84,10 @@ export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResum
             </h1>
 
             {/* Typing Effect Subtitle */}
-            <div className="h-10 text-xl sm:text-2xl font-mono text-[#8ab4f8] font-medium flex items-center gap-2">
+            <div className="h-10 text-xl sm:text-2xl font-mono text-[#FFA726] font-medium flex items-center gap-2">
               <span>&gt;</span>
               <span>{currentText}</span>
-              <span className="w-2.5 h-6 bg-[#4285F4] animate-pulse" />
+              <span className="w-2.5 h-6 bg-[#FF5F1F] animate-pulse" />
             </div>
 
             {/* Bio */}
@@ -102,7 +102,7 @@ export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResum
                   audioController.playClick();
                   onOpenResumeModal();
                 }}
-                className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#4285F4] hover:bg-[#3367d6] text-white font-display font-bold text-sm shadow-google-blue hover:scale-105 transition-all duration-300"
+                className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#FF5F1F] hover:bg-[#E64A19] text-white font-display font-bold text-sm shadow-google-blue hover:scale-105 transition-all duration-300"
               >
                 <FileText className="w-4 h-4" />
                 <span>Download Resume</span>
@@ -110,7 +110,7 @@ export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResum
 
               <button
                 onClick={scrollToContact}
-                className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#2d2e31] border border-[#EA4335]/40 text-[#f28b82] font-display font-semibold text-sm hover:bg-[#EA4335]/15 hover:border-[#EA4335] hover:scale-105 transition-all duration-300"
+                className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#121212] border border-[#FF3D00]/40 text-[#FF8A50] font-display font-semibold text-sm hover:bg-[#FF3D00]/15 hover:border-[#FF3D00] hover:scale-105 transition-all duration-300"
               >
                 <Send className="w-4 h-4" />
                 <span>Hire Me</span>
@@ -118,9 +118,9 @@ export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResum
 
               <button
                 onClick={scrollToProjects}
-                className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#2d2e31] border border-[#3c4043] text-slate-300 font-display font-medium text-sm hover:border-[#4285F4] hover:text-[#8ab4f8] transition-all duration-300"
+                className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#121212] border border-[#262626] text-slate-300 font-display font-medium text-sm hover:border-[#FF5F1F] hover:text-[#FFA726] transition-all duration-300"
               >
-                <Sparkles className="w-4 h-4 text-[#FBBC04]" />
+                <Sparkles className="w-4 h-4 text-[#FF8F00]" />
                 <span>View Projects</span>
               </button>
             </div>
@@ -145,18 +145,18 @@ export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResum
           className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4"
         >
           {[
-            { label: 'Projects Completed', value: `${PORTFOLIO_DATA.personal.stats.projectsCompleted}+`, icon: FolderGit2, color: 'text-[#4285F4]' },
-            { label: 'Hackathons Won', value: `${PORTFOLIO_DATA.personal.stats.hackathonsWon}+`, icon: Trophy, color: 'text-[#FBBC04]' },
-            { label: 'Certifications', value: `${PORTFOLIO_DATA.personal.stats.certificationsCount}+`, icon: Award, color: 'text-[#EA4335]' },
-            { label: 'Technologies', value: `${PORTFOLIO_DATA.personal.stats.technologiesMastered}+`, icon: Cpu, color: 'text-[#34A853]' }
+            { label: 'Projects Completed', value: `${PORTFOLIO_DATA.personal.stats.projectsCompleted}+`, icon: FolderGit2, color: 'text-[#FF5F1F]' },
+            { label: 'Hackathons Won', value: `${PORTFOLIO_DATA.personal.stats.hackathonsWon}+`, icon: Trophy, color: 'text-[#FF8F00]' },
+            { label: 'Certifications', value: `${PORTFOLIO_DATA.personal.stats.certificationsCount}+`, icon: Award, color: 'text-[#FF3D00]' },
+            { label: 'Technologies', value: `${PORTFOLIO_DATA.personal.stats.technologiesMastered}+`, icon: Cpu, color: 'text-[#FF5F1F]' }
           ].map((st, i) => {
             const IconComponent = st.icon;
             return (
               <div
                 key={i}
-                className="glass-panel glass-panel-hover p-5 rounded-2xl border border-[#3c4043] flex items-center gap-4 group"
+                className="glass-panel glass-panel-hover p-5 rounded-2xl border border-[#262626] flex items-center gap-4 group"
               >
-                <div className={`p-3 rounded-xl bg-[#202124] border border-[#3c4043] ${st.color} group-hover:scale-110 transition-transform`}>
+                <div className={`p-3 rounded-xl bg-[#050505] border border-[#262626] ${st.color} group-hover:scale-110 transition-transform`}>
                   <IconComponent className="w-6 h-6" />
                 </div>
                 <div>
@@ -176,7 +176,7 @@ export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResum
       {/* Down Scroll Arrow */}
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-slate-500 text-xs font-mono animate-bounce cursor-pointer" onClick={scrollToProjects}>
         <span>SCROLL DOWN</span>
-        <ArrowDown className="w-4 h-4 text-[#4285F4]" />
+        <ArrowDown className="w-4 h-4 text-[#FF5F1F]" />
       </div>
     </section>
   );
