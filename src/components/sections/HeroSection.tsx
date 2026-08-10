@@ -5,8 +5,9 @@ import { PORTFOLIO_DATA } from '../../data/portfolioData';
 import { AvatarHoloRing } from '../3d/AvatarHoloRing';
 import { audioController } from '../../utils/AudioController';
 
-interface HeroSectionProps {
+iinterface HeroSectionProps {
   onOpenResumeModal: () => void;
+  onSectionChange: (id: string) => void;
 }
 
 /**
@@ -16,7 +17,7 @@ interface HeroSectionProps {
  * 2. Timer Cleanup: Properly disposes typing effect timers to prevent memory leaks.
  * 3. Hardware Layer Promotion: Applies GPU acceleration rules to text layout and stat cards.
  */
-export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResumeModal }) => {
+export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResumeModal, onSectionChange }) => {
   const [typingIndex, setTypingIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -37,7 +38,7 @@ export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResum
         } else {
           setCurrentText(fullText.substring(0, currentText.length - 1));
           if (currentText === '') {
-            setIsDeleting(false);
+            isDeleting(false);
             setTypingIndex((prev) => (prev + 1) % titles.length);
           }
         }
@@ -51,14 +52,19 @@ export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResum
     };
   }, [currentText, isDeleting, typingIndex, titles]);
 
-  const scrollToProjects = () => {
+  const handleGoToProjects = () => {
     audioController.playClick();
-    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+    onSectionChange('projects');
   };
 
-  const scrollToContact = () => {
+  const handleGoToContact = () => {
     audioController.playClick();
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    onSectionChange('contact');
+  };
+
+  const handleGoToResume = () => {
+    audioController.playClick();
+    onSectionChange('resume');
   };
 
   return (
@@ -98,18 +104,15 @@ export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResum
             {/* CTA Action Buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <button
-                onClick={() => {
-                  audioController.playClick();
-                  onOpenResumeModal();
-                }}
+                onClick={handleGoToResume}
                 className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#FF5F1F] hover:bg-[#E64A19] text-white font-display font-bold text-sm shadow-google-blue hover:scale-105 transition-all duration-300"
               >
                 <FileText className="w-4 h-4" />
-                <span>Download Resume</span>
+                <span>View Resume</span>
               </button>
 
               <button
-                onClick={scrollToContact}
+                onClick={handleGoToContact}
                 className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#121212] border border-[#FF3D00]/40 text-[#FF8A50] font-display font-semibold text-sm hover:bg-[#FF3D00]/15 hover:border-[#FF3D00] hover:scale-105 transition-all duration-300"
               >
                 <Send className="w-4 h-4" />
@@ -117,7 +120,7 @@ export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResum
               </button>
 
               <button
-                onClick={scrollToProjects}
+                onClick={handleGoToProjects}
                 className="flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#121212] border border-[#262626] text-slate-300 font-display font-medium text-sm hover:border-[#FF5F1F] hover:text-[#FFA726] transition-all duration-300"
               >
                 <Sparkles className="w-4 h-4 text-[#FF8F00]" />
@@ -174,8 +177,8 @@ export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResum
       </div>
 
       {/* Down Scroll Arrow */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-slate-500 text-xs font-mono animate-bounce cursor-pointer" onClick={scrollToProjects}>
-        <span>SCROLL DOWN</span>
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-slate-500 text-xs font-mono animate-bounce cursor-pointer" onClick={handleGoToProjects}>
+        <span>VIEW PROJECTS</span>
         <ArrowDown className="w-4 h-4 text-[#FF5F1F]" />
       </div>
     </section>
