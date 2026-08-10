@@ -15,6 +15,7 @@ import { audioController } from '../../utils/AudioController';
 
 interface NavbarProps {
   activeSection: string;
+  onSectionChange: (id: string) => void;
   onOpenCommandPalette: () => void;
   onOpenResumeModal: () => void;
   onToggleTheme: () => void;
@@ -43,6 +44,7 @@ export const NAV_SECTIONS = [
  */
 export const Navbar: React.FC<NavbarProps> = React.memo(({
   activeSection,
+  onSectionChange,
   onOpenCommandPalette,
   onOpenResumeModal,
   onToggleTheme
@@ -73,13 +75,10 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
     setIsMuted(!active);
   };
 
-  const scrollToSection = (id: string) => {
+  const handleSectionChange = (id: string) => {
     audioController.playClick();
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    onSectionChange(id);
   };
 
   return (
@@ -93,7 +92,7 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo */}
         <button
-          onClick={() => scrollToSection('home')}
+          onClick={() => handleSectionChange('home')}
           className="flex items-center gap-3 group focus:outline-none"
         >
           <div className="p-2 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F] group-hover:scale-110 transition-all duration-300">
@@ -111,7 +110,7 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
             return (
               <button
                 key={sec.id}
-                onClick={() => scrollToSection(sec.id)}
+                onClick={() => handleSectionChange(sec.id)}
                 onMouseEnter={() => audioController.playHover()}
                 className={`relative px-3 py-1.5 text-xs font-medium tracking-wide transition-all duration-300 rounded-full ${
                   isActive
@@ -173,11 +172,12 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
 
           {/* Download / View Resume Button */}
           <button
-            onClick={() => {
-              audioController.playClick();
-              onOpenResumeModal();
-            }}
-            className="hidden sm:flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold bg-[#FF5F1F] hover:bg-[#E64A19] text-white rounded-xl shadow-google-blue transition-all duration-300"
+            onClick={() => handleSectionChange('resume')}
+            className={`hidden sm:flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold rounded-xl shadow-google-blue transition-all duration-300 ${
+              activeSection === 'resume'
+                ? 'bg-[#E64A19] text-white border border-[#FF5F1F]/50 scale-105'
+                : 'bg-[#FF5F1F] hover:bg-[#E64A19] text-white'
+            }`}
           >
             <FileText className="w-3.5 h-3.5" />
             <span>Resume</span>
@@ -206,7 +206,7 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
               {NAV_SECTIONS.map((sec) => (
                 <button
                   key={sec.id}
-                  onClick={() => scrollToSection(sec.id)}
+                  onClick={() => handleSectionChange(sec.id)}
                   className={`text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     activeSection === sec.id
                       ? 'bg-[#FF5F1F]/20 text-[#FFA726] border border-[#FF5F1F]/40 font-semibold'
@@ -231,8 +231,7 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
               </button>
               <button
                 onClick={() => {
-                  onOpenResumeModal();
-                  setMobileMenuOpen(false);
+                  handleSectionChange('resume');
                 }}
                 className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#FF5F1F] hover:bg-[#E64A19] text-white font-bold rounded-xl text-sm shadow-google-blue"
               >

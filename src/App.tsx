@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import Lenis from 'lenis';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Layout & 3D Components
 import { Preloader } from './components/layout/Preloader';
@@ -19,6 +20,7 @@ import { EducationSection } from './components/sections/EducationSection';
 import { CodingProfilesSection } from './components/sections/CodingProfilesSection';
 import { SocialDashboardSection } from './components/sections/SocialDashboardSection';
 import { ContactSection } from './components/sections/ContactSection';
+import { ResumeSection } from './components/sections/ResumeSection';
 
 // Widget Modals & Floating Features
 import { CustomCursor } from './components/widgets/CustomCursor';
@@ -32,11 +34,11 @@ import { ThemeSelector } from './components/widgets/ThemeSelector';
 import { Project, Achievement } from './data/portfolioData';
 
 /**
- * PERFORMANCE OPTIMIZED APP ROOT
+ * PERFORMANCE OPTIMIZED APP ROOT (TAB-BASED SPA ROUTING)
  * Optimizations implemented:
  * 1. useCallback Memoization: Stable prop callback references prevent full-tree re-render cascades.
  * 2. Lenis RAF Cleanup: Tracks requestAnimationFrame handle and cancels on unmount to eliminate ghost animation loops.
- * 3. Passive IntersectionObserver: Monitors active navigation section smoothly without scroll listener thrashing.
+ * 3. Smooth Direct Section Switching: Uses AnimatePresence mode="wait" to fade sections inline without scroll thrashing.
  */
 export const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -70,28 +72,10 @@ export const App: React.FC = () => {
     };
   }, []);
 
-  // Section Observer for Active Nav pill
+  // Reset scroll to top instantly on section changes
   useEffect(() => {
-    if (isLoading) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.25 }
-    );
-
-    NAV_SECTIONS.forEach((sec) => {
-      const el = document.getElementById(sec.id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, [isLoading]);
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, [activeSection]);
 
   // Memoized Action Callbacks (Prevents child component re-renders)
   const handlePreloaderComplete = useCallback(() => setIsLoading(false), []);
@@ -106,6 +90,10 @@ export const App: React.FC = () => {
   const handleSelectAchievement = useCallback((ach: Achievement) => setSelectedAchievement(ach), []);
   const handleCloseAchievementModal = useCallback(() => setSelectedAchievement(null), []);
 
+  const handleSectionChange = useCallback((id: string) => {
+    setActiveSection(id);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#050505] text-[#e8eaed] relative font-sans selection:bg-[#FF5F1F] selection:text-white gpu-accelerated">
       {/* Loading Overlay */}
@@ -119,28 +107,50 @@ export const App: React.FC = () => {
           {/* Sticky Glass Navbar */}
           <Navbar
             activeSection={activeSection}
+            onSectionChange={handleSectionChange}
             onOpenCommandPalette={handleOpenCommandPalette}
             onOpenResumeModal={handleOpenResumeModal}
             onToggleTheme={handleOpenThemeSelector}
           />
 
           {/* Main Website Content Sections */}
-          <main>
-            <HeroSection onOpenResumeModal={handleOpenResumeModal} />
-            <AboutSection />
-            <SkillsSection />
-            <ProjectsSection onSelectProject={handleSelectProject} />
-            <AchievementsSection onSelectAchievement={handleSelectAchievement} />
-            <CertificatesSection />
-            <ExperienceSection />
-            <EducationSection />
-            <CodingProfilesSection />
-            <SocialDashboardSection />
-            <ContactSection />
+          <main className="relative min-h-[70vh] w-full overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeSection}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="w-full"
+              >
+                {activeSection === 'home' && (
+                  <HeroSection
+                    onOpenResumeModal={handleOpenResumeModal}
+                    onSectionChange={handleSectionChange}
+                  />
+                )}
+                {activeSection === 'about' && <AboutSection />}
+                {activeSection === 'skills' && <SkillsSection />}
+                {activeSection === 'projects' && (
+                  <ProjectsSection onSelectProject={handleSelectProject} />
+                )}
+                {activeSection === 'achievements' && (
+                  <AchievementsSection onSelectAchievement={handleSelectAchievement} />
+                )}
+                {activeSection === 'certificates' && <CertificatesSection />}
+                {activeSection === 'experience' && <ExperienceSection />}
+                {activeSection === 'education' && <EducationSection />}
+                {activeSection === 'coding-profiles' && <CodingProfilesSection />}
+                {activeSection === 'social-dashboard' && <SocialDashboardSection />}
+                {activeSection === 'contact' && <ContactSection />}
+                {activeSection === 'resume' && <ResumeSection />}
+              </motion.div>
+            </AnimatePresence>
           </main>
 
           {/* Footer */}
-          <Footer />
+          <Footer onSectionChange={handleSectionChange} />
 
           {/* Custom Cursor & Floating Widgets */}
           <CustomCursor />
@@ -164,6 +174,7 @@ export const App: React.FC = () => {
             onClose={handleCloseCommandPalette}
             onOpenResumeModal={handleOpenResumeModal}
             onToggleTheme={handleOpenThemeSelector}
+            onSectionChange={handleSectionChange}
           />
           <ThemeSelector
             isOpen={themeSelectorOpen}
