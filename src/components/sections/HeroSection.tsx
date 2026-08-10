@@ -38,7 +38,7 @@ export const HeroSection: React.FC<HeroSectionProps> = React.memo(({ onOpenResum
         } else {
           setCurrentText(fullText.substring(0, currentText.length - 1));
           if (currentText === '') {
-            isDeleting(false);
+            setIsDeleting(false);
             setTypingIndex((prev) => (prev + 1) % titles.length);
           }
         }
