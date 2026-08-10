@@ -8,7 +8,17 @@ import { audioController } from '../../utils/AudioController';
  * 1. React.memo: Prevents footer re-renders when parent state updates.
  * 2. Timer Cleanup: Properly disposes visitor count update interval.
  */
-export const Footer: React.FC = React.memo(() => {
+interface FooterProps {
+  onSectionChange: (id: string) => void;
+}
+
+/**
+ * PERFORMANCE OPTIMIZED FOOTER
+ * Optimizations implemented:
+ * 1. React.memo: Prevents footer re-renders when parent state updates.
+ * 2. Timer Cleanup: Properly disposes visitor count update interval.
+ */
+export const Footer: React.FC<FooterProps> = React.memo(({ onSectionChange }) => {
   const [visitorCount, setVisitorCount] = useState(142850);
 
   useEffect(() => {
@@ -18,9 +28,9 @@ export const Footer: React.FC = React.memo(() => {
     return () => clearInterval(interval);
   }, []);
 
-  const scrollToTop = () => {
+  const handleBackToTop = () => {
     audioController.playClick();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    onSectionChange('home');
   };
 
   return (
@@ -54,15 +64,18 @@ export const Footer: React.FC = React.memo(() => {
             <h4 className="font-display font-semibold text-slate-200 text-sm tracking-wider uppercase text-[#FF5F1F]">
               Quick Navigation
             </h4>
-            <ul className="space-y-2 text-xs">
+            <ul className="space-y-2 text-xs text-left">
               {['home', 'about', 'skills', 'projects', 'achievements', 'contact'].map((link) => (
                 <li key={link}>
-                  <a
-                    href={`#${link}`}
-                    className="hover:text-[#FF5F1F] transition-colors uppercase tracking-wider font-mono"
+                  <button
+                    onClick={() => {
+                      audioController.playClick();
+                      onSectionChange(link);
+                    }}
+                    className="hover:text-[#FF5F1F] transition-colors uppercase tracking-wider font-mono focus:outline-none"
                   >
                     // {link}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -110,7 +123,7 @@ export const Footer: React.FC = React.memo(() => {
           <p>© {new Date().getFullYear()} Gopiprakan. All rights reserved.</p>
 
           <button
-            onClick={scrollToTop}
+            onClick={handleBackToTop}
             className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#121212] border border-[#262626] text-[#FF5F1F] hover:bg-[#FF5F1F] hover:text-white transition-all duration-300 shadow-google-blue"
           >
             <span>BACK TO TOP</span>

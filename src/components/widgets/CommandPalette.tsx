@@ -10,6 +10,7 @@ interface CommandPaletteProps {
   onClose: () => void;
   onOpenResumeModal: () => void;
   onToggleTheme: () => void;
+  onSectionChange: (id: string) => void;
 }
 
 /**
@@ -23,6 +24,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = React.memo(({
   onClose,
   onOpenResumeModal,
   onToggleTheme,
+  onSectionChange,
 }) => {
   const [query, setQuery] = useState('');
 
@@ -45,8 +47,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = React.memo(({
   const handleJump = (sectionId: string) => {
     audioController.playClick();
     onClose();
-    const elem = document.getElementById(sectionId);
-    if (elem) elem.scrollIntoView({ behavior: 'smooth' });
+    onSectionChange(sectionId);
   };
 
   const navMatches = NAV_SECTIONS.filter((s) =>
@@ -97,7 +98,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = React.memo(({
                 <button
                   onClick={() => {
                     onClose();
-                    onOpenResumeModal();
+                    onSectionChange('resume');
                   }}
                   className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-[#FF5F1F]/10 hover:border-[#FF5F1F]/30 border border-transparent text-xs text-left group transition-all"
                 >

@@ -5,7 +5,7 @@ import { PORTFOLIO_DATA } from '../../data/portfolioData';
 import { AvatarHoloRing } from '../3d/AvatarHoloRing';
 import { audioController } from '../../utils/AudioController';
 
-iinterface HeroSectionProps {
+interface HeroSectionProps {
   onOpenResumeModal: () => void;
   onSectionChange: (id: string) => void;
 }
