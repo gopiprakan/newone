@@ -136,7 +136,7 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
     const nodes: THREE.Mesh[] = [];
     const nodeGeos: THREE.BufferGeometry[] = [];
     const nodeMats: THREE.MeshBasicMaterial[] = [];
-    const nodeColors = [0xff5f1f, 0xff3d00, 0xff8f00, 0xffa726];
+    const nodeColors = [0xff5722, 0xff8a50, 0xe9e5de, 0xff5722];
 
     for (let i = 0; i < 6; i++) {
       const isIcosa = i % 2 === 0;
