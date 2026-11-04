@@ -34,10 +34,10 @@ export const Earth3D: React.FC = React.memo(() => {
     // Outer Atmosphere Wireframe Sphere
     const earthGeo = new THREE.SphereGeometry(1.2, 36, 36);
     const earthMat = new THREE.MeshBasicMaterial({
-      color: 0x4285f4,
+      color: 0xe9e5de,
       wireframe: true,
       transparent: true,
-      opacity: 0.45,
+      opacity: 0.65,
     });
     const earthMesh = new THREE.Mesh(earthGeo, earthMat);
     globeGroup.add(earthMesh);
@@ -45,9 +45,9 @@ export const Earth3D: React.FC = React.memo(() => {
     // Inner Glowing Core Sphere
     const coreGeo = new THREE.SphereGeometry(1.15, 32, 32);
     const coreMat = new THREE.MeshBasicMaterial({
-      color: 0x202124,
+      color: 0xffffff,
       transparent: true,
-      opacity: 0.9,
+      opacity: 0.95,
     });
     const coreMesh = new THREE.Mesh(coreGeo, coreMat);
     globeGroup.add(coreMesh);
@@ -70,24 +70,24 @@ export const Earth3D: React.FC = React.memo(() => {
     const dotsGeo = new THREE.BufferGeometry();
     dotsGeo.setAttribute('position', new THREE.BufferAttribute(dotPositions, 3));
     const dotsMat = new THREE.PointsMaterial({
-      size: 0.03,
-      color: 0x34a853,
+      size: 0.032,
+      color: 0xff5722,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.9,
     });
     const dotsMesh = new THREE.Points(dotsGeo, dotsMat);
     globeGroup.add(dotsMesh);
 
     // Pulsing Location Marker Pin
     const pinGeo = new THREE.SphereGeometry(0.06, 16, 16);
-    const pinMat = new THREE.MeshBasicMaterial({ color: 0xea4335 });
+    const pinMat = new THREE.MeshBasicMaterial({ color: 0xff5722 });
     const pinMesh = new THREE.Mesh(pinGeo, pinMat);
     pinMesh.position.set(0.6, 0.7, 0.8);
     globeGroup.add(pinMesh);
 
     // Location Atmosphere Ring
     const locRingGeo = new THREE.RingGeometry(0.08, 0.12, 32);
-    const locRingMat = new THREE.MeshBasicMaterial({ color: 0xfbbc04, side: THREE.DoubleSide, transparent: true, opacity: 0.8 });
+    const locRingMat = new THREE.MeshBasicMaterial({ color: 0xff8a50, side: THREE.DoubleSide, transparent: true, opacity: 0.85 });
     const locRing = new THREE.Mesh(locRingGeo, locRingMat);
     locRing.position.copy(pinMesh.position);
     locRing.lookAt(new THREE.Vector3(0, 0, 0));
@@ -195,7 +195,7 @@ export const Earth3D: React.FC = React.memo(() => {
 
   return (
     <div ref={containerRef} className="w-full h-72 md:h-80 flex items-center justify-center relative select-none gpu-accelerated">
-      <div className="absolute inset-0 bg-[#FF5F1F]/10 rounded-full filter blur-2xl -z-10 pointer-events-none animate-pulse-glow" />
+      <div className="absolute inset-0 bg-[#FF5722]/10 rounded-full filter blur-2xl -z-10 pointer-events-none animate-pulse-glow" />
     </div>
   );
 });
