@@ -3,32 +3,26 @@ import { motion } from 'framer-motion';
 import { Briefcase, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../../data/portfolioData';
 
-/**
- * PERFORMANCE OPTIMIZED EXPERIENCE SECTION
- * Optimizations implemented:
- * 1. React.memo: Prevents section re-renders on parent state changes.
- * 2. Hardware Layer Acceleration: GPU transform promotion on timeline cards.
- */
 export const ExperienceSection: React.FC = React.memo(() => {
   return (
-    <section id="experience" className="py-24 relative z-10 border-t border-[#262626] gpu-accelerated">
+    <section id="experience" className="py-24 relative z-10 border-t border-[#E9E5DE] gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FFA726] text-xs font-mono">
-            <Briefcase className="w-3.5 h-3.5 text-[#FF5F1F]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722] text-xs font-mono">
+            <Briefcase className="w-3.5 h-3.5 text-[#FF5722]" />
             <span>CAREER TRAJECTORY</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#e8eaed]">
+          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#111820]">
             WORK <span className="text-gradient-google">EXPERIENCE</span>
           </h2>
-          <p className="text-sm font-mono text-slate-400">
+          <p className="text-sm font-mono text-[#111820]/70">
             Leadership roles, architectural contributions, and high-impact engineering milestones.
           </p>
         </div>
 
         {/* Timeline Container */}
-        <div className="max-w-4xl mx-auto relative pl-6 md:pl-8 border-l-2 border-[#FF5F1F]/30 space-y-12">
+        <div className="max-w-4xl mx-auto relative pl-6 md:pl-8 border-l-2 border-[#E9E5DE] space-y-12">
           {PORTFOLIO_DATA.experience.map((exp, idx) => (
             <motion.div
               key={exp.id}
@@ -39,28 +33,28 @@ export const ExperienceSection: React.FC = React.memo(() => {
               className="relative space-y-4"
             >
               {/* Timeline Node Dot */}
-              <div className="absolute -left-[31px] md:-left-[39px] top-1.5 w-5 h-5 rounded-full bg-[#050505] border-2 border-[#FF5F1F] shadow-google-blue flex items-center justify-center">
-                <span className="w-2 h-2 rounded-full bg-[#FF5F1F] animate-ping" />
+              <div className="absolute -left-[31px] md:-left-[39px] top-1.5 w-5 h-5 rounded-full bg-white border-2 border-[#FF5722] shadow-sm flex items-center justify-center">
+                <span className="w-2 h-2 rounded-full bg-[#FF5722] animate-ping" />
               </div>
 
               {/* Card */}
-              <div className="glass-panel glass-panel-hover p-6 rounded-3xl border border-[#262626] space-y-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#262626] pb-4">
+              <div className="bg-white p-6 rounded-3xl border border-[#E9E5DE] shadow-card hover:shadow-card-hover space-y-4 transition-all duration-300">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E9E5DE] pb-4">
                   <div>
-                    <span className="text-xs font-mono text-[#FF5F1F] font-semibold uppercase tracking-wider">
+                    <span className="text-xs font-mono text-[#FF5722] font-semibold uppercase tracking-wider">
                       {exp.company}
                     </span>
-                    <h3 className="text-xl font-display font-bold text-slate-100">
+                    <h3 className="text-xl font-display font-bold text-[#111820]">
                       {exp.role}
                     </h3>
                   </div>
 
-                  <div className="flex flex-col sm:items-end text-xs font-mono text-slate-400">
-                    <span className="flex items-center gap-1 text-[#FFA726]">
-                      <Calendar className="w-3.5 h-3.5 text-[#FF5F1F]" />
+                  <div className="flex flex-col sm:items-end text-xs font-mono text-[#111820]/60">
+                    <span className="flex items-center gap-1 text-[#FF5722] font-semibold">
+                      <Calendar className="w-3.5 h-3.5 text-[#FF5722]" />
                       {exp.period}
                     </span>
-                    <span className="flex items-center gap-1 text-slate-500 mt-0.5">
+                    <span className="flex items-center gap-1 text-[#111820]/50 mt-0.5">
                       <MapPin className="w-3.5 h-3.5" />
                       {exp.location}
                     </span>
@@ -68,10 +62,10 @@ export const ExperienceSection: React.FC = React.memo(() => {
                 </div>
 
                 {/* Highlights List */}
-                <ul className="space-y-2 text-xs text-slate-300 font-sans">
+                <ul className="space-y-2 text-xs text-[#111820]/75 font-sans">
                   {exp.description.map((item, i) => (
                     <li key={i} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#FF5F1F] shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-[#FF5722] shrink-0 mt-0.5" />
                       <span className="leading-relaxed">{item}</span>
                     </li>
                   ))}
@@ -82,7 +76,7 @@ export const ExperienceSection: React.FC = React.memo(() => {
                   {exp.skills.map((s, i) => (
                     <span
                       key={i}
-                      className="px-2.5 py-0.5 rounded-md bg-[#050505] border border-[#262626] text-[10px] font-mono text-[#FFA726]"
+                      className="px-2.5 py-0.5 rounded-md bg-[#F7F5F1] border border-[#E9E5DE] text-[10px] font-mono text-[#111820]"
                     >
                       {s}
                     </span>
