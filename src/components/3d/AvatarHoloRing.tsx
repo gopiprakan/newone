@@ -40,7 +40,7 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
     // -------------------------------------------------------------
     const ring1Geo = new THREE.TorusGeometry(1.85, 0.022, 16, 120);
     const ring1Mat = new THREE.MeshBasicMaterial({
-      color: 0xff5f1f,
+      color: 0xff5722,
       transparent: true,
       opacity: 0.85,
       wireframe: false
@@ -52,7 +52,7 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
 
     const ring2Geo = new THREE.TorusGeometry(1.55, 0.018, 16, 120);
     const ring2Mat = new THREE.MeshBasicMaterial({
-      color: 0xff3d00,
+      color: 0xff8a50,
       transparent: true,
       opacity: 0.75,
       wireframe: false
@@ -65,10 +65,10 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
     // Outer HUD Segmented Compass Ring
     const hudRingGeo = new THREE.RingGeometry(2.1, 2.13, 64);
     const hudRingMat = new THREE.MeshBasicMaterial({
-      color: 0xff8f00,
+      color: 0xe9e5de,
       side: THREE.DoubleSide,
       transparent: true,
-      opacity: 0.45,
+      opacity: 0.6,
       wireframe: true
     });
     const hudRing = new THREE.Mesh(hudRingGeo, hudRingMat);
@@ -88,10 +88,10 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
     const yOffsets = new Float32Array(particleCount);
 
     const palette = [
-      new THREE.Color(0xff5f1f), // Orange
-      new THREE.Color(0xff3d00), // Red-Orange
-      new THREE.Color(0xff8f00), // Amber
-      new THREE.Color(0xffa726)  // Light Orange
+      new THREE.Color(0xff5722), // Vibrant Orange
+      new THREE.Color(0xff8a50), // Soft Orange
+      new THREE.Color(0xe9e5de), // Warm Grey
+      new THREE.Color(0x111820)  // Deep Charcoal
     ];
 
     for (let i = 0; i < particleCount; i++) {
