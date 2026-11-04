@@ -2,12 +2,13 @@ import React, { useEffect, useRef } from 'react';
 
 /**
  * PERFORMANCE OPTIMIZED PARTICLE CANVAS
- * Optimizations implemented:
- * 1. IntersectionObserver: Automatically pauses RAF loop when canvas is off-screen (0% GPU/CPU overhead when hidden).
- * 2. Removed `shadowBlur`: Software Gaussian blur on 2D context is extremely slow (causes heavy frame drops). Replaced with lightweight alpha composition.
- * 3. Event Throttling: `mousemove` updates mouse coordinates using RAF throttle to avoid excessive state recalculations.
- * 4. RAF Loop Cleanup: Cleanly manages requestAnimationFrame lifecycle to prevent memory leaks and orphaned animation frames.
- * 5. React.memo: Prevents unnecessary component re-renders when parent state changes.
+ * Palette:
+ * - #F7F5F1: Warm ivory (Canvas background base)
+ * - #FF5722: Vibrant orange (Key dynamic nodes)
+ * - #111820: Deep charcoal (Subtle precision points)
+ * - #FF8A50: Soft orange (Warm floating particles)
+ * - #E9E5DE: Warm grey (Connecting lattice lines & ambient dust)
+ * - #FFFFFF: Pure white (Clean accent highlights)
  */
 export const ParticleCanvas: React.FC = React.memo(() => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -19,11 +20,10 @@ export const ParticleCanvas: React.FC = React.memo(() => {
     if (!ctx) return;
 
     let animationFrameId: number | null = null;
-    let isVisible = true; // Controlled by IntersectionObserver to pause loop when off-screen
+    let isVisible = true;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    // Particle Structure
     interface Particle {
       x: number;
       y: number;
@@ -36,27 +36,43 @@ export const ParticleCanvas: React.FC = React.memo(() => {
     }
 
     const particles: Particle[] = [];
-    // Calculate optimal particle count based on screen area to guarantee 60+ FPS on all devices
-    const particleCount = Math.min(Math.floor((width * height) / 12000), 120);
-    const colors = ['#FF5F1F', '#FF3D00', '#FF8F00', '#FFA726'];
+    // Optimal particle count based on screen area to ensure smooth 60 FPS
+    const particleCount = Math.min(Math.floor((width * height) / 13000), 110);
+    const colors = ['#FF5722', '#FF8A50', '#E9E5DE', '#111820', '#FFFFFF'];
 
     for (let i = 0; i < particleCount; i++) {
       const color = colors[Math.floor(Math.random() * colors.length)];
-      const radius = Math.random() * 2 + 1;
+      const radius = color === '#FF5722' || color === '#FF8A50' 
+        ? Math.random() * 2 + 1.2 
+        : Math.random() * 1.8 + 1;
+
+      let baseAlpha = 0.3;
+      if (color === '#111820') {
+        baseAlpha = Math.random() * 0.15 + 0.08;
+      } else if (color === '#FF5722') {
+        baseAlpha = Math.random() * 0.35 + 0.25;
+      } else if (color === '#FF8A50') {
+        baseAlpha = Math.random() * 0.35 + 0.2;
+      } else if (color === '#E9E5DE') {
+        baseAlpha = Math.random() * 0.5 + 0.3;
+      } else {
+        baseAlpha = Math.random() * 0.6 + 0.35;
+      }
+
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
         radius,
         color,
-        alpha: Math.random() * 0.5 + 0.2,
-        baseAlpha: Math.random() * 0.5 + 0.2,
+        alpha: baseAlpha,
+        baseAlpha,
       });
     }
 
-    // Throttled Mouse Tracking via RAF
-    let mouse = { x: -1000, y: -1000, radius: 160 };
+    // Throttled Mouse Tracking
+    let mouse = { x: -1000, y: -1000, radius: 150 };
     let mouseRafId: number | null = null;
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -82,16 +98,13 @@ export const ParticleCanvas: React.FC = React.memo(() => {
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('resize', handleResize, { passive: true });
 
-    // IntersectionObserver to halt rendering loop when element is off-screen
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           isVisible = entry.isIntersecting;
           if (isVisible && !animationFrameId) {
-            // Resume rendering loop when visible
             animationFrameId = requestAnimationFrame(draw);
           } else if (!isVisible && animationFrameId) {
-            // Pause loop to conserve CPU/GPU resources
             cancelAnimationFrame(animationFrameId);
             animationFrameId = null;
           }
@@ -101,71 +114,67 @@ export const ParticleCanvas: React.FC = React.memo(() => {
     );
     observer.observe(canvas);
 
-    // High-Performance 60 FPS Render Loop
     const draw = () => {
       if (!isVisible) return;
 
       ctx.clearRect(0, 0, width, height);
 
-      // Draw ambient background dark radial gradient
-      const grad = ctx.createRadialGradient(width / 2, height / 3, 100, width / 2, height / 2, width);
-      grad.addColorStop(0, 'rgba(255, 95, 31, 0.05)');
-      grad.addColorStop(0.5, 'rgba(10, 10, 10, 0.95)');
-      grad.addColorStop(1, '#050505');
+      // Warm ivory #F7F5F1 base canvas with gentle warm glow
+      const grad = ctx.createRadialGradient(width / 2, height / 3, 80, width / 2, height / 2, width);
+      grad.addColorStop(0, 'rgba(255, 138, 80, 0.06)');
+      grad.addColorStop(0.45, 'rgba(233, 229, 222, 0.3)');
+      grad.addColorStop(1, '#F7F5F1');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, width, height);
 
-      // Update & Draw Particles without high-cost software shadowBlur
+      // Draw & update particles
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
         p.x += p.vx;
         p.y += p.vy;
 
-        // Wrap around edges efficiently
         if (p.x < 0) p.x = width;
         if (p.x > width) p.x = 0;
         if (p.y < 0) p.y = height;
         if (p.y > height) p.y = 0;
 
-        // Mouse Proximity Repulsion / Attraction math
         const dx = mouse.x - p.x;
         const dy = mouse.y - p.y;
-        const distSq = dx * dx + dy * dy; // Avoid Math.sqrt when out of range for performance
+        const distSq = dx * dx + dy * dy;
         const radiusSq = mouse.radius * mouse.radius;
 
         if (distSq < radiusSq) {
           const dist = Math.sqrt(distSq);
           const force = (mouse.radius - dist) / mouse.radius;
-          p.x -= (dx / (dist || 1)) * force * 1.5;
-          p.y -= (dy / (dist || 1)) * force * 1.5;
-          p.alpha = Math.min(1, p.baseAlpha + force * 0.5);
+          p.x -= (dx / (dist || 1)) * force * 1.4;
+          p.y -= (dy / (dist || 1)) * force * 1.4;
+          p.alpha = Math.min(0.9, p.baseAlpha + force * 0.4);
         } else {
           p.alpha += (p.baseAlpha - p.alpha) * 0.05;
         }
 
-        // Draw Particle using fast arc fill without expensive software blur
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.alpha;
         ctx.fill();
 
-        // Constellation Lines between nearby particles
+        // Connecting lines in warm grey / soft tones
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const ldx = p.x - p2.x;
           const ldy = p.y - p2.y;
           const ldistSq = ldx * ldx + ldy * ldy;
 
-          if (ldistSq < 16900) { // 130^2 = 16900
+          if (ldistSq < 15625) { // 125^2
             const ldist = Math.sqrt(ldistSq);
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = p.color;
-            ctx.globalAlpha = (1 - ldist / 130) * 0.2 * p.alpha;
-            ctx.lineWidth = 0.6;
+            ctx.strokeStyle = p.color === '#111820' ? '#E9E5DE' : p.color;
+            ctx.globalAlpha = (1 - ldist / 125) * 0.16 * p.alpha;
+            ctx.lineWidth = 0.65;
             ctx.stroke();
           }
         }
@@ -175,7 +184,6 @@ export const ParticleCanvas: React.FC = React.memo(() => {
       animationFrameId = requestAnimationFrame(draw);
     };
 
-    // Initial loop execution start
     animationFrameId = requestAnimationFrame(draw);
 
     return () => {

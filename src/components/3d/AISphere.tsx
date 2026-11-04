@@ -36,7 +36,7 @@ export const AISphere: React.FC<AISphereProps> = React.memo(({ interactive = tru
     // AI Core Sphere Geometry (Wireframe Icosahedron)
     const innerGeo = new THREE.IcosahedronGeometry(1, 2);
     const innerMat = new THREE.MeshBasicMaterial({
-      color: 0x4285f4,
+      color: 0xff5722,
       wireframe: true,
       transparent: true,
       opacity: 0.75,
@@ -47,7 +47,7 @@ export const AISphere: React.FC<AISphereProps> = React.memo(({ interactive = tru
     // Core Solid Inner Core with Pulsing Light
     const coreGeo = new THREE.SphereGeometry(0.5, 32, 32);
     const coreMat = new THREE.MeshBasicMaterial({
-      color: 0xea4335,
+      color: 0xff8a50,
       transparent: true,
       opacity: 0.6,
     });
@@ -73,10 +73,9 @@ export const AISphere: React.FC<AISphereProps> = React.memo(({ interactive = tru
 
     const particlesMat = new THREE.PointsMaterial({
       size: 0.035,
-      color: 0xfbbc04,
+      color: 0xff5722,
       transparent: true,
       opacity: 0.85,
-      blending: THREE.AdditiveBlending,
     });
     const particleSystem = new THREE.Points(particlesGeo, particlesMat);
     scene.add(particleSystem);
@@ -84,10 +83,10 @@ export const AISphere: React.FC<AISphereProps> = React.memo(({ interactive = tru
     // Holographic Ring
     const ringGeo = new THREE.TorusGeometry(1.6, 0.015, 16, 100);
     const ringMat = new THREE.MeshBasicMaterial({
-      color: 0x34a853,
+      color: 0xe9e5de,
       wireframe: true,
       transparent: true,
-      opacity: 0.5,
+      opacity: 0.7,
     });
     const ringMesh = new THREE.Mesh(ringGeo, ringMat);
     ringMesh.rotation.x = Math.PI / 3;
@@ -205,7 +204,7 @@ export const AISphere: React.FC<AISphereProps> = React.memo(({ interactive = tru
 
   return (
     <div ref={containerRef} className="w-full h-full min-h-[260px] flex items-center justify-center relative select-none gpu-accelerated">
-      <div className="absolute inset-0 bg-[#FF5F1F]/10 rounded-full filter blur-3xl -z-10 pointer-events-none animate-pulse-glow" />
+      <div className="absolute inset-0 bg-[#FF5722]/10 rounded-full filter blur-3xl -z-10 pointer-events-none animate-pulse-glow" />
     </div>
   );
 });

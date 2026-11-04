@@ -36,11 +36,8 @@ export const NAV_SECTIONS = [
 ];
 
 /**
- * PERFORMANCE OPTIMIZED NAVBAR
- * Optimizations implemented:
- * 1. React.memo: Prevents unnecessary header re-renders on active section or parent state changes.
- * 2. Throttled Scroll Listener: RAF-throttled scroll observer with passive event listener.
- * 3. Hardware Layer Promotion: Glass background promoted to GPU compositing layer.
+ * NEAT & PROFESSIONAL FIXED NAVBAR
+ * Designed with solid clean surfaces, warm grey borders, and vibrant orange accents.
  */
 export const Navbar: React.FC<NavbarProps> = React.memo(({
   activeSection,
@@ -59,7 +56,7 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
     const handleScroll = () => {
       if (!ticking) {
         requestAnimationFrame(() => {
-          setIsScrolled(window.scrollY > 40);
+          setIsScrolled(window.scrollY > 20);
           ticking = false;
         });
         ticking = true;
@@ -83,10 +80,10 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 gpu-accelerated ${
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 gpu-accelerated ${
         isScrolled
-          ? 'py-3 bg-[#050505]/90 backdrop-blur-xl border-b border-[#262626] shadow-google-card'
-          : 'py-5 bg-transparent'
+          ? 'py-2.5 bg-white/95 backdrop-blur-xl border-b border-[#E9E5DE] shadow-card'
+          : 'py-4 bg-[#F7F5F1]/80 backdrop-blur-md border-b border-[#E9E5DE]/40'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -95,16 +92,16 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
           onClick={() => handleSectionChange('home')}
           className="flex items-center gap-3 group focus:outline-none"
         >
-          <div className="p-2 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F] group-hover:scale-110 transition-all duration-300">
-            <Cpu className="w-6 h-6 animate-pulse" />
+          <div className="p-2 rounded-xl bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722] group-hover:scale-105 transition-all duration-300">
+            <Cpu className="w-5 h-5" />
           </div>
-          <span className="font-display font-bold text-lg md:text-xl tracking-wider text-gradient-google">
-            GOPIPRAKAN
+          <span className="font-display font-bold text-lg md:text-xl tracking-tight text-[#111820]">
+            GOPI<span className="text-[#FF5722]">PRAKAN</span>
           </span>
         </button>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 glass-panel px-4 py-1.5 rounded-full border border-white/10 shadow-glass">
+        <nav className="hidden lg:flex items-center gap-1 bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#E9E5DE] shadow-sm">
           {NAV_SECTIONS.map((sec) => {
             const isActive = activeSection === sec.id;
             return (
@@ -112,17 +109,17 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
                 key={sec.id}
                 onClick={() => handleSectionChange(sec.id)}
                 onMouseEnter={() => audioController.playHover()}
-                className={`relative px-3 py-1.5 text-xs font-medium tracking-wide transition-all duration-300 rounded-full ${
+                className={`relative px-3 py-1 text-xs font-medium tracking-wide transition-all duration-200 rounded-full ${
                   isActive
-                    ? 'text-[#FFA726] font-semibold'
-                    : 'text-slate-400 hover:text-slate-200'
+                    ? 'text-[#FF5722] font-semibold'
+                    : 'text-[#111820]/70 hover:text-[#111820]'
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="navbar-active-pill"
-                    className="absolute inset-0 bg-[#FF5F1F]/20 border border-[#FF5F1F]/50 rounded-full shadow-google-blue -z-10"
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    className="absolute inset-0 bg-[#FF5722]/10 border border-[#FF5722]/30 rounded-full -z-10"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
                 {sec.label}
@@ -131,20 +128,20 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
           })}
         </nav>
 
-        {/* Action Controls (Command Palette, Sound, Theme, Resume, Mobile Menu Toggle) */}
+        {/* Action Controls */}
         <div className="flex items-center gap-2">
-          {/* Command Palette Trigger (`Ctrl+K`) */}
+          {/* Command Palette Trigger */}
           <button
             onClick={() => {
               audioController.playClick();
               onOpenCommandPalette();
             }}
             title="Open Command Center (Ctrl+K)"
-            className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-xs font-mono bg-[#121212] border border-[#262626] text-slate-300 rounded-xl hover:border-[#FF5F1F] hover:text-[#FFA726] transition-all duration-300 shadow-sm"
+            className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-xs font-mono bg-white border border-[#E9E5DE] text-[#111820] rounded-xl hover:border-[#FF5722] hover:text-[#FF5722] transition-all duration-200 shadow-sm"
           >
-            <Search className="w-3.5 h-3.5 text-[#FF5F1F]" />
+            <Search className="w-3.5 h-3.5 text-[#FF5722]" />
             <span>Search</span>
-            <kbd className="px-1.5 py-0.5 bg-[#050505] text-[10px] text-[#FFA726] rounded border border-[#262626]">
+            <kbd className="px-1.5 py-0.5 bg-[#F7F5F1] text-[10px] text-[#FF5722] font-semibold rounded border border-[#E9E5DE]">
               Ctrl+K
             </kbd>
           </button>
@@ -153,9 +150,9 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
           <button
             onClick={handleToggleSound}
             title={isMuted ? 'Enable Sound FX' : 'Mute Sound FX'}
-            className="p-2.5 rounded-xl bg-[#121212] border border-[#262626] text-slate-300 hover:text-[#FF5F1F] hover:border-[#FF5F1F]/40 transition-all duration-300"
+            className="p-2 rounded-xl bg-white border border-[#E9E5DE] text-[#111820]/70 hover:text-[#FF5722] hover:border-[#FF5722]/40 transition-all duration-200 shadow-sm"
           >
-            {isMuted ? <VolumeX className="w-4 h-4 text-slate-500" /> : <Volume2 className="w-4 h-4 text-[#FF5F1F] animate-pulse" />}
+            {isMuted ? <VolumeX className="w-4 h-4 text-[#111820]/40" /> : <Volume2 className="w-4 h-4 text-[#FF5722]" />}
           </button>
 
           {/* Theme Switcher */}
@@ -165,18 +162,18 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
               onToggleTheme();
             }}
             title="Switch Theme"
-            className="p-2.5 rounded-xl bg-[#121212] border border-[#262626] text-slate-300 hover:text-[#FF3D00] hover:border-[#FF3D00]/40 transition-all duration-300"
+            className="p-2 rounded-xl bg-white border border-[#E9E5DE] text-[#111820]/70 hover:text-[#FF5722] hover:border-[#FF5722]/40 transition-all duration-200 shadow-sm"
           >
-            <Palette className="w-4 h-4 text-[#FF3D00]" />
+            <Palette className="w-4 h-4 text-[#FF5722]" />
           </button>
 
           {/* Download / View Resume Button */}
           <button
             onClick={() => handleSectionChange('resume')}
-            className={`hidden sm:flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold rounded-xl shadow-google-blue transition-all duration-300 ${
+            className={`hidden sm:flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold rounded-xl transition-all duration-200 shadow-sm ${
               activeSection === 'resume'
-                ? 'bg-[#E64A19] text-white border border-[#FF5F1F]/50 scale-105'
-                : 'bg-[#FF5F1F] hover:bg-[#E64A19] text-white'
+                ? 'bg-[#E64A19] text-white border border-[#FF5722]'
+                : 'bg-[#FF5722] hover:bg-[#E64A19] text-white'
             }`}
           >
             <FileText className="w-3.5 h-3.5" />
@@ -186,7 +183,7 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
           {/* Mobile Hamburger Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2.5 rounded-xl bg-[#121212] border border-[#262626] text-[#FF5F1F]"
+            className="lg:hidden p-2 rounded-xl bg-white border border-[#E9E5DE] text-[#FF5722] shadow-sm"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -200,17 +197,17 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-[#050505]/95 backdrop-blur-2xl border-b border-[#262626] px-6 py-6 shadow-2xl"
+            className="lg:hidden bg-white/98 backdrop-blur-2xl border-b border-[#E9E5DE] px-6 py-6 shadow-2xl"
           >
-            <div className="grid grid-cols-2 gap-3 mb-6">
+            <div className="grid grid-cols-2 gap-2.5 mb-6">
               {NAV_SECTIONS.map((sec) => (
                 <button
                   key={sec.id}
                   onClick={() => handleSectionChange(sec.id)}
                   className={`text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${
                     activeSection === sec.id
-                      ? 'bg-[#FF5F1F]/20 text-[#FFA726] border border-[#FF5F1F]/40 font-semibold'
-                      : 'text-slate-300 hover:bg-[#121212]'
+                      ? 'bg-[#FF5722]/10 text-[#FF5722] border border-[#FF5722]/30 font-semibold'
+                      : 'text-[#111820]/70 hover:bg-[#F7F5F1] hover:text-[#111820]'
                   }`}
                 >
                   {sec.label}
@@ -218,22 +215,22 @@ export const Navbar: React.FC<NavbarProps> = React.memo(({
               ))}
             </div>
 
-            <div className="pt-4 border-t border-[#262626] flex flex-col gap-3">
+            <div className="pt-4 border-t border-[#E9E5DE] flex flex-col gap-2.5">
               <button
                 onClick={() => {
                   onOpenCommandPalette();
                   setMobileMenuOpen(false);
                 }}
-                className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#121212] border border-[#262626] text-[#FFA726] rounded-xl text-sm font-mono"
+                className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#F7F5F1] border border-[#E9E5DE] text-[#111820] rounded-xl text-sm font-mono hover:border-[#FF5722]"
               >
-                <Search className="w-4 h-4 text-[#FF5F1F]" />
+                <Search className="w-4 h-4 text-[#FF5722]" />
                 <span>Command Center (Ctrl+K)</span>
               </button>
               <button
                 onClick={() => {
                   handleSectionChange('resume');
                 }}
-                className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#FF5F1F] hover:bg-[#E64A19] text-white font-bold rounded-xl text-sm shadow-google-blue"
+                className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#FF5722] hover:bg-[#E64A19] text-white font-bold rounded-xl text-sm shadow-sm"
               >
                 <Sparkles className="w-4 h-4" />
                 <span>View Resume</span>

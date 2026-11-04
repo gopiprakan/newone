@@ -8,43 +8,60 @@ export default {
   theme: {
     extend: {
       colors: {
+        ivory: '#F7F5F1',
+        charcoal: {
+          DEFAULT: '#111820',
+          muted: 'rgba(17, 24, 32, 0.7)',
+          light: 'rgba(17, 24, 32, 0.5)',
+        },
+        vibrant: {
+          orange: '#FF5722',
+        },
+        soft: {
+          orange: '#FF8A50',
+        },
+        warmgrey: {
+          DEFAULT: '#E9E5DE',
+          light: '#F2EFEB',
+        },
+        // Backward compatibility mappings strictly aligned to the 6 palette colors
         google: {
-          bg: '#050505',
-          surface: '#0d0d0d',
-          border: 'rgba(255, 95, 31, 0.15)',
-          blue: '#FF5F1F',
-          blueLight: '#FFA726',
-          red: '#FF3D00',
+          bg: '#F7F5F1',
+          surface: '#FFFFFF',
+          border: '#E9E5DE',
+          blue: '#FF5722',
+          blueLight: '#FF8A50',
+          red: '#FF5722',
           redLight: '#FF8A50',
-          yellow: '#FF8F00',
-          yellowLight: '#FFB300',
-          green: '#FF5F1F',
-          greenLight: '#FFA726',
+          yellow: '#FF8A50',
+          yellowLight: '#FF8A50',
+          green: '#FF5722',
+          greenLight: '#FF8A50',
         },
         cyber: {
-          bg: '#050505',
-          card: 'rgba(13, 13, 13, 0.85)',
-          border: 'rgba(255, 95, 31, 0.15)',
-          neonCyan: '#FF5F1F',
-          neonPurple: '#FF3D00',
-          neonPink: '#FF8F00',
-          emerald: '#FF5F1F',
-          gold: '#FF8F00',
+          bg: '#F7F5F1',
+          card: '#FFFFFF',
+          border: '#E9E5DE',
+          neonCyan: '#FF5722',
+          neonPurple: '#FF5722',
+          neonPink: '#FF8A50',
+          emerald: '#FF5722',
+          gold: '#FF8A50',
         }
       },
       fontFamily: {
-        sans: ['Google Sans', 'Roboto', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'Google Sans', 'Roboto', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-        display: ['Google Sans', 'Roboto', 'sans-serif']
+        display: ['Google Sans', 'Inter', 'Roboto', 'sans-serif']
       },
       boxShadow: {
-        'google-blue': '0 4px 25px rgba(255, 95, 31, 0.35)',
-        'google-red': '0 4px 25px rgba(255, 61, 0, 0.35)',
-        'google-card': '0 4px 24px rgba(0, 0, 0, 0.8)',
-        'neon-cyan': '0 4px 25px rgba(255, 95, 31, 0.35)',
-        'neon-purple': '0 4px 25px rgba(255, 61, 0, 0.35)',
-        'neon-pink': '0 4px 25px rgba(255, 143, 0, 0.35)',
-        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.7)'
+        'card': '0 2px 8px 0 rgba(17, 24, 32, 0.04), 0 1px 2px 0 rgba(17, 24, 32, 0.02)',
+        'card-hover': '0 12px 28px -4px rgba(17, 24, 32, 0.08), 0 4px 12px -2px rgba(255, 87, 34, 0.08)',
+        'google-blue': '0 4px 16px rgba(255, 87, 34, 0.2)',
+        'google-red': '0 4px 16px rgba(255, 87, 34, 0.2)',
+        'google-card': '0 2px 12px rgba(17, 24, 32, 0.06)',
+        'orange-glow': '0 4px 20px rgba(255, 87, 34, 0.25)',
+        'glass': '0 8px 24px 0 rgba(17, 24, 32, 0.04)'
       },
       animation: {
         'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
@@ -53,12 +70,12 @@ export default {
       },
       keyframes: {
         pulseGlow: {
-          '0%, 100%': { opacity: '0.5', transform: 'scale(1)' },
-          '50%': { opacity: '0.85', transform: 'scale(1.03)' },
+          '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
+          '50%': { opacity: '0.9', transform: 'scale(1.02)' },
         },
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-12px)' },
+          '50%': { transform: 'translateY(-10px)' },
         }
       }
     },

@@ -2,22 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Cpu, ArrowUp, Github, Linkedin, Twitter, Youtube, Activity } from 'lucide-react';
 import { audioController } from '../../utils/AudioController';
 
-/**
- * PERFORMANCE OPTIMIZED FOOTER
- * Optimizations implemented:
- * 1. React.memo: Prevents footer re-renders when parent state updates.
- * 2. Timer Cleanup: Properly disposes visitor count update interval.
- */
 interface FooterProps {
   onSectionChange: (id: string) => void;
 }
 
-/**
- * PERFORMANCE OPTIMIZED FOOTER
- * Optimizations implemented:
- * 1. React.memo: Prevents footer re-renders when parent state updates.
- * 2. Timer Cleanup: Properly disposes visitor count update interval.
- */
 export const Footer: React.FC<FooterProps> = React.memo(({ onSectionChange }) => {
   const [visitorCount, setVisitorCount] = useState(142850);
 
@@ -34,34 +22,34 @@ export const Footer: React.FC<FooterProps> = React.memo(({ onSectionChange }) =>
   };
 
   return (
-    <footer className="relative bg-[#050505] border-t border-[#262626] pt-16 pb-12 overflow-hidden text-slate-400 gpu-accelerated">
-      {/* Glow background line */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-[#FF5F1F] to-transparent shadow-google-blue" />
+    <footer className="relative bg-white border-t border-[#E9E5DE] pt-16 pb-12 overflow-hidden text-[#111820]/70 gpu-accelerated">
+      {/* Accent Top Border Line */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[2px] bg-gradient-to-r from-transparent via-[#FF5722] to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-          {/* Brand Col */}
+          {/* Brand Column */}
           <div className="md:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F]">
-                <Cpu className="w-6 h-6 animate-pulse" />
+              <div className="p-2.5 rounded-xl bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722]">
+                <Cpu className="w-5 h-5" />
               </div>
-              <span className="font-display font-bold text-xl text-gradient-google tracking-wider">
-                GOPIPRAKAN
+              <span className="font-display font-bold text-xl text-[#111820] tracking-tight">
+                GOPI<span className="text-[#FF5722]">PRAKAN</span>
               </span>
             </div>
-            <p className="text-sm text-slate-400 max-w-md leading-relaxed">
-              AI & Data Science Student building intelligent applications, web automation systems, and full-stack software solutions.
+            <p className="text-sm text-[#111820]/70 max-w-md leading-relaxed">
+              AI & Data Science Student engineering intelligent AI architectures, robust full-stack software applications, and scalable web solutions.
             </p>
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F] text-xs font-mono">
-              <Activity className="w-3.5 h-3.5 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722] text-xs font-mono">
+              <Activity className="w-3.5 h-3.5" />
               <span>SYSTEM STATUS: 100% OPERATIONAL</span>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-3">
-            <h4 className="font-display font-semibold text-slate-200 text-sm tracking-wider uppercase text-[#FF5F1F]">
+            <h4 className="font-display font-semibold text-[#111820] text-sm tracking-wider uppercase">
               Quick Navigation
             </h4>
             <ul className="space-y-2 text-xs text-left">
@@ -72,7 +60,7 @@ export const Footer: React.FC<FooterProps> = React.memo(({ onSectionChange }) =>
                       audioController.playClick();
                       onSectionChange(link);
                     }}
-                    className="hover:text-[#FF5F1F] transition-colors uppercase tracking-wider font-mono focus:outline-none"
+                    className="hover:text-[#FF5722] transition-colors uppercase tracking-wider font-mono focus:outline-none"
                   >
                     // {link}
                   </button>
@@ -81,12 +69,12 @@ export const Footer: React.FC<FooterProps> = React.memo(({ onSectionChange }) =>
             </ul>
           </div>
 
-          {/* Social Connections & Live Visitor Counter */}
+          {/* Social Connections & Telemetry */}
           <div className="space-y-4">
-            <h4 className="font-display font-semibold text-slate-200 text-sm tracking-wider uppercase text-[#FF5F1F]">
+            <h4 className="font-display font-semibold text-[#111820] text-sm tracking-wider uppercase">
               Connect & Telemetry
             </h4>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
               {[
                 { icon: Github, url: 'https://github.com' },
                 { icon: Linkedin, url: 'https://linkedin.com' },
@@ -100,7 +88,7 @@ export const Footer: React.FC<FooterProps> = React.memo(({ onSectionChange }) =>
                     href={soc.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-[#121212] border border-[#262626] text-slate-400 hover:text-[#FF5F1F] hover:border-[#FF5F1F]/40 hover:scale-110 transition-all duration-300"
+                    className="p-2.5 rounded-xl bg-[#F7F5F1] border border-[#E9E5DE] text-[#111820]/70 hover:text-[#FF5722] hover:border-[#FF5722]/40 transition-all duration-200"
                   >
                     <IconComp className="w-4 h-4" />
                   </a>
@@ -108,26 +96,29 @@ export const Footer: React.FC<FooterProps> = React.memo(({ onSectionChange }) =>
               })}
             </div>
 
-            {/* Live Visitor Counter Badge */}
-            <div className="p-3 rounded-xl bg-[#121212]/90 border border-[#262626] flex items-center justify-between">
-              <span className="text-xs font-mono text-slate-400">GLOBAL VISITORS</span>
-              <span className="text-sm font-mono font-bold text-gradient-google">
-                {visitorCount.toLocaleString()}
+            <div className="p-3 rounded-2xl bg-[#F7F5F1] border border-[#E9E5DE] space-y-1">
+              <span className="text-[10px] font-mono text-[#111820]/50 block uppercase">
+                Cumulative Visitors
+              </span>
+              <span className="text-sm font-mono font-bold text-[#FF5722]">
+                {visitorCount.toLocaleString()} HITS
               </span>
             </div>
           </div>
         </div>
 
-        {/* Bottom copyright & Back to top button */}
-        <div className="pt-8 border-t border-[#262626] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500">
-          <p>© {new Date().getFullYear()} Gopiprakan. All rights reserved.</p>
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-[#E9E5DE] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-[#111820]/60">
+          <div>
+            &copy; {new Date().getFullYear()} Gopiprakan S. Engineered with React, Three.js & Tailwind.
+          </div>
 
           <button
             onClick={handleBackToTop}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#121212] border border-[#262626] text-[#FF5F1F] hover:bg-[#FF5F1F] hover:text-white transition-all duration-300 shadow-google-blue"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#F7F5F1] border border-[#E9E5DE] text-[#111820] hover:text-[#FF5722] hover:border-[#FF5722]/40 transition-all duration-200"
           >
-            <span>BACK TO TOP</span>
-            <ArrowUp className="w-3.5 h-3.5" />
+            <span>Back to Top</span>
+            <ArrowUp className="w-3.5 h-3.5 text-[#FF5722]" />
           </button>
         </div>
       </div>
