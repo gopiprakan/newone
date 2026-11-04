@@ -1,51 +1,45 @@
 import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { FolderGit2, ExternalLink, Github, Sparkles, Search, Eye } from 'lucide-react';
+import { FolderGit2, ExternalLink, Github, Eye, Search, Sparkles } from 'lucide-react';
 import { PORTFOLIO_DATA, Project } from '../../data/portfolioData';
 import { audioController } from '../../utils/AudioController';
 
 interface ProjectsSectionProps {
-  onSelectProject: (p: Project) => void;
+  onSelectProject: (proj: Project) => void;
 }
 
-/**
- * PERFORMANCE OPTIMIZED PROJECTS SECTION
- * Optimizations implemented:
- * 1. React.memo: Prevents unnecessary component re-renders.
- * 2. useMemo filtering: Memoizes search and category filtering logic to prevent CPU layout overhead during user input.
- * 3. Image Optimization: Lazy loading, async decoding & explicit pixel dimensions for smooth image paints.
- */
 export const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onSelectProject }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const categories = useMemo(() => ['All', 'AI & ML', '3D Web & Canvas', 'Full-Stack', 'Web3 & Cloud'], []);
+  const categories = useMemo(() => {
+    return ['All', ...new Set(PORTFOLIO_DATA.projects.map((p) => p.category))];
+  }, []);
 
   const filteredProjects = useMemo(() => {
     return PORTFOLIO_DATA.projects.filter((p) => {
-      const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory;
-      const query = searchQuery.toLowerCase();
-      const matchesSearch =
-        p.title.toLowerCase().includes(query) ||
-        p.shortDescription.toLowerCase().includes(query) ||
-        p.techStack.some((t) => t.toLowerCase().includes(query));
-      return matchesCategory && matchesSearch;
+      const matchCat = selectedCategory === 'All' || p.category === selectedCategory;
+      const matchSearch =
+        p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.shortDescription.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.techStack.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
+      return matchCat && matchSearch;
     });
   }, [selectedCategory, searchQuery]);
 
   return (
-    <section id="projects" className="py-24 relative z-10 border-t border-[#262626] gpu-accelerated">
+    <section id="projects" className="py-24 relative z-10 border-t border-[#E9E5DE] gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FFA726] text-xs font-mono">
-            <FolderGit2 className="w-3.5 h-3.5 text-[#FF5F1F]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722] text-xs font-mono">
+            <FolderGit2 className="w-3.5 h-3.5 text-[#FF5722]" />
             <span>PORTFOLIO SHOWCASE</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#e8eaed]">
+          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#111820]">
             FEATURED <span className="text-gradient-google">PROJECTS</span>
           </h2>
-          <p className="text-sm font-mono text-slate-400">
+          <p className="text-sm font-mono text-[#111820]/70">
             Production-ready AI architectures, interactive web platforms, and automated software solutions.
           </p>
         </div>
@@ -63,10 +57,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onS
                     audioController.playClick();
                     setSelectedCategory(cat);
                   }}
-                  className={`px-4 py-2 rounded-xl text-xs font-mono transition-all duration-300 ${
+                  className={`px-4 py-2 rounded-xl text-xs font-mono transition-all duration-200 ${
                     isActive
-                      ? 'bg-[#FF5F1F] text-white font-bold shadow-google-blue'
-                      : 'bg-[#121212] border border-[#262626] text-slate-400 hover:text-slate-200'
+                      ? 'bg-[#FF5722] text-white font-bold border border-[#FF5722] shadow-sm'
+                      : 'bg-white border border-[#E9E5DE] text-[#111820]/70 hover:border-[#FF5722] hover:text-[#FF5722]'
                   }`}
                 >
                   {cat}
@@ -77,13 +71,13 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onS
 
           {/* Search Box */}
           <div className="relative w-full md:w-64">
-            <Search className="w-4 h-4 text-[#FF5F1F] absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-[#FF5722] absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by tech or title..."
-              className="w-full pl-10 pr-4 py-2 bg-[#121212] border border-[#262626] rounded-xl text-xs text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-[#FF5F1F]"
+              className="w-full pl-10 pr-4 py-2 bg-white border border-[#E9E5DE] rounded-xl text-xs text-[#111820] placeholder:text-[#111820]/40 focus:outline-none focus:border-[#FF5722] shadow-sm"
             />
           </div>
         </div>
@@ -97,11 +91,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onS
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              whileHover={{ y: -8 }}
-              className="glass-panel rounded-3xl border border-[#262626] overflow-hidden flex flex-col group relative"
+              whileHover={{ y: -6 }}
+              className="bg-white rounded-3xl border border-[#E9E5DE] shadow-card hover:shadow-card-hover overflow-hidden flex flex-col group relative transition-all duration-300"
             >
               {/* Image Container with Zoom & Badge */}
-              <div className="relative h-60 w-full overflow-hidden bg-[#050505]">
+              <div className="relative h-60 w-full overflow-hidden bg-[#F7F5F1]">
                 <img
                   src={proj.image}
                   alt={proj.title}
@@ -109,13 +103,13 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onS
                   decoding="async"
                   width={600}
                   height={320}
-                  className="w-full h-full object-cover filter brightness-105 contrast-105 transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover filter brightness-105 contrast-105 transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-90" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111820]/70 via-transparent to-transparent opacity-80" />
 
                 {/* Category Badge */}
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 rounded-full bg-[#050505]/90 backdrop-blur-md border border-[#262626] text-[#FFA726] text-[10px] font-mono">
+                  <span className="px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-[#E9E5DE] text-[#FF5722] text-[10px] font-mono font-semibold shadow-sm">
                     {proj.category}
                   </span>
                 </div>
@@ -126,9 +120,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onS
                     audioController.playClick();
                     onSelectProject(proj);
                   }}
-                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
+                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-[#111820]/50 backdrop-blur-sm transition-opacity duration-300"
                 >
-                  <span className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FF5F1F] hover:bg-[#E64A19] text-white font-bold text-xs shadow-google-blue">
+                  <span className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FF5722] hover:bg-[#E64A19] text-white font-bold text-xs shadow-sm">
                     <Eye className="w-4 h-4" />
                     <span>View Case Study & Specs</span>
                   </span>
@@ -138,10 +132,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onS
               {/* Card Body */}
               <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                 <div className="space-y-2">
-                  <h3 className="text-xl font-display font-bold text-[#e8eaed] group-hover:text-[#FFA726] transition-colors">
+                  <h3 className="text-xl font-display font-bold text-[#111820] group-hover:text-[#FF5722] transition-colors">
                     {proj.title}
                   </h3>
-                  <p className="text-xs text-slate-300 leading-relaxed font-sans line-clamp-2">
+                  <p className="text-xs text-[#111820]/75 leading-relaxed font-sans line-clamp-2">
                     {proj.shortDescription}
                   </p>
                 </div>
@@ -151,7 +145,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onS
                   {proj.techStack.map((t, i) => (
                     <span
                       key={i}
-                      className="px-2.5 py-0.5 rounded-md bg-[#050505] border border-[#262626] text-[10px] font-mono text-[#FFA726]"
+                      className="px-2.5 py-0.5 rounded-md bg-[#F7F5F1] border border-[#E9E5DE] text-[10px] font-mono text-[#111820]"
                     >
                       {t}
                     </span>
@@ -159,16 +153,16 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onS
                 </div>
 
                 {/* Bottom Card Actions */}
-                <div className="pt-4 border-t border-[#262626] flex items-center justify-between">
+                <div className="pt-4 border-t border-[#E9E5DE] flex items-center justify-between">
                   <button
                     onClick={() => {
                       audioController.playClick();
                       onSelectProject(proj);
                     }}
-                    className="text-xs font-mono text-[#FF5F1F] hover:text-[#FFA726] font-semibold flex items-center gap-1"
+                    className="text-xs font-mono text-[#FF5722] hover:text-[#FF8A50] font-semibold flex items-center gap-1 transition-colors"
                   >
                     <span>Full Case Study</span>
-                    <Sparkles className="w-3.5 h-3.5 text-[#FF8F00]" />
+                    <Sparkles className="w-3.5 h-3.5 text-[#FF8A50]" />
                   </button>
 
                   <div className="flex items-center gap-2">
@@ -176,7 +170,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onS
                       href={proj.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-xl bg-[#050505] border border-[#262626] text-slate-400 hover:text-slate-100 hover:border-slate-600 transition-all"
+                      className="p-2 rounded-xl bg-[#F7F5F1] border border-[#E9E5DE] text-[#111820]/70 hover:text-[#FF5722] hover:border-[#FF5722]/40 transition-all shadow-sm"
                     >
                       <Github className="w-4 h-4" />
                     </a>
@@ -184,7 +178,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = React.memo(({ onS
                       href={proj.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F] hover:bg-[#FF5F1F]/20 transition-all shadow-google-blue"
+                      className="p-2 rounded-xl bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722] hover:bg-[#FF5722]/20 transition-all shadow-sm"
                     >
                       <ExternalLink className="w-4 h-4" />
                     </a>
