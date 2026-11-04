@@ -62,12 +62,12 @@ export const SkillsSection: React.FC = React.memo(() => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   const categories = useMemo(() => {
-    return ['All', ...PORTFOLIO_DATA.skillCategories.map((c) => c.category)];
+    return ['All', ...PORTFOLIO_DATA.skills.map((c: SkillCategory) => c.category)];
   }, []);
 
   const filteredCategories = useMemo(() => {
-    if (selectedCategory === 'All') return PORTFOLIO_DATA.skillCategories;
-    return PORTFOLIO_DATA.skillCategories.filter((c) => c.category === selectedCategory);
+    if (selectedCategory === 'All') return PORTFOLIO_DATA.skills;
+    return PORTFOLIO_DATA.skills.filter((c: SkillCategory) => c.category === selectedCategory);
   }, [selectedCategory]);
 
   return (
