@@ -10,19 +10,13 @@ interface Message {
   timestamp: string;
 }
 
-/**
- * PERFORMANCE OPTIMIZED AI CHAT ASSISTANT WIDGET
- * Optimizations implemented:
- * 1. React.memo: Avoids re-evaluating widget DOM tree when unrelated App state changes.
- * 2. Hardware Layer Promotion: Applies GPU compositing rules on floating drawers.
- */
 export const AIChatAssistant: React.FC = React.memo(() => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
       sender: 'ai',
-      text: "Hello! I am GOPI-AI, Gopiprakan's autonomous portfolio assistant. Ask me about Gopiprakan's AI projects, Data Science background, or full-stack web apps!",
+      text: "Hello! I am GOPI-AI, Gopiprakan's portfolio assistant. Ask me about Gopiprakan's AI projects, Data Science background, or full-stack web applications!",
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
@@ -79,50 +73,50 @@ export const AIChatAssistant: React.FC = React.memo(() => {
 
       setMessages((prev) => [...prev, aiMsg]);
       setIsTyping(false);
-    }, 900);
+    }, 800);
   };
 
   return (
     <>
       {/* Floating Trigger Button */}
       <motion.button
-        whileHover={{ scale: 1.1 }}
+        whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => {
           audioController.playClick();
           setIsOpen(!isOpen);
         }}
-        className="fixed bottom-6 right-6 z-40 p-4 rounded-full bg-[#FF5F1F] hover:bg-[#E64A19] text-white shadow-google-blue flex items-center justify-center group gpu-accelerated"
+        className="fixed bottom-6 right-6 z-40 p-4 rounded-full bg-[#FF5722] hover:bg-[#E64A19] text-white shadow-card flex items-center justify-center group gpu-accelerated"
       >
         <Bot className="w-6 h-6 text-white group-hover:rotate-12 transition-transform" />
-        <span className="absolute -top-1 -right-1 w-3 h-3 bg-[#FF3D00] rounded-full animate-ping" />
+        <span className="absolute -top-1 -right-1 w-3 h-3 bg-[#FF8A50] rounded-full animate-ping" />
       </motion.button>
 
       {/* Floating Chat Modal Drawer */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 30 }}
-            className="fixed bottom-24 right-4 sm:right-8 z-40 w-80 sm:w-96 bg-[#121212] border border-[#262626] rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[480px] gpu-accelerated text-[#e8eaed]"
+            exit={{ opacity: 0, scale: 0.95, y: 20 }}
+            className="fixed bottom-24 right-4 sm:right-8 z-40 w-80 sm:w-96 bg-white border border-[#E9E5DE] rounded-2xl shadow-2xl overflow-hidden flex flex-col h-[480px] gpu-accelerated text-[#111820]"
           >
             {/* Header */}
-            <div className="p-3.5 bg-[#050505] border-b border-[#262626] flex items-center justify-between">
+            <div className="p-3.5 bg-[#F7F5F1] border-b border-[#E9E5DE] flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F]">
+                <div className="p-2 rounded-xl bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722]">
                   <Cpu className="w-4 h-4 animate-pulse" />
                 </div>
                 <div>
-                  <h4 className="font-display font-bold text-xs text-gradient-google tracking-wider">
+                  <h4 className="font-display font-bold text-xs text-[#111820] tracking-wider">
                     AI ASSISTANT
                   </h4>
-                  <span className="text-[10px] font-mono text-[#FF5F1F]">● ONLINE // GOOGLE KNOWLEDGE BASE</span>
+                  <span className="text-[10px] font-mono text-[#FF5722]">● ONLINE // KNOWLEDGE BASE</span>
                 </div>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 rounded-lg hover:bg-[#121212] text-slate-400 hover:text-slate-200"
+                className="p-1 rounded-lg hover:bg-white text-[#111820]/60 hover:text-[#FF5722]"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -136,15 +130,15 @@ export const AIChatAssistant: React.FC = React.memo(() => {
                   className={`flex gap-2.5 ${m.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   {m.sender === 'ai' && (
-                    <div className="w-6 h-6 rounded-lg bg-[#FF5F1F]/20 border border-[#FF5F1F]/40 flex items-center justify-center shrink-0">
-                      <Bot className="w-3.5 h-3.5 text-[#FF5F1F]" />
+                    <div className="w-6 h-6 rounded-lg bg-[#FF5722]/10 border border-[#FF5722]/30 flex items-center justify-center shrink-0">
+                      <Bot className="w-3.5 h-3.5 text-[#FF5722]" />
                     </div>
                   )}
                   <div
                     className={`max-w-[80%] p-3 rounded-2xl leading-relaxed ${
                       m.sender === 'user'
-                        ? 'bg-[#FF5F1F] text-white rounded-tr-none shadow-sm'
-                        : 'bg-[#050505] border border-[#262626] text-slate-200 rounded-tl-none'
+                        ? 'bg-[#FF5722] text-white rounded-tr-none shadow-sm'
+                        : 'bg-[#F7F5F1] border border-[#E9E5DE] text-[#111820] rounded-tl-none'
                     }`}
                   >
                     <p>{m.text}</p>
@@ -156,16 +150,16 @@ export const AIChatAssistant: React.FC = React.memo(() => {
               ))}
 
               {isTyping && (
-                <div className="flex items-center gap-2 text-[#FF5F1F] text-xs font-mono">
+                <div className="flex items-center gap-2 text-[#FF5722] text-xs font-mono">
                   <Bot className="w-3.5 h-3.5 animate-spin" />
-                  <span>Processing input...</span>
+                  <span>Processing query...</span>
                 </div>
               )}
               <div ref={chatEndRef} />
             </div>
 
             {/* Quick Prompts */}
-            <div className="p-2 border-t border-[#262626] bg-[#050505] flex gap-1.5 overflow-x-auto">
+            <div className="p-2 border-t border-[#E9E5DE] bg-[#F7F5F1] flex gap-1.5 overflow-x-auto">
               {[
                 'What are Gopiprakan’s core skills?',
                 'Tell me about AI & Data Science projects',
@@ -174,7 +168,7 @@ export const AIChatAssistant: React.FC = React.memo(() => {
                 <button
                   key={idx}
                   onClick={() => handleSend(qp)}
-                  className="px-2.5 py-1 rounded-lg bg-[#121212] border border-[#262626] text-[10px] font-mono text-[#FFA726] whitespace-nowrap hover:bg-[#FF5F1F]/10"
+                  className="px-2.5 py-1 rounded-lg bg-white border border-[#E9E5DE] text-[10px] font-mono text-[#111820] whitespace-nowrap hover:border-[#FF5722] hover:text-[#FF5722] transition-colors"
                 >
                   {qp}
                 </button>
@@ -182,18 +176,18 @@ export const AIChatAssistant: React.FC = React.memo(() => {
             </div>
 
             {/* Input Bar */}
-            <div className="p-3 bg-[#050505] border-t border-[#262626] flex items-center gap-2">
+            <div className="p-3 bg-white border-t border-[#E9E5DE] flex items-center gap-2">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Ask AI Assistant..."
-                className="flex-1 bg-[#121212] border border-[#262626] rounded-xl px-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:outline-none focus:border-[#FF5F1F]"
+                className="flex-1 bg-[#F7F5F1] border border-[#E9E5DE] rounded-xl px-3 py-2 text-xs text-[#111820] placeholder:text-[#111820]/40 focus:outline-none focus:border-[#FF5722] focus:bg-white transition-colors"
               />
               <button
                 onClick={() => handleSend()}
-                className="p-2 rounded-xl bg-[#FF5F1F] hover:bg-[#E64A19] text-white font-bold shadow-google-blue"
+                className="p-2 rounded-xl bg-[#FF5722] hover:bg-[#E64A19] text-white font-bold shadow-sm"
               >
                 <Send className="w-4 h-4" />
               </button>

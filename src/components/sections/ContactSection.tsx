@@ -7,12 +7,6 @@ import { PORTFOLIO_DATA } from '../../data/portfolioData';
 import { Earth3D } from '../3d/Earth3D';
 import { audioController } from '../../utils/AudioController';
 
-/**
- * PERFORMANCE OPTIMIZED CONTACT SECTION
- * Optimizations implemented:
- * 1. React.memo: Prevents section re-renders on parent state changes.
- * 2. Optimized Sub-components: Incorporates memory-disposed & RAF-throttled Earth3D canvas.
- */
 export const ContactSection: React.FC = React.memo(() => {
   const [formData, setFormData] = useState({
     name: '',
@@ -53,18 +47,18 @@ export const ContactSection: React.FC = React.memo(() => {
   };
 
   return (
-    <section id="contact" className="py-24 relative z-10 border-t border-[#262626] gpu-accelerated">
+    <section id="contact" className="py-24 relative z-10 border-t border-[#E9E5DE] gpu-accelerated">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FFA726] text-xs font-mono">
-            <Mail className="w-3.5 h-3.5 text-[#FF5F1F]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722] text-xs font-mono">
+            <Mail className="w-3.5 h-3.5 text-[#FF5722]" />
             <span>GLOBAL COMMUNICATION</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#e8eaed]">
+          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-[#111820]">
             INITIATE <span className="text-gradient-google">TRANSMISSION</span>
           </h2>
-          <p className="text-sm font-mono text-slate-400">
+          <p className="text-sm font-mono text-[#111820]/70">
             Available for executive consulting, system architecture design, and strategic technical advisory.
           </p>
         </div>
@@ -79,46 +73,46 @@ export const ContactSection: React.FC = React.memo(() => {
             transition={{ duration: 0.8 }}
             className="lg:col-span-5 space-y-6"
           >
-            <div className="glass-panel p-6 rounded-3xl border border-[#262626] space-y-6 relative overflow-hidden">
+            <div className="bg-white p-6 rounded-3xl border border-[#E9E5DE] shadow-card space-y-6 relative overflow-hidden">
               <Earth3D />
 
               <div className="space-y-4 font-mono text-xs">
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#050505] border border-[#262626]">
-                  <div className="p-2.5 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F]">
+                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#F7F5F1] border border-[#E9E5DE]">
+                  <div className="p-2.5 rounded-xl bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722]">
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[10px]">CURRENT NODE</span>
-                    <span className="text-slate-200 font-bold">{PORTFOLIO_DATA.personal.location}</span>
+                    <span className="text-[#111820]/50 block text-[10px]">CURRENT NODE</span>
+                    <span className="text-[#111820] font-bold">{PORTFOLIO_DATA.personal.location}</span>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#050505] border border-[#262626]">
-                  <div className="p-2.5 rounded-xl bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00]">
+                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#F7F5F1] border border-[#E9E5DE]">
+                  <div className="p-2.5 rounded-xl bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722]">
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[10px]">DIRECT TRANSMISSION EMAIL</span>
-                    <a href={`mailto:${PORTFOLIO_DATA.personal.email}`} className="text-[#FFA726] font-bold hover:underline">
+                    <span className="text-[#111820]/50 block text-[10px]">DIRECT TRANSMISSION EMAIL</span>
+                    <a href={`mailto:${PORTFOLIO_DATA.personal.email}`} className="text-[#FF5722] font-bold hover:underline">
                       {PORTFOLIO_DATA.personal.email}
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#050505] border border-[#262626]">
-                  <div className="p-2.5 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F]">
+                <div className="flex items-center gap-3 p-3 rounded-2xl bg-[#F7F5F1] border border-[#E9E5DE]">
+                  <div className="p-2.5 rounded-xl bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722]">
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-slate-500 block text-[10px]">SECURE VOICE / SMS</span>
-                    <span className="text-slate-200 font-bold">{PORTFOLIO_DATA.personal.phone}</span>
+                    <span className="text-[#111820]/50 block text-[10px]">SECURE VOICE / SMS</span>
+                    <span className="text-[#111820] font-bold">{PORTFOLIO_DATA.personal.phone}</span>
                   </div>
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Right Column: Glassmorphic Contact Form */}
+          {/* Right Column: Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -128,67 +122,67 @@ export const ContactSection: React.FC = React.memo(() => {
           >
             <form
               onSubmit={handleSubmit}
-              className="glass-panel p-6 sm:p-8 rounded-3xl border border-[#262626] space-y-5"
+              className="bg-white p-6 sm:p-8 rounded-3xl border border-[#E9E5DE] shadow-card space-y-5"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="space-y-1.5 font-mono text-xs">
-                  <label className="text-slate-400">YOUR NAME *</label>
+                  <label className="text-[#111820]/70 font-semibold">YOUR NAME *</label>
                   <input
                     type="text"
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Gopiprakan S"
-                    className="w-full px-4 py-3 bg-[#050505] border border-[#262626] rounded-xl text-[#e8eaed] placeholder:text-slate-600 focus:outline-none focus:border-[#FF5F1F] transition-colors font-sans text-sm"
+                    className="w-full px-4 py-3 bg-[#F7F5F1] border border-[#E9E5DE] rounded-xl text-[#111820] placeholder:text-[#111820]/40 focus:outline-none focus:border-[#FF5722] focus:bg-white transition-colors font-sans text-sm"
                   />
                 </div>
 
                 <div className="space-y-1.5 font-mono text-xs">
-                  <label className="text-slate-400">YOUR EMAIL ADDRESS *</label>
+                  <label className="text-[#111820]/70 font-semibold">YOUR EMAIL ADDRESS *</label>
                   <input
                     type="email"
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="gopiprakan2006@gmail.com"
-                    className="w-full px-4 py-3 bg-[#050505] border border-[#262626] rounded-xl text-[#e8eaed] placeholder:text-slate-600 focus:outline-none focus:border-[#FF5F1F] transition-colors font-sans text-sm"
+                    className="w-full px-4 py-3 bg-[#F7F5F1] border border-[#E9E5DE] rounded-xl text-[#111820] placeholder:text-[#111820]/40 focus:outline-none focus:border-[#FF5722] focus:bg-white transition-colors font-sans text-sm"
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5 font-mono text-xs">
-                <label className="text-slate-400">SUBJECT / PROJECT NATURE</label>
+                <label className="text-[#111820]/70 font-semibold">SUBJECT / PROJECT NATURE</label>
                 <input
                   type="text"
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   placeholder="System Architecture Consulting / Project Collaboration"
-                  className="w-full px-4 py-3 bg-[#050505] border border-[#262626] rounded-xl text-[#e8eaed] placeholder:text-slate-600 focus:outline-none focus:border-[#FF5F1F] transition-colors font-sans text-sm"
+                  className="w-full px-4 py-3 bg-[#F7F5F1] border border-[#E9E5DE] rounded-xl text-[#111820] placeholder:text-[#111820]/40 focus:outline-none focus:border-[#FF5722] focus:bg-white transition-colors font-sans text-sm"
                 />
               </div>
 
               <div className="space-y-1.5 font-mono text-xs">
-                <label className="text-slate-400">MESSAGE & TRANSMISSION DETAILS *</label>
+                <label className="text-[#111820]/70 font-semibold">MESSAGE & TRANSMISSION DETAILS *</label>
                 <textarea
                   required
                   rows={5}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Provide brief details regarding scope, timeline, or requirements..."
-                  className="w-full px-4 py-3 bg-[#050505] border border-[#262626] rounded-xl text-[#e8eaed] placeholder:text-slate-600 focus:outline-none focus:border-[#FF5F1F] transition-colors font-sans text-sm resize-none"
+                  className="w-full px-4 py-3 bg-[#F7F5F1] border border-[#E9E5DE] rounded-xl text-[#111820] placeholder:text-[#111820]/40 focus:outline-none focus:border-[#FF5722] focus:bg-white transition-colors font-sans text-sm resize-none"
                 />
               </div>
 
               {/* Status Notifications */}
               {status === 'success' && (
-                <div className="p-3.5 rounded-xl bg-[#FF5F1F]/10 border border-[#FF5F1F]/30 text-[#FF5F1F] text-xs font-mono flex items-center gap-2">
+                <div className="p-3.5 rounded-xl bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722] text-xs font-mono flex items-center gap-2">
                   <CheckCircle className="w-4 h-4" />
                   <span>TRANSMISSION TRANSMITTED SUCCESSFULLY. GOPIPRAKAN WILL RESPOND SHORTLY.</span>
                 </div>
               )}
 
               {status === 'error' && (
-                <div className="p-3.5 rounded-xl bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF8A50] text-xs font-mono flex items-center gap-2">
+                <div className="p-3.5 rounded-xl bg-[#FF5722]/10 border border-[#FF5722]/30 text-[#FF5722] text-xs font-mono flex items-center gap-2">
                   <AlertCircle className="w-4 h-4" />
                   <span>TRANSMISSION FAILED. PLEASE EMAIL DIRECTLY AT GOPIPRAKAN2006@GMAIL.COM</span>
                 </div>
@@ -198,17 +192,17 @@ export const ContactSection: React.FC = React.memo(() => {
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-[#FF5F1F] hover:bg-[#E64A19] text-white font-display font-bold text-sm shadow-google-blue hover:scale-[1.02] active:scale-95 transition-all duration-300 disabled:opacity-50"
+                className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl bg-[#FF5722] hover:bg-[#E64A19] text-white font-display font-bold text-sm shadow-sm hover:scale-[1.01] active:scale-98 transition-all duration-200 disabled:opacity-50"
               >
                 {status === 'sending' ? (
                   <span className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 animate-spin text-[#FF8F00]" />
+                    <Sparkles className="w-4 h-4 animate-spin text-white" />
                     TRANSMITTING SIGNAL...
                   </span>
                 ) : (
                   <span className="flex items-center gap-2">
                     <Send className="w-4 h-4" />
-                    TRANSMIT MESSAGE (EMAILJS)
+                    TRANSMIT MESSAGE
                   </span>
                 )}
               </button>
