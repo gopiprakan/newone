@@ -314,9 +314,9 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
 
   return (
     <div className="relative w-full h-[420px] md:h-[520px] flex items-center justify-center gpu-accelerated overflow-visible">
-      {/* Background Quantum HUD Radar Sweeper Ripple Rings */}
-      <div className="absolute z-0 w-80 h-80 md:w-96 md:h-96 rounded-full border border-[#FF5F1F]/20 animate-ping opacity-25 pointer-events-none" />
-      <div className="absolute z-0 w-64 h-64 md:w-80 md:h-80 rounded-full border border-[#FF3D00]/30 pointer-events-none animate-pulse" />
+      {/* Background Ripple Rings */}
+      <div className="absolute z-0 w-80 h-80 md:w-96 md:h-96 rounded-full border border-[#FF5722]/20 animate-ping opacity-25 pointer-events-none" />
+      <div className="absolute z-0 w-64 h-64 md:w-80 md:h-80 rounded-full border border-[#FF8A50]/30 pointer-events-none animate-pulse" />
 
       {/* Central Glowing 3D Synchronized Avatar Box */}
       <div
@@ -325,12 +325,12 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
           transition: 'transform 0.1s ease-out',
           willChange: 'transform'
         }}
-        className="absolute z-10 w-56 h-56 md:w-72 md:h-72 rounded-full p-1.5 bg-gradient-to-tr from-[#FF5F1F] via-[#FF8F00] to-[#FF3D00] shadow-google-blue flex items-center justify-center group cursor-pointer"
+        className="absolute z-10 w-56 h-56 md:w-72 md:h-72 rounded-full p-1.5 bg-gradient-to-tr from-[#FF5722] via-[#FF8A50] to-[#FF5722] shadow-orange-glow flex items-center justify-center group cursor-pointer"
       >
         {/* Animated Gradient Border Ring */}
-        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#FF5F1F] via-[#FF8F00] to-[#FF3D00] blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-500 animate-pulse-glow" />
+        <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#FF5722] via-[#FF8A50] to-[#FF5722] blur-md opacity-60 group-hover:opacity-90 transition-opacity duration-500 animate-pulse-glow" />
 
-        <div className="w-full h-full rounded-full bg-[#050505] overflow-hidden relative border-2 border-[#FF5F1F]/50 flex items-center justify-center z-10">
+        <div className="w-full h-full rounded-full bg-white overflow-hidden relative border-2 border-[#E9E5DE] flex items-center justify-center z-10">
           {!imageError ? (
             <img
               src="/profile.jpg"
@@ -340,25 +340,25 @@ export const AvatarHoloRing: React.FC = React.memo(() => {
               width={300}
               height={300}
               onError={() => setImageError(true)}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-110 contrast-105"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter brightness-105 contrast-105"
             />
           ) : (
-            <div className="flex flex-col items-center justify-center text-slate-400 gap-2 p-4 text-center">
-              <User className="w-16 h-16 text-[#FF5F1F] animate-pulse" />
-              <span className="text-xs font-mono text-[#FFA726]">Gopiprakan</span>
+            <div className="flex flex-col items-center justify-center text-[#111820]/70 gap-2 p-4 text-center">
+              <User className="w-16 h-16 text-[#FF5722] animate-pulse" />
+              <span className="text-xs font-mono text-[#FF5722]">Gopiprakan</span>
             </div>
           )}
           
-          {/* Ambient Lighting Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FF5F1F]/10 to-[#050505]/40 pointer-events-none" />
+          {/* Subtle Ambient Lighting Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FF5722]/5 to-[#111820]/15 pointer-events-none" />
 
           {/* Interactive Holographic Shimmer Sweep */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/30 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-          {/* Online AI Developer Status Badge */}
-          <div className="absolute bottom-3 px-3 py-1 rounded-full bg-[#050505]/90 backdrop-blur-md border border-[#FF5F1F]/40 text-[11px] font-mono text-[#FFA726] flex items-center gap-1.5 shadow-lg group-hover:border-[#FF5F1F] transition-colors">
-            <Sparkles className="w-3 h-3 text-[#FF8F00] animate-spin" />
-            <span>AI DEV</span>
+          {/* Online Status Badge */}
+          <div className="absolute bottom-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-[#E9E5DE] text-[11px] font-mono text-[#111820] flex items-center gap-1.5 shadow-md group-hover:border-[#FF5722] transition-colors">
+            <Sparkles className="w-3 h-3 text-[#FF5722] animate-spin" />
+            <span className="font-semibold">AI DEV</span>
           </div>
         </div>
       </div>
